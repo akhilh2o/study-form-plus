@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\QueryController;
 use App\Http\Controllers\Admin\RoleController;
@@ -22,6 +24,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::resource('categories', CategoryController::class);
+
+    Route::get('categories/{category}/status', [CategoryController::class, 'statusToggle'])->name('categories.status');
+    Route::resource('courses', CourseController::class);
+    Route::get('courses/{course}/status', [CourseController::class, 'statusToggle'])->name('courses.status');
+
+
+
     Route::get('profile/edit', [AdminController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile/update', [AdminController::class, 'profileUpdate'])->name('profile.update');
 

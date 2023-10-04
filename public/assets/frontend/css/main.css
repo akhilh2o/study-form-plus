@@ -2379,7 +2379,7 @@ header.active {
 }
 
 .header-area .logo {
-    width: 240px;
+    width: 100px;
 }
 
 .header-area .logo a {
@@ -2392,13 +2392,13 @@ header.active {
 
 @media (max-width: 991px) {
     .header-area .logo {
-        width: 180px;
+        width: 100px;
     }
 }
 
 @media screen and (min-width: 1366px) and (max-width: 1580px) {
     .header-area .logo {
-        width: 190px;
+        width: 100px;
     }
 
     .header-area .course-search-form {

@@ -14,6 +14,19 @@
                 </li>
                 {{-- end adash-dashboard --}}
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-blog"></i>
+                        <span>Master</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.categories.create') }}" class="btn-loader">New Category</a></li>
+                        <li><a href="{{ route('admin.categories.index') }}" class="btn-loader">All Categories</a></li>
+                        <li><a href="{{ route('admin.courses.create') }}" class="btn-loader">New Course</a></li>
+                        <li><a href="{{ route('admin.courses.index') }}" class="btn-loader">All Courses</a></li>
+                    </ul>
+                </li>
+
                 @can('queries_access')
                 <li>
                     <a href="{{ route('admin.queries.index') }}" class="waves-effect">

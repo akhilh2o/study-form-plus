@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Eduac - Online Education HTML Template</title>
+    <title>Study Form Plus</title>
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/all.min.css') }}">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
 
-    <link rel="shortcut icon" href="{{ asset('assets/frontend/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
 
     @stack('styles')
 </head>
@@ -36,182 +36,108 @@
         </span>
         <!-- ~~~ Loader & Go-Top ~~~ -->
 
-                <!-- ~~~ Header Section ~~~ -->
-                <header>
-                    <div class="custom-container">
-                        <div class="header-area">
-                            <div class="logo">
-                                <a href="index-2.html">
-                                    <img src="assets/images/logo/logo.png" alt="logo">
-                                </a>
-                            </div>
-                            <ul class="menu d-none d-lg-flex flex-wrap">
-                                <li>
-                                    <a href="#0">Home</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="index-2.html">Home 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-3.html">Home 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="about.html">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="#0">Courses</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="courses.html">Courses</a>
-                                        </li>
-                                        <li>
-                                            <a href="course-details.html">Course Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#0">Pages</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="instructor.html">Instructor</a>
-                                        </li>
-                                        <li>
-                                            <a href="gallery.html">Gallery</a>
-                                        </li>
-                                        <li>
-                                            <a href="events.html">Event</a>
-                                        </li>
-                                        <li>
-                                            <a href="upcoming-events.html">Upcoming Events</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#0">Blog</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="blog.html">Blogs</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-details.html">Blog Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                            <div class="header-bar ml-4">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <form class="course-search-form ml-auto mr-4">
-                                <select class="select-bar rounded">
-                                    <option value="01">Category</option>
-                                    <option value="02">Physics</option>
-                                    <option value="03">Chemistry</option>
-                                    <option value="04">History</option>
-                                    <option value="05">Geometry</option>
-                                    <option value="06">LoremIp</option>
-                                    <option value="07">UI/UX</option>
-                                    <option value="08">Laravel</option>
-                                </select>
-                                <input type="text" name="name" placeholder="Search Courses" class="rounded">
-                                <button type="submit" class="rounded"><i class="flaticon-loupe"></i></button>
-                            </form>
-                            <a href="#0" class="custom-button"><i class="fas fa-user"></i><span>Sign Up</span></a>
-                        </div>
+        <!-- ~~~ Header Section ~~~ -->
+        <header>
+            <div class="custom-container">
+                <div class="header-area">
+                    <div class="logo">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
+                        </a>
                     </div>
-                </header>
-                <!-- ~~~ Header Section ~~~ -->
-
-                <!-- ~~~ Mobile Menu ~~~ -->
-                <div class="mobile-menu">
-                    <span class="close-mobile-menu">
-                        <i class="fas fa-times"></i>
-                    </span>
-                    <div class="w-100 d-flex flex-wrap justify-content-center align-items-center">
-                        <form class="course-search-form mr-sm-4">
-                            <select class="select-bar rounded">
-                                <option value="01">Category</option>
-                                <option value="02">Physics</option>
-                                <option value="03">Chemistry</option>
-                                <option value="04">History</option>
-                                <option value="05">Geometry</option>
-                                <option value="06">LoremIp</option>
-                                <option value="07">UI/UX</option>
-                                <option value="08">Laravel</option>
-                            </select>
-                            <input type="text" name="name" placeholder="Search Courses" class="rounded">
-                            <button type="submit" class="rounded"><i class="flaticon-loupe"></i></button>
-                        </form>
-                        <a href="#0" class="custom-button"><i class="fas fa-user"></i><span>Sign Up</span></a>
-                        <div class="w-100 d-lg-none">
-                            <ul class="menu">
-                                <li>
-                                    <a href="#0">Home</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="index-2.html">Home 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-3.html">Home 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="about.html">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="#0">Courses</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="courses.html">Courses</a>
-                                        </li>
-                                        <li>
-                                            <a href="course-details.html">Course Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#0">Pages</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="instructor.html">Instructor</a>
-                                        </li>
-                                        <li>
-                                            <a href="gallery.html">Gallery</a>
-                                        </li>
-                                        <li>
-                                            <a href="events.html">Event</a>
-                                        </li>
-                                        <li>
-                                            <a href="upcoming-events.html">Upcoming Events</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#0">Blog</a>
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="blog.html">Blogs</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-details.html">Blog Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <ul class="menu d-none d-lg-flex flex-wrap">
+                        <li>
+                            <a href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#">Product</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">Career</a>
+                        </li>
+                        <li>
+                            <a href="#">Privacy & Policy</a>
+                        </li>
+                    </ul>
+                    <div class="header-bar ml-4">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
+                    <form class="course-search-form ml-auto mr-4">
+                        <select class="select-bar rounded">
+                            <option value="01">Category</option>
+                            <option value="02">Physics</option>
+                            <option value="03">Chemistry</option>
+                            <option value="04">History</option>
+                            <option value="05">Geometry</option>
+                            <option value="06">LoremIp</option>
+                            <option value="07">UI/UX</option>
+                            <option value="08">Laravel</option>
+                        </select>
+                        <input type="text" name="name" placeholder="Search Courses" class="rounded">
+                        <button type="submit" class="rounded"><i class="flaticon-loupe"></i></button>
+                    </form>
+                    <a href="{{ route('register') }}" class="custom-button"><i class="fas fa-user"></i><span>Sign
+                            Up</span></a>
                 </div>
-                <!-- ~~~ Mobile Menu ~~~ -->
+            </div>
+        </header>
+        <!-- ~~~ Header Section ~~~ -->
+
+        <!-- ~~~ Mobile Menu ~~~ -->
+        <div class="mobile-menu">
+            <span class="close-mobile-menu">
+                <i class="fas fa-times"></i>
+            </span>
+            <div class="w-100 d-flex flex-wrap justify-content-center align-items-center">
+                <form class="course-search-form mr-sm-4">
+                    <select class="select-bar rounded">
+                        <option value="01">Category</option>
+                        <option value="02">Physics</option>
+                        <option value="03">Chemistry</option>
+                        <option value="04">History</option>
+                        <option value="05">Geometry</option>
+                        <option value="06">LoremIp</option>
+                        <option value="07">UI/UX</option>
+                        <option value="08">Laravel</option>
+                    </select>
+                    <input type="text" name="name" placeholder="Search Courses" class="rounded">
+                    <button type="submit" class="rounded"><i class="flaticon-loupe"></i></button>
+                </form>
+                <a href="{{ route('register') }}" class="custom-button"><i class="fas fa-user"></i><span>Sign
+                        Up</span></a>
+                <div class="w-100 d-lg-none">
+                    <ul class="menu">
+                        <li>
+                            <a href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#">Product</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">Career</a>
+                        </li>
+                        <li>
+                            <a href="#">Privacy & Policy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- ~~~ Mobile Menu ~~~ -->
 
         {{ $slot }}
 
@@ -274,13 +200,10 @@
                                         <a href="#0">About us</a>
                                     </li>
                                     <li>
-                                        <a href="#0">Registration</a>
+                                        <a href="#0">Sign up</a>
                                     </li>
                                     <li>
-                                        <a href="#0">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Events</a>
+                                        <a href="#0">Product</a>
                                     </li>
                                     <li>
                                         <a href="#0">Contact</a>
@@ -291,10 +214,10 @@
                                 <h5 class="title">Information</h5>
                                 <ul>
                                     <li>
-                                        <a href="#0">Membership</a>
+                                        <a href="#0">Career</a>
                                     </li>
                                     <li>
-                                        <a href="#0">Purchase guide</a>
+                                        <a href="#0">Refund Policy</a>
                                     </li>
                                     <li>
                                         <a href="#0">Privacy policy</a>
@@ -308,16 +231,16 @@
                                 <h5 class="title">Support</h5>
                                 <ul>
                                     <li>
-                                        <a href="#0">Documentation</a>
+                                        <a href="#0">Contact us</a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">About us</a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">Support</a>
                                     </li>
                                     <li>
                                         <a href="#0">FAQs</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Condition</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Release Status</a>
                                     </li>
                                 </ul>
                             </div>
@@ -329,7 +252,7 @@
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <span>12/A, Hamilton City Way, Newyork, US</span>
+                                            <span>12/A, New Delhi, India</span>
                                         </div>
                                     </li>
                                     <li>
@@ -337,8 +260,8 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Tel:+880551251558">+8987 5675 754 6</a>
-                                            <a href="Tel:+880551251558">+8987 5675 754 6</a>
+                                            <a href="Tel:+9999999999">+91 99999999999</a>
+                                            <a href="Tel:+9999999999">+91 99999999999</a>
                                         </div>
                                     </li>
                                     <li>
@@ -346,8 +269,7 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Mailto:info@exampleweb.com"><span class="__cf_email__"
-                                                    data-cfemail="6c05020a032c09140d011c00091b090e420f0301">[email&#160;protected]</span></a>
+                                            <a href="Mailto:test@gmail.com">test@gmail.com</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -363,14 +285,13 @@
                                     <button type="submit">Subscribe Now</button>
                                 </form>
                             </div>
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <div class="thumb">
-                                    <a href="index-2.html">
-                                        <img src="{{ asset('assets/frontend/images/footer/footer-bottom.png') }}"
-                                            alt="footer">
+                                    <a href="{{ route('home') }}">
+                                        <img src="{{ asset('assets/images/logo.jpeg') }}" alt="footer" width="100px">
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="copyright-area">
@@ -399,10 +320,7 @@
         </footer>
         <!-- ~~~ Footer Section ~~~ -->
     </div>
-    <script data-cfasync="false" src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
-    </script>
     <script src="assets/frontend/js/jquery-3.6.0.min.js"></script>
-
     <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/magnific-popup.min.js') }}"></script>
