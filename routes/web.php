@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/', 'home')->name('root');
 Route::view('/', 'home')->name('home');
 Route::post('queries', [QueryController::class, 'store'])->name('queries.store');
 Route::middleware(['auth'])->group(function () {

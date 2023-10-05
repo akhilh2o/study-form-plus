@@ -30,8 +30,6 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
     Route::resource('courses', CourseController::class);
     Route::get('courses/{course}/status', [CourseController::class, 'statusToggle'])->name('courses.status');
 
-
-
     Route::get('profile/edit', [AdminController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile/update', [AdminController::class, 'profileUpdate'])->name('profile.update');
 
@@ -50,4 +48,7 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
         Route::get('roles', [PermissionController::class, 'rolePermissions'])->name('roles.index');
         Route::post('{role}', [PermissionController::class, 'rolePermissionsUpdate'])->name('roles.update');
     });
+    Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class);
+    Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
+    Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
 });

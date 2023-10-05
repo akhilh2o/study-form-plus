@@ -58,8 +58,8 @@
                                      - Crafted with
                                     <i class="fas fa-heart text-danger"></i>
                                     by
-                                    <a href="https://github.com/takshaktiwari/" target="_blank" class="text-success font-weight-bold">
-                                        Takshak Tiwari
+                                    <a href="https://texmith.com/" target="_blank" class="text-success font-weight-bold">
+                                        Texmith Infotech
                                     </a>.
                                 </span>
                             </div>

@@ -2095,7 +2095,7 @@ div[class*=col]:nth-of-type(3n + 3) .footer-support-item:hover .icon {
 }
 /*Header Section Starts Here*/
 header {
-    padding: 18px 0;
+    padding: 2px 0;
 }
 
 header.active {
