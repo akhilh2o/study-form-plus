@@ -16,9 +16,9 @@ return [
         */
         'modules'    =>    [
             'default',
-            #'faqs',
-            #'pages',
-            #'testimonials'
+            'faqs',
+            'pages',
+            'testimonials'
         ],
 
         /*

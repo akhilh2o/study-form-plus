@@ -37,7 +37,7 @@
         <!-- ~~~ Loader & Go-Top ~~~ -->
 
         <!-- ~~~ Header Section ~~~ -->
-        <header>
+        <header class="border-bottom">
             <div class="custom-container">
                 <div class="header-area">
                     <div class="logo">
@@ -50,42 +50,18 @@
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li>
-                            <a href="#">About Us</a>
+                            <a href="#">Courses</a>
                         </li>
                         <li>
-                            <a href="#">Product</a>
+                            <a href="#">About Us</a>
                         </li>
                         <li>
                             <a href="#">Contact</a>
                         </li>
                         <li>
-                            <a href="#">Career</a>
-                        </li>
-                        <li>
-                            <a href="#">Privacy & Policy</a>
+                            <a href="{{ route('login') }}">Login</a>
                         </li>
                     </ul>
-                    <div class="header-bar ml-4">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <form class="course-search-form ml-auto mr-4">
-                        <select class="select-bar rounded">
-                            <option value="01">Category</option>
-                            <option value="02">Physics</option>
-                            <option value="03">Chemistry</option>
-                            <option value="04">History</option>
-                            <option value="05">Geometry</option>
-                            <option value="06">LoremIp</option>
-                            <option value="07">UI/UX</option>
-                            <option value="08">Laravel</option>
-                        </select>
-                        <input type="text" name="name" placeholder="Search Courses" class="rounded">
-                        <button type="submit" class="rounded"><i class="flaticon-loupe"></i></button>
-                    </form>
-                    <a href="{{ route('register') }}" class="custom-button"><i class="fas fa-user"></i><span>Sign
-                            Up</span></a>
                 </div>
             </div>
         </header>
@@ -126,12 +102,6 @@
                         </li>
                         <li>
                             <a href="#">Contact</a>
-                        </li>
-                        <li>
-                            <a href="#">Career</a>
-                        </li>
-                        <li>
-                            <a href="#">Privacy & Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -320,7 +290,7 @@
         </footer>
         <!-- ~~~ Footer Section ~~~ -->
     </div>
-    <script src="assets/frontend/js/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('assets/frontend/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/magnific-popup.min.js') }}"></script>

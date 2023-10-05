@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(QuerySeeder::class);
+		$this->call(FaqSeeder::class);
+		$this->call(PageSeeder::class);
+		$this->call(TestimonialSeeder::class);
+
+
+
 
     }
 }
