@@ -66,7 +66,7 @@
                         </li>
                     @endcan
                 @endcanany
-
+                <li class="menu-title">Manage CMS</li>
                 @canany(['faqs_access', 'faqs_create'])
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -84,6 +84,8 @@
                         </ul>
                     </li>
                 @endcanany
+
+
 
                 @canany(['pages_create', 'pages_access'])
                     <li>
@@ -119,6 +121,20 @@
                         </ul>
                     </li>
                 @endcanany
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('admin.settings.index') }}" class="active">
+                                General Settings
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="menu-title">Manage Account</li>
                 <li>

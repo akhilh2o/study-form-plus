@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Study Form Plus</title>
+    <title>
+        @yield('meta_title', setting('general_settings')?->option_value['meta_title'])
+    </title>
+    <meta name="description"
+        content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
+    <meta name="keywords" content="@yield('meta_keyword', setting('general_settings')?->option_value['meta_keyword'])">
+    <meta name="author" content="{{ config('app.name') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/all.min.css') }}">
@@ -17,8 +23,12 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
-
+    @if (setting('general_settings')?->option_value['favicon'])
+    <link rel="shortcut icon" href="{{ asset('storage/'.setting('general_settings')?->option_value['favicon']) }}"
+        type="image/x-icon">
+    @else
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
+    @endif
 
     @stack('styles')
 </head>
@@ -37,12 +47,17 @@
         <!-- ~~~ Loader & Go-Top ~~~ -->
 
         <!-- ~~~ Header Section ~~~ -->
-        <header class="border-bottom">
+        <header>
             <div class="custom-container">
                 <div class="header-area">
                     <div class="logo">
                         <a href="{{ route('home') }}">
+                            @if (setting('general_settings')?->option_value['logo'])
+                            <img src="{{ asset('storage/'.setting('general_settings')?->option_value['logo']) }}"
+                                alt="logo">
+                            @else
                             <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
+                            @endif
                         </a>
                     </div>
                     <ul class="menu d-none d-lg-flex flex-wrap">
@@ -50,18 +65,23 @@
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li>
-                            <a href="#">Courses</a>
+                            <a href="{{ route('courses') }}">Courses</a>
                         </li>
                         <li>
-                            <a href="#">About Us</a>
+                            <a href="{{ route('about') }}">About Us</a>
                         </li>
                         <li>
-                            <a href="#">Contact</a>
+                            <a href="{{ route('contact') }}">Contact</a>
                         </li>
                         <li>
                             <a href="{{ route('login') }}">Login</a>
                         </li>
                     </ul>
+                    <div class="header-bar ml-4">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </header>
@@ -73,35 +93,22 @@
                 <i class="fas fa-times"></i>
             </span>
             <div class="w-100 d-flex flex-wrap justify-content-center align-items-center">
-                <form class="course-search-form mr-sm-4">
-                    <select class="select-bar rounded">
-                        <option value="01">Category</option>
-                        <option value="02">Physics</option>
-                        <option value="03">Chemistry</option>
-                        <option value="04">History</option>
-                        <option value="05">Geometry</option>
-                        <option value="06">LoremIp</option>
-                        <option value="07">UI/UX</option>
-                        <option value="08">Laravel</option>
-                    </select>
-                    <input type="text" name="name" placeholder="Search Courses" class="rounded">
-                    <button type="submit" class="rounded"><i class="flaticon-loupe"></i></button>
-                </form>
-                <a href="{{ route('register') }}" class="custom-button"><i class="fas fa-user"></i><span>Sign
-                        Up</span></a>
                 <div class="w-100 d-lg-none">
                     <ul class="menu">
                         <li>
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li>
-                            <a href="#">About Us</a>
+                            <a href="{{ route('courses') }}">Courses</a>
                         </li>
                         <li>
-                            <a href="#">Product</a>
+                            <a href="{{ route('about') }}">About Us</a>
                         </li>
                         <li>
-                            <a href="#">Contact</a>
+                            <a href="{{ route('contact') }}">Contact</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('login') }}">Login</a>
                         </li>
                     </ul>
                 </div>
@@ -163,41 +170,29 @@
                 <div class="container">
                     <div class="footer-top">
                         <div class="footer-area">
+
                             <div class="footer-widget widget-link">
-                                <h5 class="title">Talk to Us</h5>
+                                <h5 class="title">Supports</h5>
+
                                 <ul>
+                                    @foreach (\Takshak\Adash\Models\Page::where('status',true)->limit(1,4)->get() ?? [] as $page)
                                     <li>
-                                        <a href="#0">About us</a>
+                                        <a href="{{ route('page',[$page]) }}">{{ $page?->title }}</a>
                                     </li>
-                                    <li>
-                                        <a href="#0">Sign up</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Product</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Contact</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="footer-widget widget-link">
                                 <h5 class="title">Information</h5>
                                 <ul>
+                                    @foreach (\Takshak\Adash\Models\Page::where('status',true)->limit(4,6)->get() ?? [] as $page)
                                     <li>
-                                        <a href="#0">Career</a>
+                                        <a href="{{ route('page',[$page]) }}">{{ $page?->title }}</a>
                                     </li>
-                                    <li>
-                                        <a href="#0">Refund Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Privacy policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Terms of service</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
-                            <div class="footer-widget widget-link">
+                            {{-- <div class="footer-widget widget-link">
                                 <h5 class="title">Support</h5>
                                 <ul>
                                     <li>
@@ -213,7 +208,8 @@
                                         <a href="#0">FAQs</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
+
                             <div class="footer-widget widget-info">
                                 <h5 class="title">Contact Us</h5>
                                 <ul>
@@ -222,7 +218,9 @@
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <span>12/A, New Delhi, India</span>
+                                            <span>
+                                                {{ setting('general_settings')?->option_value['company_address'] }}
+                                            </span>
                                         </div>
                                     </li>
                                     <li>
@@ -230,8 +228,10 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Tel:+9999999999">+91 99999999999</a>
-                                            <a href="Tel:+9999999999">+91 99999999999</a>
+                                            <a
+                                                href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">+91
+                                                {{ setting('general_settings')?->option_value['support_phone'] }}</a>
+                                            {{-- <a href="Tel:+9999999999">+91 99999999999</a> --}}
                                         </div>
                                     </li>
                                     <li>
@@ -239,14 +239,16 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Mailto:test@gmail.com">test@gmail.com</a>
+                                            <a
+                                                href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">{{
+                                                setting('general_settings')?->option_value['support_email'] }}</a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="footer-bottom">
+                    {{-- <div class="footer-bottom">
                         <div class="row align-items-center">
                             <div class="col-md-8">
                                 <h5 class="title">Subscribe Newsletter</h5>
@@ -255,15 +257,15 @@
                                     <button type="submit">Subscribe Now</button>
                                 </form>
                             </div>
-                            {{-- <div class="col-md-4">
+                            <div class="col-md-4">
                                 <div class="thumb">
                                     <a href="{{ route('home') }}">
                                         <img src="{{ asset('assets/images/logo.jpeg') }}" alt="footer" width="100px">
                                     </a>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="copyright-area">
                         <div class="left">
                             <p>&copy; Copyright 2023. All Rights Reserved.</p>

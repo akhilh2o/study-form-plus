@@ -1,27 +1,23 @@
 <x-app-layout>
-    <!-- ~~~ Banner Section ~~~ -->
-    <section class="banner-section banner-overlay bg_img"
+    <!-- ~~~ Hero Section ~~~ -->
+    <section class="hero-section banner-overlay bg_img"
         data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
         <div class="container">
-            <div class="banner-content cl-white">
-                <h3 class="subtitle">Looking to Explore</h3>
-                <h1 class="title">Your Knowledge</h1>
-                <p>Donec quis fermentum metus. Fusce nec eleifend urna. Sed id placerat erat. Aenean congue, metus sit
-                    amet sagittis tincidunt, augue odio vulputate meg ipsum dolor sit amet, consectetur ad.</p>
-                <div class="banner-button-area">
-                    <a href="#" class="custom-button btn-md">view courses<i class="fas fa-play-circle"></i></a>
-                    <a href="#apply" class="custom-button btn-md theme-one">Apply now<i class="flaticon-tap-1"></i></a>
-                </div>
+            <div class="hero-content">
+                <h1 class="title cl-white">About Us</h1>
+                <ul class="breadcrumb cl-white p-0 m-0">
+                    <li>
+                        <a href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li>
+                        About us
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="banner-thumb">
-            <div class="rounded-shape shape-1"></div>
-            <div class="rounded-shape shape-2"></div>
-            <div class="rounded-shape shape-3"></div>
-            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-        </div>
     </section>
-    <!-- ~~~ Banner Section ~~~ -->
+    <!-- ~~~ Hero Section ~~~ -->
+
 
     <!-- ~~~ Feature Section ~~~ -->
     <section class="feature-section pt-120 pb-120">
@@ -88,73 +84,41 @@
     </section>
     <!-- ~~~ Feature Section ~~~ -->
 
-    <!-- ~~~ Course Section ~~~ -->
-    <section class="course-section pt-120 pb-120 section-bg oh pos-rel">
-        <div class="course-top-shape">
-            <img src="{{ asset('assets/frontend/images/course/course-top-shape.png') }}" alt="course">
-        </div>
-        <div class="course-bottom-shape">
-            <img src="{{ asset('assets/frontend/images/course/course-bottom-shape.png') }}" alt="course">
-        </div>
+
+    <!-- ~~~ About Section ~~~ -->
+    <section class="about-section">
         <div class="container">
-            <div class="section-header">
-                <span class="category">TOP COURSES</span>
-                <h2 class="title"><span>Featured</span> Online Courses</h2>
-            </div>
-            <div class="row justify-content-center mb-30-none">
-                @foreach ($courses ?? [] as $course)
-                <div class="col-xl-4 col-md-6 col-sm-10">
-                    <div class="course-item">
-                        <div class="thumb">
-                            <a href="{{ route('course',[$course]) }}">
-                                <img src="{{ $course?->thumbnail() }}" alt="{{ $course?->title }}">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h5 class="title">
-                                <a href="{{ route('course',[$course]) }}">{{ $course?->title }}</a>
-                            </h5>
-                            <div class="meta-area">
-                                <div class="meta">
-                                    {{-- <div class="meta-item">
-                                        <i class="fas fa-user"></i>
-                                        <span>Mark Parker</span>
-                                    </div> --}}
-                                    <div class="meta-item">
-                                        <i class="fas fa-photo-video"></i>
-                                        <span>15 Lessons</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <span>25 Students</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ratings-area">
-                                <div class="ratings cl-theme">
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span class="cl-theme-light"><i class="fas fa-star"></i></span>
-                                    <span>(4.9/5.00)</span>
-                                </div>
-                                <div class="price cl-1">
-                                    ${{ rand(20,50) }}
-                                </div>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-lg-6 align-self-end d-none d-lg-block">
+                    <div class="about-thumb rtl">
+                        <img src="{{ asset('assets/frontend/images/about/about.png') }}" alt="about">
                     </div>
                 </div>
-                @endforeach
+                <div class="col-lg-6 pb-120">
+                    <div class="section-header text-lg-left mb-0">
+                        <h2 class="title"><span>Read </span>About Us</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nulla,
+                            finibus vitae blandit id, euismod vitae dolor. Nam eget tortor quam. Morbi
+                            posuere, dolor a porttitor facilisis, odio ante suscipit felis, nec aliquet
+                            ipsum dui sit amet massa. Nulla blandit mauris volutpat elit elementum,
+                            sed posuere turpis vulputate. Suspendisse rhoncus ante rhoncus elit
+                            ullamcorper egestas. Ut eu eleifend ipsum, vitae iaculis mauris. Aenean at
+                            nisi feugiat, elementum sem sit amet, congue odio.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nulla,
+                            finibus vitae blandit id, euismod vitae dolor. Nam eget tortor quam. Morbi
+                            posuere, dolor a porttitor facilisis, odio.</p>
+                        <a href="#0" class="custom-button theme-one">get in touch</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <!-- ~~~ Course Section ~~~ -->
+    <!-- ~~~ About Section ~~~ -->
+
 
     <!-- ~~~ Counter Section ~~~ -->
     <section class="counter-section pt-120 pb-120 title-lay bg_img"
-        data-img="{{ asset('assets/frontend/images/counter/counter-bg.jpg') }}" id="apply">
+        data-img="{{ asset('assets/frontend/images/counter/counter-bg.jpg') }}">
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <div class="odo-area">
@@ -225,8 +189,12 @@
     </section>
     <!-- ~~~ Counter Section ~~~ -->
 
+
     <!-- ~~~ Testimonial Section ~~~ -->
-    <section class="testimonial-section pt-120 pb-120">
+    <section class="testimonial-section pb-120 pt-120 pos-rel">
+        <div class="schedule-left-shape">
+            <img src="{{ asset('assets/frontend/images/course/course-top-shape.png') }}" alt="course">
+        </div>
         <div class="container">
             <div class="slider-header">
                 <div class="section-header left-style">
@@ -272,4 +240,68 @@
         </div>
     </section>
     <!-- ~~~ Testimonial Section ~~~ -->
+
+
+    <!-- ~~~ Instructor Section ~~~ -->
+    <section class="instructor-section pt-120 pb-120 gradient-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="category">our teachers</span>
+                <h2 class="title"><span>Awesome </span>Instructors</h2>
+            </div>
+            <div class="row justify-content-center mb-30-none">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="instructor-item">
+                        <div class="instructor-thumb">
+                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/01.png') }}"
+                                    alt="instructor"></a>
+                        </div>
+                        <div class="instructor-content">
+                            <h6 class="title"><a href="#0">SANDRA RILEY</a></h6>
+                            <span class="details">TEACHER</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="instructor-item">
+                        <div class="instructor-thumb">
+                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/02.png') }}"
+                                    alt="instructor"></a>
+                        </div>
+                        <div class="instructor-content">
+                            <h6 class="title"><a href="#0">Alison Bekar</a></h6>
+                            <span class="details">TEACHER</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="instructor-item">
+                        <div class="instructor-thumb">
+                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/03.png') }}"
+                                    alt="instructor"></a>
+                        </div>
+                        <div class="instructor-content">
+                            <h6 class="title"><a href="#0">Frank Armany</a></h6>
+                            <span class="details">TEACHER</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="instructor-item">
+                        <div class="instructor-thumb">
+                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/04.png') }}"
+                                    alt="instructor"></a>
+                        </div>
+                        <div class="instructor-content">
+                            <h6 class="title"><a href="#0">Manuel Nuer</a></h6>
+                            <span class="details">TEACHER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ~~~ Instructor Section ~~~ -->
+
+
 </x-app-layout>

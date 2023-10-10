@@ -61,15 +61,6 @@
                             <input type="file" name="image" class="form-control" id="crop-main-image">
                         </div>
                     </div>
-                    <div class="d-flex">
-                        <div class="mr-2">
-                            <div id="cover-image-preview"></div>
-                        </div>
-                        <div class="form-group flex-fill">
-                            <label for="">Thumb Image</label>
-                            <input type="file" name="image_thumb" class="form-control" id="crop-cover-image">
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
                         <textarea name="meta_title" class="form-control" id="meta_title" cols="30" rows="2"></textarea>
@@ -96,13 +87,6 @@
 
     <x-slot name="script">
         <script>
-            var previewImg = {
-                width: '70px',
-                height: '70px',
-                rounded: '50px',
-                targetId:'cover-image-preview'
-            };
-            imageCropper('crop-cover-image', 16/9, previewImg);
             var previewImg2 = {
                 width: '70px',
                 height: '70px',

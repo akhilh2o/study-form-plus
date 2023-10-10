@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use Takshak\Adash\Models\Page;
+use Takshak\Adash\Models\Testimonial;
 
 class HomeController extends Controller
 {
@@ -13,5 +16,27 @@ class HomeController extends Controller
         } else {
             return redirect()->route('user.dashboard');
         }
+    }
+    public function home()
+    {
+        $courses = Course::where('popular', true)->limit(3)->get();
+        $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();
+        return view('home')->with('courses', $courses)->with('testimonials',$testimonials);
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function about()
+    {
+        $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->get();
+        return view('about')->with('testimonials', $testimonials);
+    }
+
+    public function page(Page $page)
+    {
+        return view('page')->with('page', $page);
     }
 }

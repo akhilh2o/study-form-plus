@@ -44,7 +44,6 @@ class CategoryController extends Controller
             'parent_id'           =>  'nullable',
             'content'             =>  'nullable',
             'status'              =>  'required',
-            'image_thumb'         =>  'nullable|image',
             'image'               =>  'nullable|image',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
@@ -61,20 +60,18 @@ class CategoryController extends Controller
         $category->meta_keyword              =  $request->post('meta_keyword');
         $category->meta_description          =  $request->post('meta_description');
 
-        if ($request->file('image_thumb')) {
-            $category->image_thumb = 'categories/' . time() . '.' . $request->file('image_thumb')->getClientOriginalExtension();
-            Imager::init($request->file('image_thumb'))
-                ->resizeFit(600, 400)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($category->image_thumb);
-        }
-
         if ($request->file('image')) {
             $category->image = 'categories/' . time() . '.' . $request->file('image')->getClientOriginalExtension();
             Imager::init($request->file('image'))
                 ->resizeFit(1920, 1080)->inCanvas('#fff')
                 ->basePath(storage_path('app/public/'))
                 ->save($category->image);
+
+            $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            Imager::init($request->file('image'))
+                ->resizeFit(600, 400)->inCanvas('#fff')
+                ->basePath(storage_path('app/public/'))
+                ->save($category->image_thumb);
         }
 
         $category->save();
@@ -91,7 +88,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $categories = Category::where('parent_id', 0)->get();
-        return view('admin.categories.edit')->with('category', $category)->with('categories',$categories);
+        return view('admin.categories.edit')->with('category', $category)->with('categories', $categories);
     }
 
     public function update(Request $request, Category $category)
@@ -101,7 +98,6 @@ class CategoryController extends Controller
             'parent_id'           =>  'nullable',
             'content'             =>  'nullable',
             'status'              =>  'required',
-            'image_thumb'         =>  'nullable|image',
             'image'               =>  'nullable|image',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
@@ -117,28 +113,29 @@ class CategoryController extends Controller
         $category->meta_keyword              =  $request->post('meta_keyword');
         $category->meta_description          =  $request->post('meta_description');
 
-        if ($request->file('image_thumb')) {
-            $image_thumb = public_path('storage/' . $category->image_thumb);
-            if (File::exists($image_thumb)) {
-                File::delete($image_thumb);
-            }
-            $category->image_thumb = 'categories/' . time() . '.' . $request->file('image_thumb')->getClientOriginalExtension();
-            Imager::init($request->file('image_thumb'))
-                ->resizeFit(600, 400)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($category->image_thumb);
-        }
 
         if ($request->file('image')) {
             $image = public_path('storage/' . $category->image);
             if (File::exists($image)) {
                 File::delete($image);
             }
+
             $category->image = 'categories/' . time() . '.' . $request->file('image')->getClientOriginalExtension();
             Imager::init($request->file('image'))
                 ->resizeFit(1920, 1080)->inCanvas('#fff')
                 ->basePath(storage_path('app/public/'))
                 ->save($category->image);
+
+            $image_thumb = public_path('storage/' . $category->image_thumb);
+            if (File::exists($image_thumb)) {
+                File::delete($image_thumb);
+            }
+
+            $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            Imager::init($request->file('image'))
+                ->resizeFit(600, 400)->inCanvas('#fff')
+                ->basePath(storage_path('app/public/'))
+                ->save($category->image_thumb);
         }
 
         $category->save();

@@ -8,4 +8,6 @@ use Takshak\Adash\Traits\Controllers\QueryControllerTrait;
 class QueryController extends Controller
 {
     use QueryControllerTrait;
+
+
 }

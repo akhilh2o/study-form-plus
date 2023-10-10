@@ -21,8 +21,8 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('admin.categories.update', [$category]) }}" method="POST"
-                class="card shadow-sm" enctype="multipart/form-data">
+            <form action="{{ route('admin.categories.update', [$category]) }}" method="POST" class="card shadow-sm"
+                enctype="multipart/form-data">
                 <div class="card-body">
                     @csrf
                     @method('PUT')
@@ -40,7 +40,8 @@
                                 <select name="parent_id" class="form-control select2">
                                     <option value="">-- Select --</option>
                                     @foreach ($categories as $parent)
-                                    <option value="{{ $parent->id }}" @selected($category->parent_id==$parent->id)>{{ $parent?->name }}</option>
+                                    <option value="{{ $parent->id }}" @selected($category->parent_id==$parent->id)>{{
+                                        $parent?->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -73,18 +74,6 @@
                         <div class="form-group flex-fill">
                             <label for="">Image</label>
                             <input type="file" name="image" class="form-control" id="crop-main-image">
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <div class="mr-2">
-                            <div id="cover-image-preview">
-                                <img src="{{ $category->imageThumb() }}" alt="image" width="70"
-                                    class="rounded-circle img-thumbnail">
-                            </div>
-                        </div>
-                        <div class="form-group flex-fill">
-                            <label for="">Thumb Image</label>
-                            <input type="file" name="image_thumb" class="form-control" id="crop-cover-image">
                         </div>
                     </div>
                     <div class="form-group">
@@ -124,13 +113,6 @@
     @endpush
     <x-slot name="script">
         <script>
-            var previewImg = {
-                width: '70px',
-                height: '70px',
-                rounded: '50px',
-                targetId:'cover-image-preview'
-            };
-            imageCropper('crop-cover-image', 1/1, previewImg);
             var previewImg2 = {
                 width: '70px',
                 height: '70px',
