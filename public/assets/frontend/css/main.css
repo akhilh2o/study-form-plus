@@ -6476,3 +6476,7 @@ blockquote::before {
 .all-sections {
     overflow: hidden;
 }
+
+.form-group{
+    margin-bottom: 1rem;
+}

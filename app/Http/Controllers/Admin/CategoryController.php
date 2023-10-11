@@ -6,32 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Takshak\Imager\Facades\Imager;
 
 class CategoryController extends Controller
 {
-
     public function index(Request $request)
     {
-        $query = Category::query();
-        $query->when($request->has('parent_id'), function ($query) use ($request) {
-            $query->where('parent_id', $request->parent_id);
-        }, function ($query) {
-            $query->where('parent_id', 0);
-        });
-
-        $query->when($request->get('search'), function ($query)  use ($request) {
-            $query->where('name', 'like', '%' . $request->get('search') . '%');
-        });
-        $categories = $query->withCount('children')
+        $categories = Category::query()
+            ->when($request->has('parent_id'), function ($query) use ($request) {
+                $query->where('parent_id', $request->parent_id);
+            }, function ($query) {
+                $query->where('parent_id', 0);
+            })
+            ->when($request->get('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->get('search') . '%');
+            })
+            ->withCount('children')
             ->paginate(25)
             ->withQueryString();
 
         return view('admin.categories.index')->with('categories', $categories);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         $categories = Category::where('parent_id', 0)->get();
         return view('admin.categories.create')->with('categories', $categories);
@@ -61,17 +60,15 @@ class CategoryController extends Controller
         $category->meta_description          =  $request->post('meta_description');
 
         if ($request->file('image')) {
-            $category->image = 'categories/' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            Imager::init($request->file('image'))
-                ->resizeFit(1920, 1080)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($category->image);
+            $category->image = 'categories/' . time() . '.' . $request->file('image')->extension();
+            $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->extension();
 
-            $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
             Imager::init($request->file('image'))
-                ->resizeFit(600, 400)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($category->image_thumb);
+                ->resizeFit(600, 500)
+                ->inCanvas('#fff')
+                ->basePath(Storage::disk('public')->path('/'))
+                ->save($category->image)
+                ->save($category->image_thumb, 300);
         }
 
         $category->save();
@@ -115,27 +112,18 @@ class CategoryController extends Controller
 
 
         if ($request->file('image')) {
-            $image = public_path('storage/' . $category->image);
-            if (File::exists($image)) {
-                File::delete($image);
-            }
+            Storage::disk('public')->delete($category->image);
+            Storage::disk('public')->delete($category->image_thumb);
 
-            $category->image = 'categories/' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $category->image = 'categories/' . time() . '.' . $request->file('image')->extension();
+            $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->extension();
+
             Imager::init($request->file('image'))
-                ->resizeFit(1920, 1080)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($category->image);
-
-            $image_thumb = public_path('storage/' . $category->image_thumb);
-            if (File::exists($image_thumb)) {
-                File::delete($image_thumb);
-            }
-
-            $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            Imager::init($request->file('image'))
-                ->resizeFit(600, 400)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($category->image_thumb);
+                ->resizeFit(600, 500)
+                ->inCanvas('#fff')
+                ->basePath(Storage::disk('public')->path('/'))
+                ->save($category->image)
+                ->save($category->image_thumb, 300);
         }
 
         $category->save();
@@ -145,14 +133,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $image_thumb = public_path('storage/' . $category->image_thumb);
-        if (File::exists($image_thumb)) {
-            File::delete($image_thumb);
-        }
-        $image = public_path('storage/' . $category->image);
-        if (File::exists($image)) {
-            File::delete($image);
-        }
+        Storage::disk('public')->delete($category->image);
+        Storage::disk('public')->delete($category->image_thumb);
         $category->courses()->delete();
         $category->delete();
         return to_route('admin.categories.index')->withErrors('Category has been successfully deleted.');

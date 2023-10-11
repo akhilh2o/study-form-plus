@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
         $courses = Course::where('popular', true)->limit(3)->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();
-        return view('home')->with('courses', $courses)->with('testimonials',$testimonials);
+        return view('home')->with('courses', $courses)->with('testimonials', $testimonials);
     }
 
     public function contact()

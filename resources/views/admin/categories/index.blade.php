@@ -100,9 +100,6 @@
                                     <i class="fas fa-plus-circle"></i>
                                 </button>
                             </form>
-                            {{-- <a href="{{ route('admin.categories.create') }}"
-                                class="btn btn-warning btn-sm btn-loader load-circle" title="Add Subcategory"> <i
-                                    class="fas fa-plus-circle"></i></a> --}}
 
                             <a href="{{ route('admin.categories.show', [$category]) }}"
                                 class="btn btn-info btn-sm btn-loader load-circle">

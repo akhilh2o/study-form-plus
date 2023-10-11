@@ -26,16 +26,54 @@
                 <div class="card-body">
                     @csrf
                     @method('PUT')
-                    <div class="form-group">
-                        <label for="title">Title <span class="text-danger">*</span></label>
-                        <input type="text" name="title" class="form-control" value="{{ $course->title }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sub_title">Sub Title </label>
-                        <textarea name="sub_title" class="form-control" id="sub_title" cols="30" rows="3">{{ $course->sub_title }}</textarea>
-                    </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title">Title <span class="text-danger">*</span></label>
+                                <input type="text" name="title" class="form-control" value="{{ $course->title }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sub_title">Sub Title </label>
+                                <input type="text" name="sub_title" class="form-control" value="{{ old('sub_title', $course->sub_title) }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="mr-2">
+                                    <div id="cover-image-preview">
+                                        <img src="{{ $course->thumbnail() }}" alt="image" width="75"
+                                            class="img-thumbnail">
+                                    </div>
+                                </div>
+                                <div class="form-group flex-fill">
+                                    <label for="">Thumbnail</label>
+                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="download_link">Download URL <span class="text-danger">*</span></label>
+                                <input type="url" name="download_link" class="form-control" value="{{ $course->download_link }}"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Category <span class="text-danger">*</span></label>
+                                <select name="category_id" class="form-control select2" required>
+                                    <option value="">-- Select --</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category?->id }}" @selected($course->category_id == $category?->id)>
+                                            {{ $category?->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <label for="">Popular <span class="text-danger">*</span></label>
                             <select name="popular" class="form-control" required>
                                 <option value="">-- Select --</option>
@@ -43,7 +81,7 @@
                                 <option value="0" {{ ($course->popular=='0' ) ? 'selected' : '' }}>No</option>
                             </select>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Status <span class="text-danger">*</span></label>
                                 <select name="status" class="form-control" required>
@@ -55,47 +93,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="d-flex">
-                                <div class="mr-2">
-                                    <div id="cover-image-preview">
-                                        <img src="{{ $course->thumbnail() }}" alt="image" width="70"
-                                            class="rounded-circle img-thumbnail">
-                                    </div>
-                                </div>
-                                <div class="form-group flex-fill">
-                                    <label for="">Thumbnail</label>
-                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="video_url">Video URL <span class="text-danger">*</span></label>
-                                <input type="url" name="video_url" class="form-control" value="{{ $course->video_url }}"
-                                    required>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="form-group">
                         <label for="description">Description </label>
-                        <textarea name="description" class="form-control text-editor" id="description" cols="30"
-                            rows="10">{{ $course->description }}</textarea>
+                        <textarea name="description" class="form-control text-editor" id="description" rows="10">{{ $course->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
-                        <textarea name="meta_title" class="form-control" id="meta_title" cols="30"
-                            rows="2">{{ $course?->meta_title }}</textarea>
+                        <textarea name="meta_title" class="form-control" id="meta_title" rows="2">{{ $course?->meta_title }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="meta_keyword">Meta Keyword</label>
-                        <textarea name="meta_keyword" class="form-control" id="meta_keyword" cols="30"
-                            rows="3">{{ $course?->meta_keyword }}</textarea>
+                        <textarea name="meta_keyword" class="form-control" id="meta_keyword" rows="2">{{ $course?->meta_keyword }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="meta_description">Meta Description</label>
-                        <textarea name="meta_description" class="form-control" id="meta_description" cols="30"
-                            rows="5">{{ $course?->meta_description }}</textarea>
+                        <textarea name="meta_description" class="form-control" id="meta_description" rows="2">{{ $course?->meta_description }}</textarea>
                     </div>
                 </div>
                 <div class="card-footer">

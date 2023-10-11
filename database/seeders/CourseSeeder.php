@@ -14,8 +14,6 @@ class CourseSeeder extends Seeder
      */
     public function run(): void
     {
-        Storage::disk('public')->deleteDirectory('courses');
-        // Course::truncate();
-        Course::factory(10)->create();
+        Course::factory(75)->create();
     }
 }

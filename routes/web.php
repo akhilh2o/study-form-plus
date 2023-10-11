@@ -28,6 +28,7 @@ Route::get('page/{page:slug}', [HomeController::class, 'page'])->name('page');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::post('queries', [QueryController::class, 'store'])->name('queries.store');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::prefix('user')->name('user.')->group(function () {
