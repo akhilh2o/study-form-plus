@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Takshak\Imager\Facades\Imager;
 
@@ -14,16 +15,17 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Course::query();
-        if ($request->get('search')) {
-            $query->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->get('search') . '%');
-            });
-        }
-        $courses = $query->with('category')
+        $courses = Course::query()
+            ->when($request->get('search'), function ($query) use ($request) {
+                $query->where(function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->get('search') . '%');
+                });
+            })
+            ->with('category')
             ->latest()
             ->paginate(25)
             ->withQueryString();
+
         return view('admin.courses.index')
             ->with('courses', $courses);
     }
@@ -64,11 +66,11 @@ class CourseController extends Controller
         $course->meta_description          =  $request->post('meta_description');
 
         if ($request->file('thumbnail')) {
-            $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->extension();
             Imager::init($request->file('thumbnail'))
-                ->resizeFit(370, 212)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($course->thumbnail);
+                ->resizeFit(600, 500)
+                ->inCanvas('#fff')
+                ->save(Storage::disk('public')->path($course->thumbnail));
         }
         $course->save();
 
@@ -118,15 +120,13 @@ class CourseController extends Controller
         $course->meta_description          =  $request->post('meta_description');
 
         if ($request->file('thumbnail')) {
-            $image_thumb = public_path('storage/' . $course->thumbnail);
-            if (File::exists($image_thumb)) {
-                File::delete($image_thumb);
-            }
-            $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            Storage::disk('public')->delete($course->thumbnail);
+
+            $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->extension();
             Imager::init($request->file('thumbnail'))
-                ->resizeFit(370, 212)->inCanvas('#fff')
-                ->basePath(storage_path('app/public/'))
-                ->save($course->thumbnail);
+                ->resizeFit(600, 500)
+                ->inCanvas('#fff')
+                ->save(Storage::disk('public')->path($course->thumbnail));
         }
         $course->save();
 
@@ -136,10 +136,7 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        $image_thumb = public_path('storage/' . $course->thumbnail);
-        if (File::exists($image_thumb)) {
-            File::delete($image_thumb);
-        }
+        Storage::disk('public')->delete($course->thumbnail);
         $course->delete();
         return to_route('admin.courses.index')->withErrors('Course has been successfully deleted.');
     }

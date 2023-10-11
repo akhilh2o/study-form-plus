@@ -9,8 +9,7 @@
     <title>
         @yield('meta_title', setting('general_settings')?->option_value['meta_title'])
     </title>
-    <meta name="description"
-        content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
+    <meta name="description" content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
     <meta name="keywords" content="@yield('meta_keyword', setting('general_settings')?->option_value['meta_keyword'])">
     <meta name="author" content="{{ config('app.name') }}">
 
@@ -24,10 +23,10 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
     @if (setting('general_settings')?->option_value['favicon'])
-    <link rel="shortcut icon" href="{{ asset('storage/'.setting('general_settings')?->option_value['favicon']) }}"
-        type="image/x-icon">
+        <link rel="shortcut icon"
+            href="{{ asset('storage/' . setting('general_settings')?->option_value['favicon']) }}" type="image/x-icon">
     @else
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
     @endif
 
     @stack('styles')
@@ -48,15 +47,15 @@
 
         <!-- ~~~ Header Section ~~~ -->
         <header>
-            <div class="custom-container">
+            <div class="container">
                 <div class="header-area">
                     <div class="logo">
                         <a href="{{ route('home') }}">
                             @if (setting('general_settings')?->option_value['logo'])
-                            <img src="{{ asset('storage/'.setting('general_settings')?->option_value['logo']) }}"
-                                alt="logo">
+                                <img src="{{ asset('storage/' . setting('general_settings')?->option_value['logo']) }}"
+                                    alt="logo">
                             @else
-                            <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
+                                <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
                             @endif
                         </a>
                     </div>
@@ -64,8 +63,20 @@
                         <li>
                             <a href="{{ route('home') }}">Home</a>
                         </li>
-                        <li>
-                            <a href="{{ route('courses') }}">Courses</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Courses
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{ route('courses', ['category' => $category->slug]) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
                         <li>
                             <a href="{{ route('about') }}">About Us</a>
@@ -73,15 +84,46 @@
                         <li>
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
-                        <li>
-                            <a href="{{ route('login') }}">Login</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                {{ auth()->check() ? auth()->user()->name : 'My Account' }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @guest
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                @else
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('login') }}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('register') }}"
+                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                @endguest
+                            </ul>
                         </li>
                     </ul>
-                    <div class="header-bar ml-4">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+                    <ul class="menu d-none d-lg-flex flex-wrap">
+                        <li>
+                            <a href="{{ route('home') }}">
+                                <i class="fas fa-heart"></i> Wishlist
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('home') }}">
+                                <i class="fas fa-shopping-cart"></i> Cart
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </header>
@@ -107,8 +149,20 @@
                         <li>
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
-                        <li>
-                            <a href="{{ route('login') }}">Login</a>
+                        @auth
+                            <li>
+                                <a href="{{ route('dashboard') }}">My Account</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endauth
                         </li>
                     </ul>
                 </div>
@@ -170,46 +224,37 @@
                 <div class="container">
                     <div class="footer-top">
                         <div class="footer-area">
-
                             <div class="footer-widget widget-link">
-                                <h5 class="title">Supports</h5>
+                                <h5 class="title">Important Links</h5>
 
                                 <ul>
-                                    @foreach (\Takshak\Adash\Models\Page::where('status',true)->limit(1,4)->get() ?? [] as $page)
                                     <li>
-                                        <a href="{{ route('page',[$page]) }}">{{ $page?->title }}</a>
+                                        <a href="{{ route('home') }}">Home</a>
                                     </li>
-                                    @endforeach
+                                    <li>
+                                        <a href="{{ route('courses') }}">All Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('login') }}">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('about') }}">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('contact') }}">Contact Us</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="footer-widget widget-link">
                                 <h5 class="title">Information</h5>
                                 <ul>
-                                    @foreach (\Takshak\Adash\Models\Page::where('status',true)->limit(4,6)->get() ?? [] as $page)
-                                    <li>
-                                        <a href="{{ route('page',[$page]) }}">{{ $page?->title }}</a>
-                                    </li>
+                                    @foreach ($pages as $page)
+                                        <li>
+                                            <a href="{{ route('page', [$page]) }}">{{ $page?->title }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
-                            {{-- <div class="footer-widget widget-link">
-                                <h5 class="title">Support</h5>
-                                <ul>
-                                    <li>
-                                        <a href="#0">Contact us</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">About us</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Support</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">FAQs</a>
-                                    </li>
-                                </ul>
-                            </div> --}}
-
                             <div class="footer-widget widget-info">
                                 <h5 class="title">Contact Us</h5>
                                 <ul>
@@ -219,7 +264,7 @@
                                         </div>
                                         <div class="content">
                                             <span>
-                                                {{ setting('general_settings')?->option_value['company_address'] }}
+                                                {{ setting('general_settings')?->option_value['company_address'] ?? '3078 Oberoi Garden Estate, B Wing Chandivali Farm Road, Saki Naka' }}
                                             </span>
                                         </div>
                                     </li>
@@ -228,10 +273,9 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a
-                                                href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">+91
-                                                {{ setting('general_settings')?->option_value['support_phone'] }}</a>
-                                            {{-- <a href="Tel:+9999999999">+91 99999999999</a> --}}
+                                            <a href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
+                                                {{ setting('general_settings')?->option_value['support_phone'] ?? '+91 9638-9638-9638' }}
+                                            </a>
                                         </div>
                                     </li>
                                     <li>
@@ -239,33 +283,15 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a
-                                                href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">{{
-                                                setting('general_settings')?->option_value['support_email'] }}</a>
+                                            <a href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
+                                                {{ setting('general_settings')?->option_value['support_email'] ?? 'info@example.com' }}
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="footer-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h5 class="title">Subscribe Newsletter</h5>
-                                <form class="footer-subscribe-form">
-                                    <input type="text" placeholder="Enter Your Email" name="email">
-                                    <button type="submit">Subscribe Now</button>
-                                </form>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="thumb">
-                                    <a href="{{ route('home') }}">
-                                        <img src="{{ asset('assets/images/logo.jpeg') }}" alt="footer" width="100px">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="copyright-area">
                         <div class="left">
                             <p>&copy; Copyright 2023. All Rights Reserved.</p>

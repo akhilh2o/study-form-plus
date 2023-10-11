@@ -61,14 +61,14 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Description </label>
-                        <textarea name="content" class="form-control text-editor" id="content" cols="30"
-                            rows="10">{{ $category?->content }}</textarea>
+                        <textarea name="content" class="form-control " id="content" cols="30"
+                            rows="3">{{ $category?->content }}</textarea>
                     </div>
                     <div class="d-flex">
                         <div class="mr-2">
                             <div id="main-image-preview">
-                                <img src="{{ $category->image() }}" alt="image" width="70"
-                                    class="rounded-circle img-thumbnail">
+                                <img src="{{ $category->image() }}" alt="image" width="75"
+                                    class="rounded">
                             </div>
                         </div>
                         <div class="form-group flex-fill">
@@ -84,12 +84,12 @@
                     <div class="form-group">
                         <label for="meta_keyword">Meta Keyword</label>
                         <textarea name="meta_keyword" class="form-control" id="meta_keyword" cols="30"
-                            rows="3">{{ $category?->meta_keyword }}</textarea>
+                            rows="2">{{ $category?->meta_keyword }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="meta_description">Meta Description</label>
                         <textarea name="meta_description" class="form-control" id="meta_description" cols="30"
-                            rows="5">{{ $category?->meta_description }}</textarea>
+                            rows="2">{{ $category?->meta_description }}</textarea>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -116,20 +116,10 @@
             var previewImg2 = {
                 width: '70px',
                 height: '70px',
-                rounded: '50px',
                 targetId:'main-image-preview'
             };
-            imageCropper('crop-main-image', 16/9, previewImg2);
+            imageCropper('crop-main-image', 6/5, previewImg2);
 
-            tinymce.init({
-                toolbar: 'fontselect fontsizeselect | bold italic underline strikethrough | aligncenter alignjustify alignleft alignright | indent outdent |  table forecolor backcolor image code',
-                plugins: 'table autosave image code',
-                selector: '.text-editor',
-                height: 400,
-                images_upload_handler: function (blobInfo, success, failure) {
-                    success("data:" + blobInfo.blob().type + ";base64," + blobInfo.base64());
-                },
-            });
         </script>
     </x-slot>
 </x-admin.layout>

@@ -13,7 +13,7 @@ class Category extends Model
     public function imageThumb()
     {
         if ($this->image_thumb) {
-            return asset('storage/' . $this->image_thumb);
+            return storage($this->image_thumb);
         } else {
             return 'https://ui-avatars.com/api/?name=NIL&background=random';
         }
@@ -21,7 +21,7 @@ class Category extends Model
     public function image()
     {
         if ($this->image) {
-            return asset('storage/' . $this->image);
+            return storage($this->image);
         } else {
             return 'https://ui-avatars.com/api/?name=NIL&background=random';
         }

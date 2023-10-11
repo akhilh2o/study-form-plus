@@ -1,36 +1,30 @@
-<x-guest-layout>
+<x-app-layout>
+    <x-breadcrumb title="Reset Password" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Reset Password']]" />
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="{{ url('/') }}">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.store') }}">
             @csrf
-
             <!-- Password Reset Token -->
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
             <!-- Email Address -->
             <div class="form-group">
-                <x-label for="email" >Email</x-label>
-                <x-input id="email" class="form-control" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus />
+                <label for="email" >Email</label>
+                <input id="email" class="form-control" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus />
             </div>
 
             <!-- Password -->
             <div class="form-group">
-                <x-label for="password" >Password</x-label>
-                <x-input id="password" class="form-control" type="password" name="password" required />
+                <label for="password" >Password</label>
+                <input id="password" class="form-control" type="password" name="password" required />
             </div>
 
             <!-- Confirm Password -->
             <div class="form-group">
-                <x-label for="password_confirmation" >Confirm Password</x-label>
-                <x-input id="password_confirmation" class="form-control"
+                <label for="password_confirmation" >Confirm Password</label>
+                <input id="password_confirmation" class="form-control"
                                     type="password"
                                     name="password_confirmation" required />
             </div>
@@ -42,4 +36,4 @@
             </div>
         </form>
     </x-auth-card>
-</x-guest-layout>
+</x-app-layout>

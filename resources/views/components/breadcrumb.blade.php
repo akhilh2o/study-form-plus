@@ -1,24 +1,23 @@
-<div class="breadcrumb-area bg-light border-bottom">
-    <div class="container py-3">
-        @if($title)
-            <h5 class="fw-bold mb-1 lc-1">{{ substr($title, 0, 60) }}</h5>
-        @endif
+<section class="hero-section banner-overlay bg_img" data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
+    <div class="container">
+        <div class="hero-content">
+            @if ($title)
+                <h1 class="title cl-white">{{ substr($title, 0, 60) }}</h1>
+            @endif
 
-        <ul class="breadcrumb mb-0 fs-6">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-            @foreach($links as $link)
-                @if(!$loop->last)
-                    <li class="breadcrumb-item">
-                        <a href="{{ isset($link['url']) ? $link['url'] : 'javascript:void(0)' }}">
+            <ul class="breadcrumb cl-white p-0 m-0">
+                @foreach ($links as $link)
+                    <li>
+                        @if (!$loop->last)
+                            <a href="{{ isset($link['url']) ? $link['url'] : 'javascript:void(0)' }}">
+                                {{ $link['text'] }}
+                            </a>
+                        @else
                             {{ $link['text'] }}
-                        </a>
+                        @endif
                     </li>
-                @else
-                    <li class="breadcrumb-item active">
-                        {{ $link['text'] }}
-                    </li>
-                @endif
-            @endforeach
-        </ul>
+                @endforeach
+            </ul>
+        </div>
     </div>
-</div>
+</section>

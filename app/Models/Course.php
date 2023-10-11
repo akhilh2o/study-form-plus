@@ -12,12 +12,9 @@ class Course extends Model
 
     public function thumbnail()
     {
-        if ($this->thumbnail) {
-            return asset('storage/' . $this->thumbnail);
-        } else {
-            return 'https://picsum.photos/370/210';
-        }
+        return $this->thumbnail ? storage($this->thumbnail) : 'https://picsum.photos/600/500';
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
