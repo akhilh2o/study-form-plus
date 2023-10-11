@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\CourseAction;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Course;
@@ -36,7 +37,7 @@ class CourseController extends Controller
         return view('admin.courses.create')->with('categories', $categories);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, CourseAction $action)
     {
         $request->validate([
             'title'               =>  'required',
@@ -52,27 +53,7 @@ class CourseController extends Controller
             'meta_description'    =>  'nullable',
         ]);
 
-        $course = new Course();
-        $course->category_id               =  $request->post('category_id');
-        $course->title                     =  $request->post('title');
-        $course->sub_title                 =  $request->post('sub_title');
-        $course->slug                      =  Str::slug($request->post('title'));
-        $course->description               =  $request->post('description');
-        $course->download_link             =  $request->post('download_link');
-        $course->status                    =  $request->post('status');
-        $course->popular                   =  $request->post('popular');
-        $course->meta_title                =  $request->post('meta_title');
-        $course->meta_keyword              =  $request->post('meta_keyword');
-        $course->meta_description          =  $request->post('meta_description');
-
-        if ($request->file('thumbnail')) {
-            $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->extension();
-            Imager::init($request->file('thumbnail'))
-                ->resizeFit(600, 500)
-                ->inCanvas('#fff')
-                ->save(Storage::disk('public')->path($course->thumbnail));
-        }
-        $course->save();
+        $action->save(new Course(), $request);
 
         return to_route('admin.courses.index')->withSuccess('SUCCESS !! New Course is successfully created');
     }
@@ -91,7 +72,7 @@ class CourseController extends Controller
     }
 
 
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Course $course, CourseAction $action)
     {
         $request->validate([
             'title'               =>  'required',
@@ -107,29 +88,7 @@ class CourseController extends Controller
             'meta_description'    =>  'nullable',
         ]);
 
-        $course->category_id               =  $request->post('category_id');
-        $course->title                     =  $request->post('title');
-        $course->sub_title                 =  $request->post('sub_title');
-        $course->slug                      =  Str::slug($request->post('title'));
-        $course->description               =  $request->post('description');
-        $course->download_link             =  $request->post('download_link');
-        $course->status                    =  $request->post('status');
-        $course->popular                   =  $request->post('popular');
-        $course->meta_title                =  $request->post('meta_title');
-        $course->meta_keyword              =  $request->post('meta_keyword');
-        $course->meta_description          =  $request->post('meta_description');
-
-        if ($request->file('thumbnail')) {
-            Storage::disk('public')->delete($course->thumbnail);
-
-            $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->extension();
-            Imager::init($request->file('thumbnail'))
-                ->resizeFit(600, 500)
-                ->inCanvas('#fff')
-                ->save(Storage::disk('public')->path($course->thumbnail));
-        }
-        $course->save();
-
+        $action->save($course, $request);
         return to_route('admin.courses.index')->withSuccess('SUCCESS !! Course is successfully updated');
     }
 
@@ -141,7 +100,7 @@ class CourseController extends Controller
         return to_route('admin.courses.index')->withErrors('Course has been successfully deleted.');
     }
 
-    function getYoutubeEmbedUrl($url)
+    public function getYoutubeEmbedUrl($url)
     {
         $shortUrlRegex = '/youtu.be\/([a-zA-Z0-9_-]+)\??/i';
         $longUrlRegex = '/youtube.com\/((?:embed)|(?:watch))((?:\?v\=)|(?:\/))([a-zA-Z0-9_-]+)/i';
