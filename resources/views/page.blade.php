@@ -1,21 +1,5 @@
 <x-app-layout>
-    <!-- ~~~ Hero Section ~~~ -->
-    <section class="hero-section banner-overlay bg_img" data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
-        <div class="custom-container">
-            <div class="hero-content">
-                <h1 class="title uppercase cl-white">{{ $page?->title }}</h1>
-                <ul class="breadcrumb cl-white p-0 m-0">
-                    <li>
-                        <a href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li>
-                        {{ $page?->title }}
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- ~~~ Hero Section ~~~ -->
+    <x-breadcrumb :title="$page?->title" :links="[['text' => 'Home', 'url' => route('home')], ['text' => $page?->title]]" />
 
 
     <!-- ~~~ Blog Section ~~~ -->

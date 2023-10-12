@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +33,16 @@ Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::post('queries', [QueryController::class, 'store'])->name('queries.store');
 
 Route::middleware(['auth'])->group(function () {
+    Route::prefix('carts')->name('carts.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+    });
+    Route::prefix('wishlists')->name('wishlists.')->group(function () {
+        Route::get('/', [WishlistController::class, 'index'])->name('index');
+        Route::get('{course}', [WishlistController::class, 'toggle'])->name('toggle');
+    });
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');

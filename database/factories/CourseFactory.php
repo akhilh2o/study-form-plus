@@ -29,6 +29,8 @@ class CourseFactory extends Factory
             'title'                     =>  $this->faker->text(rand(50, 70)),
             'sub_title'                 =>  $this->faker->realText(rand(50, 150)),
             'slug'                      =>  $this->faker->slug(4),
+            'net_price'                 =>  rand(1, 15) * 10,
+            'sell_price'                =>  rand(1, 15) * 10,
             'description'               =>  $this->faker->realText(rand(150, 400)),
             'download_link'             =>   $this->faker->url(),
             'status'                    =>  true,

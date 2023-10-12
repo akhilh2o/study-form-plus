@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
-        return view('carts');
+        return view('checkout');
     }
 }

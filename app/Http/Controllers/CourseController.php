@@ -22,7 +22,7 @@ class CourseController extends Controller
         }
 
         $categories = Category::select('id', 'name')->get();
-        $courses = Course::paginate(20);
+        $courses = Course::paginate(18);
         return view('courses')->with([
             'courses' => $courses,
             'categories' => $categories,

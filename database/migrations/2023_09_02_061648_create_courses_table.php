@@ -16,7 +16,8 @@ return new class () extends Migration {
             $table->string('title')->nullable()->default(null);
             $table->text('sub_title')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
-            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('net_price', 10, 2)->nullable();
+            $table->decimal('sell_price', 10, 2)->nullable();
             $table->string('thumbnail')->nullable()->default(null);
             $table->string('download_link')->nullable()->default(null);
             $table->longText('description')->nullable()->default(null);

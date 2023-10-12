@@ -14,7 +14,8 @@ use Takshak\Imager\Facades\Placeholder;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     protected $guarded = [];
     protected $hidden = [
@@ -34,6 +35,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * The wishlists that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function wishlists(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class, 'wishlists');
     }
 
     public function profileImg()

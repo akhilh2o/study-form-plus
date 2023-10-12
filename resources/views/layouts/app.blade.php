@@ -68,6 +68,11 @@
                                 Courses
                             </a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('courses') }}">
+                                        All Courses
+                                    </a>
+                                </li>
                                 @foreach ($categories as $category)
                                     <li>
                                         <a class="dropdown-item"
@@ -114,12 +119,12 @@
                     </ul>
                     <ul class="menu d-none d-lg-flex flex-wrap">
                         <li>
-                            <a href="{{ route('home') }}">
+                            <a href="{{ route('wishlists.index') }}">
                                 <i class="fas fa-heart"></i> Wishlist
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('home') }}">
+                            <a href="{{ route('carts.index') }}">
                                 <i class="fas fa-shopping-cart"></i> Cart
                             </a>
                         </li>
@@ -154,7 +159,8 @@
                                 <a href="{{ route('dashboard') }}">My Account</a>
                             </li>
                             <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
                             </li>
@@ -273,7 +279,8 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
+                                            <a
+                                                href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
                                                 {{ setting('general_settings')?->option_value['support_phone'] ?? '+91 9638-9638-9638' }}
                                             </a>
                                         </div>
@@ -283,7 +290,8 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
+                                            <a
+                                                href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
                                                 {{ setting('general_settings')?->option_value['support_email'] ?? 'info@example.com' }}
                                             </a>
                                         </div>
