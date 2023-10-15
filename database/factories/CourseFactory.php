@@ -20,9 +20,9 @@ class CourseFactory extends Factory
     public function definition()
     {
         $thumbnail = 'courses/' . time() . rand() . '.jpg';
-        Picsum::dimensions(600, 500)
-            ->save(Storage::disk('public')->path($thumbnail))
-            ->destroy();
+        // Picsum::dimensions(600, 500)
+        //     ->save(Storage::disk('public')->path($thumbnail))
+        //     ->destroy();
 
         return [
             'category_id'               =>  Category::inRandomOrder()->first()->id,
@@ -30,9 +30,9 @@ class CourseFactory extends Factory
             'sub_title'                 =>  $this->faker->realText(rand(50, 150)),
             'slug'                      =>  $this->faker->slug(4),
             'net_price'                 =>  rand(1, 15) * 10,
-            'sell_price'                =>  rand(1, 15) * 10,
+            'sale_price'                =>  rand(1, 15) * 10,
             'description'               =>  $this->faker->realText(rand(150, 400)),
-            'download_link'             =>   $this->faker->url(),
+            'demo_link'                 =>  $this->faker->url(),
             'status'                    =>  true,
             'popular'                   =>  rand(0, 1),
             'meta_title'                =>  $this->faker->realText(rand(50, 150)),

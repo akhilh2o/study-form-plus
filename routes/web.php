@@ -35,13 +35,20 @@ Route::post('queries', [QueryController::class, 'store'])->name('queries.store')
 Route::middleware(['auth'])->group(function () {
     Route::prefix('carts')->name('carts.')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::get('/add/{id}', [CartController::class, 'addtoCart'])->name('add');
+        Route::get('/update', [CartController::class, 'updateCart'])->name('update');
+        Route::get('/delete', [CartController::class, 'deleteFromCart'])->name('delete');
     });
     Route::prefix('wishlists')->name('wishlists.')->group(function () {
         Route::get('/', [WishlistController::class, 'index'])->name('index');
+        Route::get('remove/{course}', [WishlistController::class, 'detachFromWishlist'])->name('remove');
+        Route::get('move-to-cart/{course}', [WishlistController::class, 'moveToCart'])->name('move_to_cart');
         Route::get('{course}', [WishlistController::class, 'toggle'])->name('toggle');
     });
-    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.store');
+    Route::get('checkout/success',[CheckoutController::class,'success'])->name('checkout.success');
 
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::prefix('user')->name('user.')->group(function () {

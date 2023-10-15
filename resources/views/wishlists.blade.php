@@ -3,27 +3,33 @@
 
     <section class="carts pt-120 pb-120">
         <div class="container">
+            @forelse (auth()->user()?->wishlists ?? [] as $wishlist)
             <div class="card cart_item">
                 <div class="card-body d-flex gap-3">
                     <div class="my-auto">
-                        <img src="https://picsum.photos/300/250" alt="" class="rounded course_img">
+                        <img src="{{ $wishlist->thumbnail() }}" alt="" class="rounded course_img">
                     </div>
                     <div class="my-auto">
-                        <h6 class="mb-3 lh-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h6>
+                        <h6 class="mb-3 lh-1">{{ $wishlist?->title }}</h6>
                         <p class="mb-2">
                             <b>Price:</b>
-                            <span>150.00</span>
-                            <del>185.00</del>
+                            <span>{{ $wishlist?->sale_price }}</span>
+                            <del>{{ $wishlist?->net_price }}</del>
                         </p>
-                        <a href="" class="badge bg-success">
+                        <a href="{{ route('wishlists.move_to_cart',[$wishlist]) }}" class="badge bg-success">
                             <i class="fas fa-shopping-cart"></i> Move To Cart
                         </a>
-                        <a href="" class="badge bg-danger">
+                        <a href="{{ route('wishlists.remove',[$wishlist]) }}" class="badge bg-danger">
                             <i class="fas fa-times"></i> Remove
                         </a>
                     </div>
                 </div>
             </div>
+            @empty
+            <div class="text-center">
+                <p>No items found.</p>
+            </div>
+            @endforelse
         </div>
     </section>
 </x-app-layout>

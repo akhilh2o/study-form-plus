@@ -22,11 +22,18 @@ class CourseController extends Controller
         }
 
         $categories = Category::select('id', 'name')->get();
-        $courses = Course::paginate(18);
+
+        $courses = Course::when($category, function ($query) use ($category) {
+            $query->whereHas('category', function ($query) use ($category) {
+                $query->where('id', $category?->id);
+            });
+        })->paginate()
+            ->withQueryString();
+
         return view('courses')->with([
-            'courses' => $courses,
-            'categories' => $categories,
-            'category' => $category
+            'courses'       => $courses,
+            'categories'    => $categories,
+            'category'      => $category
         ]);
     }
 

@@ -17,14 +17,14 @@
                     <h6 class="mb-4">{{ $course?->sub_title }}</h6>
                     <p class="lead">
                         <b>Price: </b>
-                        <span>150</span>
-                        <del>175</del>
+                        <span>{{ $course?->sale_price }}</span>
+                        <del>{{ $course?->net_price }}</del>
                     </p>
                     <a href="{{ route('wishlists.toggle', [$course]) }}"
                         class="btn px-3 rounded-pill {{ auth()->user()?->wishlists?->pluck('id')?->contains($course->id)? 'btn-danger': 'btn-dark' }}">
                         <i class="fas fa-heart"></i>
                     </a>
-                    <a href="" class="btn btn-dark px-3 rounded-pill">
+                    <a href="{{ route('carts.add', $course->id) }}" class="btn btn-dark px-3 rounded-pill">
                         <i class="fas fa-shopping-cart"></i> Add to cart
                     </a>
                     <hr />

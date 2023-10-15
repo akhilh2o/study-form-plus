@@ -1,25 +1,19 @@
 <x-admin.layout>
-    <x-admin.breadcrumb title='All Courses' :links="[
+    <x-admin.breadcrumb title='All Order' :links="[
 				[
                     'text' => 'Dashboard',
                     'url'  => route('admin.dashboard')
                 ],
                 [
-                    'text' => 'Course'
+                    'text' => 'Order'
                 ]
 			]" :actions="[
                 [
                     'text'  => 'Filter',
                     'icon'  => 'fas fa-filter',
                     'class' => 'btn-secondary btn-loader',
-                    'url'   => route('admin.courses.index', ['filter' => 1])
+                    'url'   => route('admin.orders.index', ['filter' => 1])
                 ],
-                [
-                    'text'       => 'Create New',
-                    'icon'       => 'fas fa-plus',
-                    'url'        => route('admin.courses.create'),
-                    'class'      => 'btn-dark btn-loader'
-            ],
             ]" />
 
     @if(request()->get('filter'))
@@ -32,10 +26,18 @@
                             value="{{ Request::get('search') }}">
                     </div>
                     <div class="col-12 col-md-4">
+                        <select name="status" id="status" class="form-control select2">
+                            <option value="">- Select --</option>
+                            <option value="pending"  @selected(Request::get('status')=='pending')>Pending</option>
+                            <option value="confirmed" @selected(Request::get('status')=='confirmed')>Confirmed</option>
+                            <option value="delivered" @selected(Request::get('status')=='delivered')>Delivered</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
                         <button type="submit" class="btn btn-dark btn-loader">
                             <i class="fas fa-save"></i> Submit
                         </button>
-                        <a href="{{ route('admin.courses.index') }}" class="btn btn-basic border btn-loader">
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-basic border btn-loader">
                             <i class="fas fa-times"></i>
                         </a>
                     </div>
@@ -45,73 +47,76 @@
     </div>
     @endif
     <div class="card shadow-sm">
-        <x-admin.paginator-info :items="$courses" class="card-header" />
+        <x-admin.paginator-info :items="$orders" class="card-header" />
         <div class="card-body table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Thumbnail</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Price</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($courses as $course)
+                    @foreach($orders as $order)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td width="10%"><img src="{{ $course->thumbnail() }}" alt="cover image" width="50" height="40">
-                        </td>
+                        <td width="10%">{{ $order?->name }}</td>
                         <td width="50%">
-                            {{ $course->title }}
-                            <div class="text-small">{{ Str::limit($course->sub_title,50) }}</div>
+                            {{ $order->address }}
+                            <div class="text-small">
+                                {{ $order->city }}
+                                {{ $order->state }}
+                                {{ $order->landmark }}
+                                {{ $order->pincode }}
+                                {{ $order->country }}
+                            </div>
                         </td>
-                        <td>{{ $course?->category?->name }}</td>
-                        <td><del>{{ $course?->net_price }}</del>
-                        {{ $course->sale_price }}</td>
+                        <td>{{ $order?->total }}</td>
+                        <td>{{ $order?->payment_status ? 'Paid' : 'Unpaid' }}</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button"
-                                    class="btn btn-{{ $course->status ? 'success' : 'danger' }} text-nowrap btn-sm">
-                                    {!! $course->status ? 'Active'.str_repeat('&nbsp;', 3) : 'In-active' !!}
+                                    class="btn btn-{{ $order->status=='delivered' ? 'success' : 'warning' }} text-nowrap btn-sm">
+                                    {!! Str::ucfirst($order->status) !!}
                                 </button>
                                 <button type="button"
-                                    class="btn btn-{{ $course->status ? 'success' : 'danger' }} btn-sm dropdown-toggle dropdown-toggle-split"
+                                    class="btn btn-{{ $order->status=='delivered' ? 'success' : 'warning' }} btn-sm dropdown-toggle dropdown-toggle-split"
                                     data-bs-toggle="dropdown">
                                     <i class="fas fa-caret-down"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item bg-danger text-white"
-                                        href="{{ route('admin.courses.status', [$course]) }}">
-                                        In-active
+                                    <a class="dropdown-item bg-warning text-white"
+                                        href="{{ route('admin.orders.status', [$order,'status'=>'pending']) }}">
+                                        Pending
                                     </a>
                                     <a class="dropdown-item bg-success text-white"
-                                        href="{{ route('admin.courses.status', [$course]) }}">
-                                        Active
+                                        href="{{ route('admin.orders.status', [$order,'status'=>'confirmed']) }}">
+                                        Confirmed
+                                    </a>
+                                    <a class="dropdown-item bg-info text-white"
+                                        href="{{ route('admin.orders.status', [$order,'status'=>'delivered']) }}">
+                                        Delivered
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td width="15%">
-                            <a href="{{ route('admin.courses.show', [$course]) }}"
+                        <td>
+                            <a href="{{ route('admin.orders.show', [$order]) }}"
                                 class="btn btn-info btn-sm btn-loader load-circle">
                                 <i class="fas fa-info-circle"></i>
                             </a>
-                            <a href="{{ route('admin.courses.edit', [$course]) }}"
-                                class="btn btn-success btn-sm btn-loader load-circle">
-                                <i class="fas fa-edit"></i>
-                            </a>
 
-                            <form action="{{ route('admin.courses.destroy', [$course]) }}" method="POST"
+                            {{-- <form action="{{ route('admin.orders.destroy', [$order]) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger delete-alert btn-loader load-circle"><i
                                         class="fas fa-trash"></i></button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                     @endforeach
@@ -119,7 +124,7 @@
             </table>
         </div>
         <div class="card-footer">
-            {{ $courses->links() }}
+            {{ $orders->links() }}
         </div>
     </div>
 </x-admin.layout>

@@ -10,8 +10,8 @@
         </h5>
         <p class="fs-5">
             <b>Price: </b>
-            <span>150</span>
-            <del>175</del>
+            <span>{{ $product?->sale_price }}</span>
+            <del>{{ $product?->net_price }}</del>
         </p>
         <hr />
         <div class="text-center">

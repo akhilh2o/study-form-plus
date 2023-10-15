@@ -47,6 +47,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Course::class, 'wishlists');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
     public function profileImg()
     {
         if (!empty($this->profile_img)) {

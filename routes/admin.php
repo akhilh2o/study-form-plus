@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\QueryController;
 use App\Http\Controllers\Admin\RoleController;
@@ -33,6 +34,8 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
     Route::get('profile/edit', [AdminController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile/update', [AdminController::class, 'profileUpdate'])->name('profile.update');
 
+    Route::resource('orders', OrderController::class);
+    Route::get('orders/{order}/status', [OrderController::class, 'statusToggle'])->name('orders.status');
     Route::resource('users', UserController::class);
     Route::prefix('users')->name('users.')->controller(UserController::class)->group(function () {
         Route::get('status-toggle/{user}', 'statusToggle')->name('status-toggle');

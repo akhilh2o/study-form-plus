@@ -4,28 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories', 'id')->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained('orders', 'id')
+                ->cascadeOnDelete();
+            $table->foreignId('course_id')->nullable()->default()
+                ->constrained('courses', 'id')
+                ->cascadeOnDelete();
             $table->string('title')->nullable()->default(null);
             $table->text('sub_title')->nullable()->default(null);
             $table->string('slug')->nullable()->default(null);
-            $table->decimal('net_price', 10, 2)->nullable();
-            $table->decimal('sale_price', 10, 2)->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->string('thumbnail')->nullable()->default(null);
             $table->string('demo_link')->nullable()->default(null);
             $table->longText('description')->nullable()->default(null);
-            $table->boolean('popular')->default(true);
-            $table->boolean('status')->default(true);
-            $table->text('meta_title')->nullable()->default(null);
-            $table->text('meta_keyword')->nullable()->default(null);
-            $table->text('meta_description')->nullable()->default(null);
+            $table->string('order_type')->nullable()
+                ->default('download')
+                ->comment('download,pendrive');
+            $table->string('download_link')->nullable()->default(null);
             $table->timestamps();
         });
     }
@@ -35,6 +38,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('order_items');
     }
 };

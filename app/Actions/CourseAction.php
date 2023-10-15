@@ -16,7 +16,9 @@ class CourseAction
         $course->sub_title                 =  $request->post('sub_title');
         $course->slug                      =  Str::slug($request->post('title'));
         $course->description               =  $request->post('description');
-        $course->download_link             =  $request->post('download_link');
+        $course->demo_link                 =  $this->getYoutubeEmbedUrl($request->post('demo_link'));
+        $course->net_price                 =  $request->post('net_price');
+        $course->sale_price                =  $request->post('sale_price');
         $course->status                    =  $request->post('status');
         $course->popular                   =  $request->post('popular');
         $course->meta_title                =  $request->post('meta_title');
@@ -25,7 +27,7 @@ class CourseAction
 
         if ($request->file('thumbnail')) {
 
-            if($course->thumbnail) {
+            if ($course->thumbnail) {
                 Storage::disk('public')->delete($course->thumbnail);
             }
 
@@ -38,5 +40,25 @@ class CourseAction
         $course->save();
 
         return $course;
+    }
+
+    public function getYoutubeEmbedUrl($url)
+    {
+        $youtube_id='';
+        $shortUrlRegex = '/youtu.be\/([a-zA-Z0-9_-]+)\??/i';
+        $longUrlRegex = '/youtube.com\/((?:embed)|(?:watch))((?:\?v\=)|(?:\/))([a-zA-Z0-9_-]+)/i';
+
+        if (preg_match($longUrlRegex, $url, $matches)) {
+            $youtube_id = $matches[count($matches) - 1];
+        }
+
+        if (preg_match($shortUrlRegex, $url, $matches)) {
+            $youtube_id = $matches[count($matches) - 1];
+        }
+        if ($youtube_id) {
+            return 'https://www.youtube.com/embed/' . $youtube_id;
+        } else {
+            return $url;
+        }
     }
 }

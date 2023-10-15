@@ -47,7 +47,9 @@ class CourseController extends Controller
             'status'              =>  'required',
             'popular'             =>  'required',
             'thumbnail'           =>  'nullable|image',
-            'download_link'       =>  'nullable',
+            'demo_link'           =>  'nullable',
+            'net_price'           =>  'required',
+            'sale_price'          =>  'required',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
             'meta_description'    =>  'nullable',
@@ -82,7 +84,9 @@ class CourseController extends Controller
             'status'              =>  'required',
             'popular'             =>  'required',
             'thumbnail'           =>  'nullable|image',
-            'download_link'       =>  'required',
+            'demo_link'           =>  'nullable',
+            'net_price'           =>  'required',
+            'sale_price'          =>  'required',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
             'meta_description'    =>  'nullable',
@@ -98,21 +102,6 @@ class CourseController extends Controller
         Storage::disk('public')->delete($course->thumbnail);
         $course->delete();
         return to_route('admin.courses.index')->withErrors('Course has been successfully deleted.');
-    }
-
-    public function getYoutubeEmbedUrl($url)
-    {
-        $shortUrlRegex = '/youtu.be\/([a-zA-Z0-9_-]+)\??/i';
-        $longUrlRegex = '/youtube.com\/((?:embed)|(?:watch))((?:\?v\=)|(?:\/))([a-zA-Z0-9_-]+)/i';
-
-        if (preg_match($longUrlRegex, $url, $matches)) {
-            $youtube_id = $matches[count($matches) - 1];
-        }
-
-        if (preg_match($shortUrlRegex, $url, $matches)) {
-            $youtube_id = $matches[count($matches) - 1];
-        }
-        return 'https://www.youtube.com/embed/' . $youtube_id;
     }
 
     public function statusToggle(Course $course)

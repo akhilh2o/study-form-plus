@@ -3,51 +3,36 @@
 
     <section class="carts pt-120 pb-120">
         <div class="container">
+            @php $total = 0 @endphp
+            @if(session('cart'))
+            @foreach($courses ?? [] as $id => $course)
             <div class="card cart_item">
                 <div class="card-body d-flex gap-3">
                     <div class="my-auto">
-                        <img src="https://picsum.photos/300/250" alt="" class="rounded course_img">
+                        <img src="{{ $course->thumbnail() }}" alt="" class="rounded course_img">
                     </div>
                     <div class="my-auto">
-                        <h6 class="mb-3 lh-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h6>
+                        <h6 class="mb-3 lh-1">{{ $course?->title }}</h6>
                         <p class="mb-2">
                             <b>Price:</b>
-                            <span>150.00</span>
-                            <del>185.00</del>
+                            <span>{{ number_format($course?->sale_price,2) }}</span>
+                            <del>{{ number_format($course?->net_price,2) }}</del>
                         </p>
                         <p class="mb-2">
-                            <b>Quantity:</b> <span>1</span>
+                            <b>Quantity:</b> <span>{{ $carts[$course?->id]['quantity'] }}</span>
                         </p>
-                        <a href="" class="badge bg-danger">
+                        <a href="{{ route('carts.delete',['id'=>$course->id]) }}" class="badge bg-danger">
                             <i class="fas fa-times"></i> Remove
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="card cart_item">
-                <div class="card-body d-flex gap-3">
-                    <div class="my-auto">
-                        <img src="https://picsum.photos/300/250" alt="" class="rounded course_img">
-                    </div>
-                    <div class="my-auto">
-                        <h6 class="mb-3 lh-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h6>
-                        <p class="mb-2">
-                            <b>Price:</b>
-                            <span>150.00</span>
-                            <del>185.00</del>
-                        </p>
-                        <p class="mb-0">
-                            <b>Quantity:</b> <span>1</span>
-                        </p>
-                        <a href="" class="badge bg-danger">
-                            <i class="fas fa-times"></i> Remove
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @php $total += $course?->sale_price * $carts[$course?->id]['quantity'] @endphp
+            @endforeach
+            @endif
             <div class="mt-4 text-end d-flex gap-4 justify-content-between">
                 <div class="my-auto">
-                    <h4>Total: 1250.00</h4>
+                    <h4>Total: {{ number_format($total, 2) }}</h4>
                 </div>
                 <a href="{{ route('checkout') }}" class="btn btn-lg btn-dark px-4 rounded-pill">
                     Procceed Checkout

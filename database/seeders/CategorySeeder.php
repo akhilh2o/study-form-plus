@@ -33,10 +33,10 @@ class CategorySeeder extends Seeder
             $category->image = 'categories/' . time().rand() . '.jpg';
             $category->image_thumb = 'categories/thumb-' . time().rand() . '.jpg';
 
-            Picsum::dimensions(600, 500)
-                ->save(Storage::disk('public')->path($category->image))
-                ->save(Storage::disk('public')->path($category->image_thumb), 300)
-                ->destroy();
+            // Picsum::dimensions(600, 500)
+            //     ->save(Storage::disk('public')->path($category->image))
+            //     ->save(Storage::disk('public')->path($category->image_thumb), 300)
+            //     ->destroy();
 
             $category->save();
         }
