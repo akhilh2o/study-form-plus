@@ -20,9 +20,9 @@ class CourseFactory extends Factory
     public function definition()
     {
         $thumbnail = 'courses/' . time() . rand() . '.jpg';
-        // Picsum::dimensions(600, 500)
-        //     ->save(Storage::disk('public')->path($thumbnail))
-        //     ->destroy();
+        Picsum::dimensions(600, 500)
+            ->save(Storage::disk('public')->path($thumbnail))
+            ->destroy();
 
         return [
             'category_id'               =>  Category::inRandomOrder()->first()->id,
