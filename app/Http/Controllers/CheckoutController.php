@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderSuccess;
+use App\Models\Coupon;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -23,9 +24,8 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        $this->cartItems();
         // return $request;
-        // dd($this->carts, $this->courses);
+        $this->cartItems();
         $request->validate([
             'name'              => 'required',
             'mobile'            => 'required',
@@ -36,11 +36,12 @@ class CheckoutController extends Controller
             'state'             => 'required',
             'pincode'           => 'required',
             'country'           => 'required',
+            'coupon_code'       => 'nullable',
+            'coupon_id'         => 'nullable',
         ]);
         $total = 0;
         foreach ($this->courses ?? [] as $course) {
-            $course?->sale_price * $this->carts[$course?->id]['quantity'];
-            $total += $course?->sale_price * $this->carts[$course?->id]['quantity'];
+            $total += $course?->sale_price;
             $orderItems[] = [
                 'course_id'  => $course->id,
                 'title'      => $course->title,
@@ -50,22 +51,36 @@ class CheckoutController extends Controller
                 'thumbnail'   => $course->thumbnail,
                 'demo_link'   => $course->demo_link,
                 'description' => $course->description,
-                'order_type'  => 'download'
+                'order_type'  => $this->carts[$course?->id]['order_type']
             ];
         }
 
-        $order = new Order;
-        $order->name    = $request->name;
-        $order->mobile  = $request->mobile;
-        $order->email   = $request->email;
-        $order->address = $request->address_link_1;
-        $order->landmark = $request->landmark;
-        $order->city     = $request->city;
-        $order->state    = $request->state;
-        $order->pincode  = $request->pincode;
-        $order->country  = $request->country;
-        $order->user_id  = auth()?->user()?->id;
+
+        $order              = new Order;
+        $order->name        = $request->name;
+        $order->mobile      = $request->mobile;
+        $order->email       = $request->email;
+        $order->address     = $request->address_link_1;
+        $order->landmark    = $request->landmark;
+        $order->city        = $request->city;
+        $order->state       = $request->state;
+        $order->pincode     = $request->pincode;
+        $order->country     = $request->country;
+        $order->user_id     = auth()?->user()?->id;
+        $order->sub_total   = $total;
         $order->total       = $total;
+
+        // checking the coupon code and apply
+        if ($request->coupon_code) {
+            $coupon = $this->getCoupon($request->coupon_code);
+            if ($coupon) {
+                $order->coupon_discount_amount = $coupon->discount($total);
+                $order->coupon_code            = $request->coupon_code;
+                $order->coupon_discount_remark = $request->coupon_code . ' coupon has been applied.';
+                $order->total                  = $total - $order->coupon_discount_amount;
+            }
+        }
+
         $order->payment_status   = true;
         $order->save();
 
@@ -86,5 +101,28 @@ class CheckoutController extends Controller
     public function success()
     {
         return view('checkout_success');
+    }
+
+    public function verifyCoupon(Request $request)
+    {
+        $coupon_id = 0;
+        $discountAmount = 0;
+        $couponCode = $request->input('coupon_code');
+        if ($couponCode && $request->amount) {
+            $coupon = $this->getCoupon($couponCode);
+            if ($coupon) {
+                $coupon_id      = $coupon->id;
+                $discountAmount = $coupon->discount($request->amount);
+            }
+        }
+
+        return response()->json([
+            'discount' => $discountAmount,
+            'coupon_id' => $coupon_id
+        ]);
+    }
+    public function getCoupon($couponCode)
+    {
+        return Coupon::where('status', true)->where('coupon_code', $couponCode)->first();
     }
 }

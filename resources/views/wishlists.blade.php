@@ -12,11 +12,15 @@
                     <div class="my-auto">
                         <h6 class="mb-3 lh-1">{{ $wishlist?->title }}</h6>
                         <p class="mb-2">
+                            <b>Course Type:</b>
+                            <span>{{ Str::ucfirst($wishlist?->pivot?->course_type); }}</span>
+                        </p>
+                        <p class="mb-2">
                             <b>Price:</b>
                             <span>{{ $wishlist?->sale_price }}</span>
                             <del>{{ $wishlist?->net_price }}</del>
                         </p>
-                        <a href="{{ route('wishlists.move_to_cart',[$wishlist]) }}" class="badge bg-success">
+                        <a href="{{ route('wishlists.move_to_cart',[$wishlist,'order_type'=> $wishlist?->pivot?->course_type ]) }}" class="badge bg-success">
                             <i class="fas fa-shopping-cart"></i> Move To Cart
                         </a>
                         <a href="{{ route('wishlists.remove',[$wishlist]) }}" class="badge bg-danger">

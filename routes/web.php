@@ -25,7 +25,6 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('courses', [CourseController::class, 'index'])->name('courses');
 Route::get('course/{course:slug}', [CourseController::class, 'detail'])->name('course');
-
 Route::get('page/{page:slug}', [HomeController::class, 'page'])->name('page');
 
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
@@ -49,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.store');
     Route::get('checkout/success',[CheckoutController::class,'success'])->name('checkout.success');
-
+    Route::post('/checkout/verify-coupon', [CheckoutController::class,'verifyCoupon'])->name('checkout.verify-coupon');
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');

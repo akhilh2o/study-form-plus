@@ -45,6 +45,20 @@
                             <td><b>Order Status:</b></td>
                             <td> {!! Str::ucfirst($order->status) !!}</td>
                         </tr>
+                        @if ($order->coupon_discount_amount)
+                        <tr>
+                            <td><b>Coupon Discount Amount:</b></td>
+                            <td>{{ $order?->coupon_discount_amount }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Coupon Remark:</b></td>
+                            <td>{{ $order?->coupon_discount_remark }}</td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td><b>Sub Total Amount:</b></td>
+                            <td>{{ $order?->sub_total }}</td>
+                        </tr>
                         <tr>
                             <td><b>Total Amount:</b></td>
                             <td>{{ $order?->total }}</td>

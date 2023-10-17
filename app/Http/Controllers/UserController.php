@@ -10,6 +10,6 @@ class UserController extends Controller
     public function dashboard()
     {
         $users_count  = User::count();
-        return view('admin.dashboard', compact('users_count'));
+        return view('user.dashboard', compact('users_count'));
     }
 }

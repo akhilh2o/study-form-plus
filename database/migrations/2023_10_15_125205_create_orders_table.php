@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('country')->nullable()->default(null);
             $table->decimal('sub_total', 10, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
+            $table->decimal('coupon_discount_amount', 10, 2)->nullable()->default(null);
+            $table->string('coupon_discount_remark')->nullable()->default(null);
+            $table->string('coupon_code')->nullable()->default(null);
             $table->string('status')->nullable()
                 ->default('pending')
                 ->comment('pending,confirmed,delivered');

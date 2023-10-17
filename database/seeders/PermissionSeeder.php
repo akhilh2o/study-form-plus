@@ -37,6 +37,46 @@ class PermissionSeeder extends Seeder
     {
         return  [
             [
+                'name'        =>    'category_access',
+                'title'        =>    'Category Management',
+                'children'    =>    [
+                    ['name'    => 'category_show', 'title' =>    'Category Create'],
+                    ['name'    => 'category_create', 'title' =>    'Category Create'],
+                    ['name'    => 'category_update', 'title' =>    'Category Update'],
+                    ['name'    => 'category_delete', 'title' =>    'Category Delete'],
+                ]
+            ],
+            [
+                'name'        =>    'course_access',
+                'title'        =>    'Course Management',
+                'children'    =>    [
+                    ['name'    => 'course_show', 'title' =>    'Course Create'],
+                    ['name'    => 'course_create', 'title' =>    'Course Create'],
+                    ['name'    => 'course_update', 'title' =>    'Course Update'],
+                    ['name'    => 'course_delete', 'title' =>    'Course Delete'],
+                ]
+            ],
+            [
+                'name'        =>    'order_access',
+                'title'        =>    'Order Management',
+                'children'    =>    [
+                    ['name'    => 'order_show', 'title' =>    'Order Create'],
+                    ['name'    => 'order_create', 'title' =>    'Order Create'],
+                    ['name'    => 'order_update', 'title' =>    'Order Update'],
+                    ['name'    => 'order_delete', 'title' =>    'Order Delete'],
+                ]
+            ],
+            [
+                'name'        =>    'coupon_access',
+                'title'        =>    'Coupon Management',
+                'children'    =>    [
+                    ['name'    => 'coupon_show', 'title' =>    'Coupon Create'],
+                    ['name'    => 'coupon_create', 'title' =>    'Coupon Create'],
+                    ['name'    => 'coupon_update', 'title' =>    'Coupon Update'],
+                    ['name'    => 'coupon_delete', 'title' =>    'Coupon Delete'],
+                ]
+            ],
+            [
                 'name'        =>    'queries_access',
                 'title'        =>    'Queries Management',
                 'children'    =>    [

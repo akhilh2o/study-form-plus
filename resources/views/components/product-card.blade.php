@@ -15,7 +15,7 @@
         </p>
         <hr />
         <div class="text-center">
-            <a href="{{ route('wishlists.toggle', [$product]) }}"
+            <a href="{{ route('wishlists.toggle', [$product, 'course_type' => 'download']) }}"
                 class="btn px-3 rounded-pill {{ auth()->user()?->wishlists?->pluck('id')?->contains($product->id)? 'btn-danger': 'btn-dark' }}">
                 <i class="fas fa-heart"></i>
             </a>

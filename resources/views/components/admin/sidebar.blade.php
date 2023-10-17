@@ -13,46 +13,64 @@
                     </a>
                 </li>
                 {{-- end adash-dashboard --}}
-
+                @canany(['category_access'])
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-tags"></i>
                         <span>Categories</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                         @can('category_create')
                         <li>
                             <a href="{{ route('admin.categories.create') }}">
                                 New Categories
                             </a>
                         </li>
+                        @endcan
+                         @can('category_create')
                         <li>
                             <a href="{{ route('admin.categories.index') }}">
                                 All Categories
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
-
+                @endcanany
+                @canany(['course_access'])
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-graduation-cap"></i>
                         <span>Courses</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        @can('course_create')
                         <li>
                             <a href="{{ route('admin.courses.create') }}">
                                 New Courses
                             </a>
                         </li>
+                        @endcan
+                        @can('course_access')
                         <li>
                             <a href="{{ route('admin.courses.index') }}">
                                 All Courses
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
+                @endcanany
+                @can('coupon_access')
+                <li>
+                    <a href="{{ route('admin.coupons.index') }}" class="waves-effect">
+                        <i class="fa fa-gifts"></i>
+                        <span>Coupon</span>
+                    </a>
+                </li>
+                @endcan
 
-                @can('queries_access')
+                @can('order_access')
                 <li>
                     <a href="{{ route('admin.orders.index') }}" class="waves-effect">
                         <i class="fas fa-cart-plus"></i>

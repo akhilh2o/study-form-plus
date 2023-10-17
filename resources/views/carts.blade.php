@@ -19,7 +19,7 @@
                             <del>{{ number_format($course?->net_price,2) }}</del>
                         </p>
                         <p class="mb-2">
-                            <b>Quantity:</b> <span>{{ $carts[$course?->id]['quantity'] }}</span>
+                            <b>Course Type:</b> <span>{{ Str::ucfirst($carts[$course?->id]['order_type']) }}</span>
                         </p>
                         <a href="{{ route('carts.delete',['id'=>$course->id]) }}" class="badge bg-danger">
                             <i class="fas fa-times"></i> Remove
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            @php $total += $course?->sale_price * $carts[$course?->id]['quantity'] @endphp
+            @php $total += $course?->sale_price @endphp
             @endforeach
             @endif
             <div class="mt-4 text-end d-flex gap-4 justify-content-between">
