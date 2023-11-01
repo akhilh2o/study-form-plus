@@ -19,8 +19,8 @@
                         <h6 class="mb-4">{{ $course?->sub_title }}</h6>
                         <p class="lead">
                             <b>Price: </b>
-                            <span>{{ $course?->sale_price }}</span>
-                            <del>{{ $course?->net_price }}</del>
+                            <span>{!! currencySymbol() !!} {{ $course?->sale_price }}</span>
+                            <del>{!! currencySymbol() !!} {{ $course?->net_price }}</del>
                         </p>
                         <div class="col-md-12 mb-3">
                             <div class="form-check form-check-inline">
@@ -52,5 +52,4 @@
         </div>
     </section>
     <!-- ~~~ Course Section ~~~ -->
-
 </x-app-layout>

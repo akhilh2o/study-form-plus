@@ -58,5 +58,6 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
         Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class);
         Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
         Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
+        Route::resource('faculties', \App\Http\Controllers\Admin\FacultyController::class);
         Route::resource('settings', \App\Http\Controllers\Admin\SettingController::class);
     });

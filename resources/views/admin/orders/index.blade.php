@@ -75,7 +75,7 @@
                                 {{ $order->country }}
                             </div>
                         </td>
-                        <td>{{ $order?->total }}</td>
+                        <td>{!! currencySymbol() !!} {{ $order?->total }}</td>
                         <td>{{ $order?->payment_status ? 'Paid' : 'Unpaid' }}</td>
                         <td>
                             <div class="btn-group">

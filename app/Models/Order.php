@@ -14,4 +14,8 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class, 'order_id');
     }
+    public function fullAddress()
+    {
+        return implode(', ', array_filter(array($this->address, $this->landmark, $this->city, $this->state, $this->pincode, $this->country)));
+    }
 }

@@ -17,8 +17,8 @@
                         </p>
                         <p class="mb-2">
                             <b>Price:</b>
-                            <span>{{ $wishlist?->sale_price }}</span>
-                            <del>{{ $wishlist?->net_price }}</del>
+                            <span>{!! currencySymbol() !!} {{ $wishlist?->sale_price }}</span>
+                            <del>{!! currencySymbol() !!} {{ $wishlist?->net_price }}</del>
                         </p>
                         <a href="{{ route('wishlists.move_to_cart',[$wishlist,'order_type'=> $wishlist?->pivot?->course_type ]) }}" class="badge bg-success">
                             <i class="fas fa-shopping-cart"></i> Move To Cart

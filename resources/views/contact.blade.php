@@ -62,8 +62,8 @@
                     <div class="col-md-6">
                         <div class="contact-form-group">
                             <label class="icon" for="name"><i class="fas fa-user"></i></label>
-                            <input type="text" placeholder="First Name" id="name" name="name"
-                                value="{{ old('name') }}" required>
+                            <input type="text" placeholder="First Name" id="first_name" name="first_name"
+                                value="{{ old('first_name') }}" required>
                         </div>
                     </div>
                     <div class="col-md-6">

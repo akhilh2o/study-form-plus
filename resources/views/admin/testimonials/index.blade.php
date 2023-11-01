@@ -1,5 +1,5 @@
 <x-admin.layout>
-	<x-admin.breadcrumb 
+	<x-admin.breadcrumb
 			title='All Testimonials'
 			:links="[
 				['text' => 'Dashboard', 'url' => route('admin.dashboard') ],

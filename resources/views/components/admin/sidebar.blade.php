@@ -20,14 +20,14 @@
                         <span>Categories</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                         @can('category_create')
+                        @can('category_create')
                         <li>
                             <a href="{{ route('admin.categories.create') }}">
                                 New Categories
                             </a>
                         </li>
                         @endcan
-                         @can('category_create')
+                        @can('category_create')
                         <li>
                             <a href="{{ route('admin.categories.index') }}">
                                 All Categories
@@ -168,6 +168,24 @@
 
                         @can('testimonials_access')
                         <li><a href="{{ route('admin.testimonials.index') }}">All Testimonials</a></li>
+                        @endcan
+                    </ul>
+                </li>
+                @endcanany
+
+                @canany(['faculties_access', 'faculties_create'])
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-users"></i>
+                        <span>Faculty</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        @can('faculties_create')
+                        <li><a href="{{ route('admin.faculties.create') }}">New Faculty</a></li>
+                        @endcan
+
+                        @can('faculties_access')
+                        <li><a href="{{ route('admin.faculties.index') }}">All Faculty</a></li>
                         @endcan
                     </ul>
                 </li>

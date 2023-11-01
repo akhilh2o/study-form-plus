@@ -15,8 +15,8 @@
                         <h6 class="mb-3 lh-1">{{ $course?->title }}</h6>
                         <p class="mb-2">
                             <b>Price:</b>
-                            <span>{{ number_format($course?->sale_price,2) }}</span>
-                            <del>{{ number_format($course?->net_price,2) }}</del>
+                            <span>{!! currencySymbol() !!} {{ number_format($course?->sale_price,2) }}</span>
+                            <del>{!! currencySymbol() !!} {{ number_format($course?->net_price,2) }}</del>
                         </p>
                         <p class="mb-2">
                             <b>Course Type:</b> <span>{{ Str::ucfirst($carts[$course?->id]['order_type']) }}</span>
@@ -32,7 +32,7 @@
             @endif
             <div class="mt-4 text-end d-flex gap-4 justify-content-between">
                 <div class="my-auto">
-                    <h4>Total: {{ number_format($total, 2) }}</h4>
+                    <h4>Total: {!! currencySymbol() !!} {{ number_format($total, 2) }}</h4>
                 </div>
                 <a href="{{ route('checkout') }}" class="btn btn-lg btn-dark px-4 rounded-pill">
                     Procceed Checkout

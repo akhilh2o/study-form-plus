@@ -27,14 +27,7 @@
                         <tr>
                             <td><b>Address:</b></td>
                             <td>
-                                {{ $order->address }}
-                                <div class="text-small">
-                                    {{ $order->city }}
-                                    {{ $order->state }}
-                                    {{ $order->landmark }}
-                                    {{ $order->pincode }}
-                                    {{ $order->country }}
-                                </div>
+                                {{ $order->fullAddress() }}
                             </td>
                         </tr>
                         <tr>
@@ -48,7 +41,7 @@
                         @if ($order->coupon_discount_amount)
                         <tr>
                             <td><b>Coupon Discount Amount:</b></td>
-                            <td>{{ $order?->coupon_discount_amount }}</td>
+                            <td>{!! currencySymbol() !!} {{ $order?->coupon_discount_amount }}</td>
                         </tr>
                         <tr>
                             <td><b>Coupon Remark:</b></td>
@@ -57,11 +50,11 @@
                         @endif
                         <tr>
                             <td><b>Sub Total Amount:</b></td>
-                            <td>{{ $order?->sub_total }}</td>
+                            <td>{!! currencySymbol() !!} {{ $order?->sub_total }}</td>
                         </tr>
                         <tr>
                             <td><b>Total Amount:</b></td>
-                            <td>{{ $order?->total }}</td>
+                            <td>{!! currencySymbol() !!} {{ $order?->total }}</td>
                         </tr>
                         <tr>
                             <td><b>Created at:</b></td>
@@ -81,11 +74,11 @@
                         </tr>
                         <tr>
                             <td><b>Price:</b></td>
-                            <td>{{ $item->price }}</td>
+                            <td>{!! currencySymbol() !!} {{ $item->price }}</td>
                         </tr>
                         <tr>
                             <td><b>Order Type:</b></td>
-                            <td>{{ $item->order_type }}</td>
+                            <td>{{ ucfirst($item->order_type) }}</td>
                         </tr>
                         @endforeach
                     </table>

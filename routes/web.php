@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,8 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('courses', [CourseController::class, 'index'])->name('courses');
 Route::get('course/{course:slug}', [CourseController::class, 'detail'])->name('course');
 Route::get('page/{page:slug}', [HomeController::class, 'page'])->name('page');
+Route::get('faculties', [FacultyController::class, 'index'])->name('faculties');
+Route::get('faculty/{faculty}', [FacultyController::class, 'detail'])->name('faculty');
 
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('about', [HomeController::class, 'about'])->name('about');
@@ -47,7 +50,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.store');
-    Route::get('checkout/success',[CheckoutController::class,'success'])->name('checkout.success');
+
+    Route::get('checkout/{order}/success',[CheckoutController::class,'success'])->name('checkout.success');
+
     Route::post('/checkout/verify-coupon', [CheckoutController::class,'verifyCoupon'])->name('checkout.verify-coupon');
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::prefix('user')->name('user.')->group(function () {

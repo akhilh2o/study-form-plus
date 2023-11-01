@@ -9,7 +9,8 @@
     <title>
         @yield('meta_title', setting('general_settings')?->option_value['meta_title'])
     </title>
-    <meta name="description" content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
+    <meta name="description"
+        content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
     <meta name="keywords" content="@yield('meta_keyword', setting('general_settings')?->option_value['meta_keyword'])">
     <meta name="author" content="{{ config('app.name') }}">
 
@@ -23,10 +24,10 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
     @if (setting('general_settings')?->option_value['favicon'])
-        <link rel="shortcut icon"
-            href="{{ asset('storage/' . setting('general_settings')?->option_value['favicon']) }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('storage/' . setting('general_settings')?->option_value['favicon']) }}"
+        type="image/x-icon">
     @else
-        <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
     @endif
 
     @stack('styles')
@@ -46,16 +47,40 @@
         <!-- ~~~ Loader & Go-Top ~~~ -->
 
         <!-- ~~~ Header Section ~~~ -->
+        <div class="custom-container" style="background-color: #202c45!important;color: #aab1c6;">
+            <div class="d-flex justify-content-end align-items-center justify-content-lg-between py-2">
+                <div class="left d-none d-lg-flex">
+                    <p class="text-white m-0">For Any Business Partnership Contact <a class="text-white"
+                            href="tel:+91xxxxxxxxx">+91-xxxxxxxxxx</a> Us.</p>
+                </div>
+                <div class="right ">
+                    <ul class="social-icons">
+                        <li>
+                            <a href="#0" class="active"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="#0" class=""><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#0"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#0"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <header>
             <div class="container">
                 <div class="header-area">
                     <div class="logo">
                         <a href="{{ route('home') }}">
                             @if (setting('general_settings')?->option_value['logo'])
-                                <img src="{{ asset('storage/' . setting('general_settings')?->option_value['logo']) }}"
-                                    alt="logo">
+                            <img src="{{ asset('storage/' . setting('general_settings')?->option_value['logo']) }}"
+                                alt="logo">
                             @else
-                                <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
+                            <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
                             @endif
                         </a>
                     </div>
@@ -74,14 +99,17 @@
                                     </a>
                                 </li>
                                 @foreach ($categories as $category)
-                                    <li>
-                                        <a class="dropdown-item"
-                                            href="{{ route('courses', ['category' => $category->slug]) }}">
-                                            {{ $category->name }}
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="{{ route('courses', ['category' => $category->slug]) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
                                 @endforeach
                             </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('faculties') }}">Faculties</a>
                         </li>
                         <li>
                             <a href="{{ route('about') }}">About Us</a>
@@ -95,24 +123,24 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @guest
-                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                 @else
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('login') }}">
-                                            Dashboard
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('register') }}"
-                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                    </li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('login') }}">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('register') }}"
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
                                 @endguest
                             </ul>
                         </li>
@@ -149,25 +177,28 @@
                             <a href="{{ route('courses') }}">Courses</a>
                         </li>
                         <li>
+                            <a href="{{ route('faculties') }}">Faculties</a>
+                        </li>
+                        <li>
                             <a href="{{ route('about') }}">About Us</a>
                         </li>
                         <li>
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
                         @auth
-                            <li>
-                                <a href="{{ route('dashboard') }}">My Account</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('dashboard') }}">My Account</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                        </li>
                         @else
-                            <li>
-                                <a href="{{ route('login') }}">Login</a>
-                            </li>
+                        <li>
+                            <a href="{{ route('login') }}">Login</a>
+                        </li>
                         @endauth
                         </li>
                     </ul>
@@ -232,13 +263,15 @@
                         <div class="footer-area">
                             <div class="footer-widget widget-link">
                                 <h5 class="title">Important Links</h5>
-
                                 <ul>
                                     <li>
                                         <a href="{{ route('home') }}">Home</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('courses') }}">All Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('faculties') }}">Faculties</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('login') }}">My Account</a>
@@ -255,9 +288,9 @@
                                 <h5 class="title">Information</h5>
                                 <ul>
                                     @foreach ($pages as $page)
-                                        <li>
-                                            <a href="{{ route('page', [$page]) }}">{{ $page?->title }}</a>
-                                        </li>
+                                    <li>
+                                        <a href="{{ route('page', [$page]) }}">{{ $page?->title }}</a>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -270,7 +303,8 @@
                                         </div>
                                         <div class="content">
                                             <span>
-                                                {{ setting('general_settings')?->option_value['company_address'] ?? '3078 Oberoi Garden Estate, B Wing Chandivali Farm Road, Saki Naka' }}
+                                                {{ setting('general_settings')?->option_value['company_address'] ??
+                                                '3078 Oberoi Garden Estate, B Wing Chandivali Farm Road, Saki Naka' }}
                                             </span>
                                         </div>
                                     </li>
@@ -281,7 +315,8 @@
                                         <div class="content">
                                             <a
                                                 href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
-                                                {{ setting('general_settings')?->option_value['support_phone'] ?? '+91 9638-9638-9638' }}
+                                                {{ setting('general_settings')?->option_value['support_phone'] ?? '+91
+                                                9638-9638-9638' }}
                                             </a>
                                         </div>
                                     </li>
@@ -292,7 +327,8 @@
                                         <div class="content">
                                             <a
                                                 href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
-                                                {{ setting('general_settings')?->option_value['support_email'] ?? 'info@example.com' }}
+                                                {{ setting('general_settings')?->option_value['support_email'] ??
+                                                'info@example.com' }}
                                             </a>
                                         </div>
                                     </li>

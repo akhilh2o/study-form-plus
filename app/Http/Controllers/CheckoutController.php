@@ -89,7 +89,7 @@ class CheckoutController extends Controller
 
         Mail::to($order->email)->send(new OrderSuccess($order));
 
-        return to_route('checkout.success')
+        return to_route('checkout.success', [$order])
             ->with('success', 'Your Order has been completed');
     }
     public function cartItems()
@@ -98,9 +98,10 @@ class CheckoutController extends Controller
         $this->courses = Course::whereIn('id', $this->carts->pluck('id'))->get();
     }
 
-    public function success()
+    public function success(Order $order)
     {
-        return view('checkout_success');
+        $order->load('items');
+        return view('checkout_success')->with('order', $order);
     }
 
     public function verifyCoupon(Request $request)

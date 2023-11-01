@@ -14,19 +14,19 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Name*</label>
-                                            <input type="text" class="form-control" name="name" required>
+                                            <input type="text" class="form-control" name="name" value="{{ auth()?->user()?->name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Mobile*</label>
-                                            <input type="tel" class="form-control" name="mobile" required>
+                                            <input type="tel" class="form-control" name="mobile" value="{{ auth()?->user()?->mobile }}" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="">Email*</label>
-                                            <input type="email" class="form-control" name="email" required>
+                                            <input type="email" class="form-control" name="email" value="{{ auth()?->user()?->email }}" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -76,26 +76,26 @@
                             @foreach($courses ?? [] as $id => $course)
                             <li class="list-group-item">
                                 <span class="fw-bold d-block">{{ $course?->title }}</span>
-                                <span><strong>Course Type :-</strong> {{
+                                <span><strong>Course Type -:</strong> {{
                                     Str::ucfirst($carts[$course?->id]['order_type']) }}</span> <br>
-                                <span><strong>Price :-</strong> {{ number_format($course?->sale_price,2) }}</span>
+                                <span><strong>Price -: </strong>{!! currencySymbol() !!} {{ number_format($course?->sale_price,2) }}</span>
                             </li>
                             @php $total += $course?->sale_price @endphp
                             @endforeach
                             @endif
                             <li class="list-group-item">
                                 <h6 class="my-2">
-                                    Sub Total: {{ number_format($total, 2) }}
+                                    Sub Total: {!! currencySymbol() !!} {{ number_format($total, 2) }}
                                 </h6>
                             </li>
                             <li class="list-group-item coupon-discount d-none">
                                 <h6 class="my-2">
-                                    Discount: <span id="discount">0.00</span>
+                                    Discount: {!! currencySymbol() !!} <span id="discount">0.00</span>
                                 </h6>
                             </li>
                             <li class="list-group-item">
                                 <h6 class="my-2" id="">
-                                    Total: <span id="total">{{ number_format($total, 2) }}</span>
+                                    Total: {!! currencySymbol() !!} <span id="total"> {{ number_format($total, 2) }}</span>
 
                                 </h6>
                                 <input type="hidden" name="total_amt" id="total_amt" value="{{ $total }}">
@@ -115,7 +115,6 @@
                                         </strong>
                                     </div>
                                     <div class="col-5">
-
                                         <div class="from-group">
                                             <input type="text" class="form-control" name="coupon_code" id="coupon_code"
                                                 placeholder="eg-: OFF50" style="text-transform: uppercase;">

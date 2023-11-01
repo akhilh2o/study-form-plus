@@ -153,6 +153,17 @@ class PermissionSeeder extends Seeder
             ],
 
             [
+                'name'        =>    'faculties_access',
+                'title'        =>    'faculties Management',
+                'children'    =>    [
+                    ['name'    => 'faculties_create', 'title' =>    'Faculty Create'],
+                    ['name'    => 'faculties_show',   'title' =>    'Faculty Show'],
+                    ['name'    => 'faculties_update', 'title' =>    'Faculty Update'],
+                    ['name'    => 'faculties_delete', 'title' =>    'Faculty Delete'],
+                ]
+            ],
+
+            [
                 'name'        =>    'blog_categories_access',
                 'title'        =>    'Blog Categories Management',
                 'children'    =>    [

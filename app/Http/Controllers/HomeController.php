@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Faculty;
 use Takshak\Adash\Models\Page;
 use Takshak\Adash\Models\Testimonial;
 
@@ -21,7 +22,10 @@ class HomeController extends Controller
     {
         $courses = Course::where('popular', true)->limit(3)->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();
-        return view('home')->with('courses', $courses)->with('testimonials', $testimonials);
+        $faculties = Faculty::select(['id','avatar', 'title', 'subtitle',])->limit(8)->get();
+        return view('home')->with('courses', $courses)
+            ->with('testimonials', $testimonials)
+            ->with('faculties', $faculties);
     }
 
     public function contact()

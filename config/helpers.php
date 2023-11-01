@@ -11,4 +11,10 @@ if (!function_exists('setting')) {
             ->first();
     }
 }
-?>
+
+if (!function_exists('currencySymbol')) {
+    function currencySymbol()
+    {
+        return '<i class="fas fa-rupee-sign"></i>';
+    }
+}
