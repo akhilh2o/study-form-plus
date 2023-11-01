@@ -21,7 +21,7 @@ class PageFactory extends Factory
         $title      = $this->faker->realText(rand(30, 60), 2);
         $slug       = Str::of($title)->slug('-');
         $banner     =   'pages/' . $slug . '.jpg';
-        // Picsum::dimensions(800, 500)->save(Storage::disk('public')->path($banner))->destroy();
+        Picsum::dimensions(800, 500)->save(Storage::disk('public')->path($banner))->destroy();
 
         return [
             'title' =>  $title,
