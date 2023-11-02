@@ -24,7 +24,7 @@
     <!-- ~~~ Banner Section ~~~ -->
     <section class="notice-section pt-20 pb-20 justify" style="background-color: red;">
         <div class="container text-center">
-            <h6 class="text-white">
+            <h6 class="text-white my-0">
                NEED ASSISTANCE IN BUYING/ ORDERING? CALL 91XXXXXXXXX, 93XXXXXXXX NOW [Office Timing 10AM to 7PM]
             </h6>
         </div>
@@ -111,47 +111,7 @@
             <div class="row justify-content-center mb-30-none">
                 @foreach ($courses ?? [] as $course)
                 <div class="col-xl-4 col-md-6 col-sm-10">
-                    <div class="course-item">
-                        <div class="thumb">
-                            <a href="{{ route('course',[$course]) }}">
-                                <img src="{{ $course?->thumbnail() }}" alt="{{ $course?->title }}">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h5 class="title">
-                                <a href="{{ route('course',[$course]) }}">{{ $course?->title }}</a>
-                            </h5>
-                            <div class="meta-area">
-                                <div class="meta">
-                                    {{-- <div class="meta-item">
-                                        <i class="fas fa-user"></i>
-                                        <span>Mark Parker</span>
-                                    </div> --}}
-                                    <div class="meta-item">
-                                        <i class="fas fa-photo-video"></i>
-                                        <span>15 Lessons</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <span>25 Students</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ratings-area">
-                                <div class="ratings cl-theme">
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span class="cl-theme-light"><i class="fas fa-star"></i></span>
-                                    <span>(4.9/5.00)</span>
-                                </div>
-                                <div class="price cl-1">
-                                    ${{ rand(20,50) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <x-product-card :product="$course" />
                 </div>
                 @endforeach
             </div>
