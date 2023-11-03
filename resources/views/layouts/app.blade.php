@@ -50,8 +50,7 @@
             <div class="d-flex justify-content-end align-items-center justify-content-lg-between py-2">
                 <div class="left d-none d-lg-flex">
                     <p class="text-white m-0 small" style="line-height: 0px">
-                        For Any Business Partnership Contact <a class="text-white"
-                            href="tel:+91xxxxxxxxx">+91-xxxxxxxxxx</a> Us.
+                        Study Form Plus
                     </p>
                 </div>
                 <div class="right ">

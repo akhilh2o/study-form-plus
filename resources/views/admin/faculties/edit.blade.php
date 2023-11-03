@@ -7,7 +7,7 @@
                 ['text' => 'Edit']
 			]"
             :actions="[
-                ['text' => 'Faculty', 'icon' => 'fas fa-plus', 'url' => route('admin.faculties.index'), 'permission' => 'faculties_access', 'class' => 'btn-success btn-loader btn-loader'],
+                ['text' => 'Faculties', 'icon' => 'fas fa-list', 'url' => route('admin.faculties.index'), 'permission' => 'faculties_access', 'class' => 'btn-success btn-loader btn-loader'],
                 ['text' => 'Create Faculty', 'icon' => 'fas fa-plus', 'url' => route('admin.faculties.create'), 'permission' => 'faculties_create', 'class' => 'btn-dark btn-loader btn-loader'],
             ]"
 		/>
@@ -20,7 +20,7 @@
                 <div class="col-sm-6">
                     <div class="d-flex">
                         <div class="mr-3">
-                            <img src="{{ $faculty->avatarUrl() }}" alt="image" width="70" class="rounded-circle">
+                            <img src="{{ $faculty->avatarUrl() }}" alt="image" width="70" class="rounded">
                         </div>
                         <div class="form-group flex-fill">
                             <label for="">Upload Avatar</label>
@@ -34,7 +34,7 @@
                         <input type="text" class="form-control" name="title" placeholder="Title or Name" value="{{ $faculty->title }}">
                     </div>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="">Subtitle </label>
                         <input type="text" class="form-control" name="subtitle" placeholder="Location or Degisnation" value="{{ $faculty->subtitle }}">

@@ -4,7 +4,7 @@
                 ['text' => 'Faculties', 'url' => route('admin.faculties.index')],
                 ['text' => 'Create']
 			]" :actions="[
-                ['text' => 'Faculties', 'icon' => 'fas fa-plus', 'url' => route('admin.faculties.index'), 'permission' => 'faculties_access', 'class' => 'btn-success btn-loader btn-loader'],
+                ['text' => 'Faculties', 'icon' => 'fas fa-list', 'url' => route('admin.faculties.index'), 'permission' => 'faculties_access', 'class' => 'btn-success btn-loader btn-loader'],
                 ['text' => 'Dashboard', 'icon' => 'fas fa-technometer', 'url' => auth()->user()->dashboardRoute(), 'class' => 'btn-dark btn-loader'],
             ]" />
 
