@@ -25,7 +25,7 @@
     <section class="notice-section pt-20 pb-20 justify" style="background-color: red;">
         <div class="container text-center">
             <h6 class="text-white my-0">
-               NEED ASSISTANCE IN BUYING/ ORDERING? CALL 91XXXXXXXXX, 93XXXXXXXX NOW [Office Timing 10AM to 7PM]
+                NEED ASSISTANCE IN BUYING/ ORDERING? CALL 91XXXXXXXXX, 93XXXXXXXX NOW [Office Timing 10AM to 7PM]
             </h6>
         </div>
     </section>
@@ -35,7 +35,7 @@
         <div class="container">
             <div class="section-header">
                 {{-- <span class="category">Features</span> --}}
-                <h2 class="title"><span>Why</span> SFP</h2>
+                <h2 class="title"><span>Why</span> Study Form Plus</h2>
             </div>
             <div class="row justify-content-center mb-30-none">
                 <div class="col-xl-3 col-md-6 col-sm-10">
@@ -110,9 +110,9 @@
             </div>
             <div class="row justify-content-center mb-30-none">
                 @foreach ($courses ?? [] as $course)
-                <div class="col-xl-4 col-md-6 col-sm-10">
-                    <x-product-card :product="$course" />
-                </div>
+                    <div class="col-xl-4 col-md-6 col-sm-10">
+                        <x-product-card :product="$course" />
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -199,21 +199,11 @@
                 <span class="category">our faculties</span>
                 <h2 class="title"><span>Awesome </span>faculties</h2>
             </div>
-            <div class="row justify-content-center mb-30-none">
+            <div class="row g-3 justify-content-center mb-30-none">
                 @foreach ($faculties ?? [] as $faculty)
-                <div class="col-lg-3 col-sm-6">
-                    <div class="instructor-item">
-                        <div class="instructor-thumb">
-                            <a href="{{ route('faculty', [$faculty]) }}"><img src="{{ $faculty->avatarUrl() }}"
-                                    alt="{{ $faculty?->title }}"></a>
-                        </div>
-                        <div class="instructor-content">
-                            <h6 class="title"><a href="{{ route('faculty', [$faculty]) }}">{{ $faculty?->title }}</a>
-                            </h6>
-                            <span class="details">{{ strtoupper($faculty?->subtitle) }}</span>
-                        </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <x-faculty-card :faculty="$faculty" />
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -239,28 +229,28 @@
             <div class="m--15">
                 <div class="testimonial-slider owl-theme owl-carousel">
                     @foreach ($testimonials ?? [] as $testimonial)
-                    <div class="testimonial-item">
-                        <div class="rating-area">
-                            <div class="ratings cl-theme">
-                                @for ($i=0;$i<$testimonial->rating;$i++)
-                                    <span><i class="fas fa-star"></i></span>
+                        <div class="testimonial-item">
+                            <div class="rating-area">
+                                <div class="ratings cl-theme">
+                                    @for ($i = 0; $i < $testimonial->rating; $i++)
+                                        <span><i class="fas fa-star"></i></span>
                                     @endfor
-                            </div>
-                            {{-- <div class="quote">
+                                </div>
+                                {{-- <div class="quote">
                                 "Best Services"
                             </div> --}}
-                        </div>
-                        <p>{{ $testimonial?->content }}</p>
-                        <div class="clients">
-                            <div class="thumb">
-                                <img src="{{ $testimonial->avatarUrl() }}" alt="{{ $testimonial?->title }}">
                             </div>
-                            <div class="content">
-                                <h6 class="title">{{ $testimonial?->title }}</h6>
-                                <span class="cl-1 fs-sm">{{ $testimonial?->subtitle }}</span>
+                            <p>{{ $testimonial?->content }}</p>
+                            <div class="clients">
+                                <div class="thumb">
+                                    <img src="{{ $testimonial->avatarUrl() }}" alt="{{ $testimonial?->title }}">
+                                </div>
+                                <div class="content">
+                                    <h6 class="title">{{ $testimonial?->title }}</h6>
+                                    <span class="cl-1 fs-sm">{{ $testimonial?->subtitle }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>

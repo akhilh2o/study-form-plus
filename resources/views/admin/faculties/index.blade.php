@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>
-                            <img src="{{ $faculty->avatarUrl() }}" alt="image" width="50" class="rounded-circle">
+                            <img src="{{ $faculty->avatarUrl() }}" alt="image" width="50" class="rounded">
                         </td>
                         <td>
                             {{ $faculty->title }}
