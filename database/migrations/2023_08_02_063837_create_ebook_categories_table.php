@@ -11,14 +11,17 @@ return new class() extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('ebook_categories', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->nullable()->default(0);
             $table->string('name')->nullable()->default(null);
-            $table->string('slug');
+            $table->string('professor')->nullable()->default(null);
+            $table->string('slug')->nullable();
             $table->string('image_thumb')->nullable()->default(null);
             $table->string('image')->nullable()->default(null);
+            $table->text('short_content')->nullable();
             $table->longText('content');
+            $table->string('download_file')->nullable()->default(null);
             $table->boolean('status')->default(true);
             $table->text('meta_title')->nullable()->default(null);
             $table->text('meta_keyword')->nullable()->default(null);
@@ -32,6 +35,6 @@ return new class() extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('ebook_categories');
     }
 };

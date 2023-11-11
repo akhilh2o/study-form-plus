@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EbookController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QueryController;
@@ -26,6 +27,13 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('courses', [CourseController::class, 'index'])->name('courses');
 Route::get('course/{course:slug}', [CourseController::class, 'detail'])->name('course');
+
+Route::prefix('ebooks')->name('ebooks.')->group(function () {
+    Route::get('/{parent:slug}/{child:slug}', [EbookController::class, 'index'])->name('category');
+    Route::get('/{category:slug}', [EbookController::class, 'detail'])->name('detail');
+    Route::post('/download/{category}', [EbookController::class, 'download'])->name('download');
+});
+
 Route::get('page/{page:slug}', [HomeController::class, 'page'])->name('page');
 Route::get('faculties', [FacultyController::class, 'index'])->name('faculties');
 Route::get('faculty/{faculty}', [FacultyController::class, 'detail'])->name('faculty');

@@ -108,6 +108,46 @@
                                 @endforeach
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                E-Books
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($ebookCategories ?? [] as $category)
+                                    <li class="nav-item dropdown">
+                                        <a class="dropdown-item nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown">
+                                            {{ $category->name }}
+                                        </a>
+                                        @if ($category->children)
+                                            <ul class="dropdown-submenu">
+                                                @foreach ($category->children ?? [] as $childrens)
+                                                    <li class="nav-item dropdown">
+                                                        <a class="dropdown-item nav-link dropdown-toggle"
+                                                            href="{{ route('ebooks.category', ['parent'=>$category, 'child'=>$childrens]) }}"
+                                                            role="button" data-bs-toggle="dropdown">
+                                                            {{ $childrens->name }}
+                                                        </a>
+                                                        @if ($childrens->children)
+                                                            <ul class="dropdown-submenu">
+                                                                @foreach ($childrens->children ?? [] as $child)
+                                                                    <li class="nav-item">
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('ebooks.detail',[$child->slug]) }}">
+                                                                            {{ $child->name }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
                         <li>
                             <a href="{{ route('faculties') }}">Faculties</a>
                         </li>
@@ -118,7 +158,8 @@
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown">
                                 {{ auth()->check() ? auth()->user()->name : 'My Account' }}
                             </a>
                             <ul class="dropdown-menu">
@@ -319,7 +360,7 @@
                                                 href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
                                                 {{ setting('general_settings')?->option_value['support_phone'] ??
                                                     '+91
-                                                                                                9638-9638-9638' }}
+                                                                                                                                                                                                                                                                                                9638-9638-9638' }}
                                             </a>
                                         </div>
                                     </li>

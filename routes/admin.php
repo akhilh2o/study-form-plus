@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\Ebook\CategoryController as EbookCategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\QueryController;
@@ -28,9 +29,16 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
     ->name('admin.')
     ->group(function () {
         Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-        Route::resource('categories', CategoryController::class);
+        
+        Route::prefix('ebooks')->name('ebooks.')->group(function () {
+            Route::resource('categories', EbookCategoryController::class);
+            Route::get('categories/{category}/status', [EbookCategoryController::class, 'statusToggle'])
+                ->name('categories.status');
+        });
 
+        Route::resource('categories', CategoryController::class);
         Route::get('categories/{category}/status', [CategoryController::class, 'statusToggle'])->name('categories.status');
+
         Route::resource('courses', CourseController::class);
         Route::get('courses/{course}/status', [CourseController::class, 'statusToggle'])->name('courses.status');
 

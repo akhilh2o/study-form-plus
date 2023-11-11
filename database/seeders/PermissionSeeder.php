@@ -46,6 +46,17 @@ class PermissionSeeder extends Seeder
                     ['name'    => 'category_delete', 'title' =>    'Category Delete'],
                 ]
             ],
+            
+            [
+                'name'        =>    'ebook_category_access',
+                'title'        =>    'Ebook Category Management',
+                'children'    =>    [
+                    ['name'    => 'ebook_category_show',   'title' =>    'Ebook Category Create'],
+                    ['name'    => 'ebook_category_create', 'title' =>    'Ebook Category Create'],
+                    ['name'    => 'ebook_category_update', 'title' =>    'Ebook Category Update'],
+                    ['name'    => 'ebook_category_delete', 'title' =>    'Ebook Category Delete'],
+                ]
+            ],
             [
                 'name'        =>    'course_access',
                 'title'        =>    'Course Management',
