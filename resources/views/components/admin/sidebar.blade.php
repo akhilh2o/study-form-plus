@@ -118,7 +118,7 @@
                     @endcan
                 @endcanany
                 <li class="menu-title">Manage CMS</li>
-                @canany(['ebook_category_access'])
+                @canany(['ebook_category_access','ebook_download_access'])
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fas fa-book"></i>
@@ -130,8 +130,12 @@
                             @endcan
 
                             @can('ebook_category_access')
-                            <li><a href="{{ route('admin.ebooks.categories.index') }}">All E-Books</a></li>
-                        @endcan
+                                <li><a href="{{ route('admin.ebooks.categories.index') }}">All E-Books</a></li>
+                            @endcan
+
+                            @can('ebook_download_access')
+                                <li><a href="{{ route('admin.ebooks.downloads.index') }}">All Downloads</a></li>
+                            @endcan
                         </ul>
                     </li>
                 @endcanany

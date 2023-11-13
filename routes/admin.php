@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\Ebook\CategoryController as EbookCategoryController;
+use App\Http\Controllers\Admin\Ebook\EbookDownloadController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\QueryController;
@@ -31,6 +32,9 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
         Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
         
         Route::prefix('ebooks')->name('ebooks.')->group(function () {
+            Route::get('downloads', [EbookDownloadController::class,'index'])->name('downloads.index');
+            Route::get('downloads/{download}', [EbookDownloadController::class,'show'])->name('downloads.show');
+            Route::delete('downloads/{download}', [EbookDownloadController::class,'destroy'])->name('downloads.destroy');
             Route::resource('categories', EbookCategoryController::class);
             Route::get('categories/{category}/status', [EbookCategoryController::class, 'statusToggle'])
                 ->name('categories.status');

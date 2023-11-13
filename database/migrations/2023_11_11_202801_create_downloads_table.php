@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('last_name')->nullable()->default(null);
             $table->string('email')->nullable()->default(null);
             $table->string('mobile')->nullable()->default(null);
+            $table->foreignId('ebook_category_id')->constrained('ebook_categories', 'id')->cascadeOnDelete();
             $table->foreignId('course_id')->constrained('courses', 'id')->cascadeOnDelete();
             $table->timestamps();
         });

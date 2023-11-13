@@ -65,6 +65,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+        Route::get('orders', [UserController::class, 'orders'])->name('orders');
+
+        Route::get('profile', [UserController::class, 'profile'])->name('profile');
+        Route::put('update', [UserController::class, 'update'])->name('profile.update');
+        
+        Route::get('password', [UserController::class, 'password'])->name('password');
+        Route::put('password-update', [UserController::class, 'updatePassword'])->name('password.update');
     });
 });
 

@@ -58,6 +58,16 @@ class PermissionSeeder extends Seeder
                 ]
             ],
             [
+                'name'        =>    'ebook_download_access',
+                'title'        =>    'Ebook Download Management',
+                'children'    =>    [
+                    ['name'    => 'ebook_download_show',   'title' =>    'Ebook Download Create'],
+                    ['name'    => 'ebook_download_create', 'title' =>    'Ebook Download Create'],
+                    ['name'    => 'ebook_download_update', 'title' =>    'Ebook Download Update'],
+                    ['name'    => 'ebook_download_delete', 'title' =>    'Ebook Download Delete'],
+                ]
+            ],
+            [
                 'name'        =>    'course_access',
                 'title'        =>    'Course Management',
                 'children'    =>    [

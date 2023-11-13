@@ -15,14 +15,14 @@
                         <b>By: </b>
                         <span>{{ $category?->professor }}</span>
                     </p>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#ebookDownloadModal"
                         class="btn btn-dark px-3 rounded-pill" style="height:auto">
                         <i class="fas fa-download"></i> Download Free PDF
                     </button>
                     <hr />
                     <div class="description">
                         <h6 class="mb-4">Description</h6>
-                        {!! $category?->description !!}
+                        {!! $category?->content !!}
                     </div>
 
                 </div>
@@ -31,13 +31,13 @@
     </section>
     <!-- ~~~ ebook Section ~~~ -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ebookDownloadModal" tabindex="-1" aria-labelledby="ebookDownloadModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form method="POST" action="{{ route('ebooks.download',[$category]) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Download E-Book</h5>
+                        <h5 class="modal-title" id="ebookDownloadModalLabel">Download E-Book</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

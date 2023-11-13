@@ -2,40 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ebook\Category;
 use App\Models\Course;
+use App\Models\Ebook\Category;
 use App\Models\Ebook\Download;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class EbookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, Category $parent, Category $child)
     {
-        $category = null;
-        if ($request->get('category')) {
-            $category = Category::query()
-                ->where('id', $request->category)
-                ->orWhere('slug', $request->category)
-                ->first();
-        }
-
-        $categories = Category::select('id', 'name')->get();
-
-        $courses = Course::when($category, function ($query) use ($category) {
-            $query->whereHas('category', function ($query) use ($category) {
-                $query->where('id', $category?->id);
-            });
-        })->paginate()
+        $ebooks = Category::where('parent_id', $child->id)->paginate(30)
             ->withQueryString();
 
-        return view('courses')->with([
-            'courses'       => $courses,
-            'categories'    => $categories,
-            'category'      => $category
+        return view('ebooks')->with([
+            'ebooks'        => $ebooks,
+            'category'      => $child,
         ]);
     }
 
@@ -54,7 +38,7 @@ class EbookController extends Controller
             'course_id'     => 'required',
         ]);
 
-        Download::create($request->except('_token'));
+        Download::create($request->except('_token') + ['ebook_category_id' => $category->id]);
         //PDF file is stored under project/public/download/info.pdf
         $downloadable_file = $category->downloadable_file();
 

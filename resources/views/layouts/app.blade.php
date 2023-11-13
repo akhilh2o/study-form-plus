@@ -168,12 +168,32 @@
                                     <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                 @else
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('login') }}">
+                                        <a class="dropdown-item" href="{{ route('user.dashboard') }}">
                                             Dashboard
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('register') }}"
+                                        <a class="dropdown-item" href="{{ route('user.profile') }}">
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('wishlists.index') }}">
+                                            Wishlist
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('user.orders') }}">
+                                            Orders
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('user.password') }}">
+                                            Change Password
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('login') }}"
                                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
