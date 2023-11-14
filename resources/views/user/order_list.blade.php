@@ -42,7 +42,6 @@
                                                     <td colspan="5" align="center"><strong>No Record Available.</strong></td>
                                                 </tr>
                                             @endforelse
-
                                         </tbody>
                                     </table>
                                 </div>

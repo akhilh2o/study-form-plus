@@ -119,6 +119,17 @@ class PermissionSeeder extends Seeder
             ],
 
             [
+                'name'        =>    'setting_access',
+                'title'        =>    'setting Management',
+                'children'    =>    [
+                    ['name'    => 'setting_show', 'title' =>    'setting Create'],
+                    ['name'    => 'setting_create', 'title' =>    'setting Create'],
+                    ['name'    => 'setting_update', 'title' =>    'setting Update'],
+                    ['name'    => 'setting_delete', 'title' =>    'setting Delete'],
+                ]
+            ],
+
+            [
                 'name'        =>    'permissions_access',
                 'title'        =>    'Permissions Access',
                 'children'    =>    [

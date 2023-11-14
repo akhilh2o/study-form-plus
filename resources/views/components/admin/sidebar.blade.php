@@ -212,21 +212,23 @@
                         </ul>
                     </li>
                 @endcanany
-
+                @canany(['setting_access'])
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-cog"></i>
                         <span>Settings</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        @can('setting_access')
                         <li>
                             <a href="{{ route('admin.settings.index') }}" class="active">
                                 General Settings
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
-
+                @endcanany
                 <li class="menu-title">Manage Account</li>
                 <li>
                     <a href="{{ route('admin.profile.edit') }}" class=" waves-effect">

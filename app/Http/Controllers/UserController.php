@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Str;
+use Takshak\Imager\Facades\Imager;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -32,13 +34,28 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
-            'mobile' => ['required']
+            'mobile' => ['required'],
+            'avatar' =>  'nullable|image',
         ]);
+        
+        $profile_img = $request->user()->profile_img;
+
+        if ($request->file('avatar')) {
+            Storage::disk('public')->delete($profile_img);
+            $profile_img    = 'users/' . Str::of(microtime())->slug('-') . '.';
+            $profile_img    .= $request->file('avatar')->extension();
+
+            Imager::init($request->file('avatar'))
+                ->resizeFit(300, 300)
+                ->inCanvas('#fff')
+                ->save(Storage::disk('public')->path($profile_img));
+        }
 
         $request->user()->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'mobile' => $request->mobile,
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'mobile'      => $request->mobile,
+            'profile_img' => $profile_img,
         ]);
 
         return back()->withSuccess('Profile has been updated!');
