@@ -39,14 +39,12 @@ class EbookController extends Controller
         ]);
 
         Download::create($request->except('_token') + ['ebook_category_id' => $category->id]);
-        //PDF file is stored under project/public/download/info.pdf
-        $downloadable_file = $category->downloadable_file();
+         $downloadable_file = $category->downloadable_file();
 
-        $headers = array(
-            'Content-Type: application/pdf',
-        );
-        // return Storage::disk('public')->download($downloadable_file);
-        return response()->download($downloadable_file, $category->slug, $headers);
-        // return response()->download($downloadable_file);
+        return response()->file($downloadable_file);
+        // $headers = array(
+        //     'Content-Type: application/pdf',
+        // );
+        // return response()->download($downloadable_file, $category->slug.'.pdf', $headers);
     }
 }

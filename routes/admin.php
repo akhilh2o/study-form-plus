@@ -30,14 +30,22 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
     ->name('admin.')
     ->group(function () {
         Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-        
+
         Route::prefix('ebooks')->name('ebooks.')->group(function () {
-            Route::get('downloads', [EbookDownloadController::class,'index'])->name('downloads.index');
-            Route::get('downloads/{download}', [EbookDownloadController::class,'show'])->name('downloads.show');
-            Route::delete('downloads/{download}', [EbookDownloadController::class,'destroy'])->name('downloads.destroy');
+            Route::get('downloads', [EbookDownloadController::class, 'index'])->name('downloads.index');
+            Route::get('downloads/{download}', [EbookDownloadController::class, 'show'])->name('downloads.show');
+            Route::delete('downloads/{download}', [EbookDownloadController::class, 'destroy'])->name('downloads.destroy');
             Route::resource('categories', EbookCategoryController::class);
             Route::get('categories/{category}/status', [EbookCategoryController::class, 'statusToggle'])
                 ->name('categories.status');
+
+            Route::get('/', [EbookCategoryController::class, 'ebooks'])->name('index');
+            Route::get('/create', [EbookCategoryController::class, 'ebookCreate'])->name('create');
+            Route::post('/create', [EbookCategoryController::class, 'ebookStore'])->name('store');
+            Route::get('/{category}', [EbookCategoryController::class, 'ebookShow'])->name('show');
+            Route::get('/{category}/edit', [EbookCategoryController::class, 'ebookEdit'])->name('edit');
+            Route::put('/{category}', [EbookCategoryController::class, 'ebookUpdate'])->name('update');
+            Route::delete('/{category}', [EbookCategoryController::class, 'ebookDestroy'])->name('destroy');
         });
 
         Route::resource('categories', CategoryController::class);

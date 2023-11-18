@@ -25,7 +25,6 @@
                                     <a href="{{ route('admin.categories.create') }}">
                                         New Categories
                                     </a>
-                                    
                                 </li>
                             @endcan
                             @can('category_create')
@@ -127,11 +126,18 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             @can('ebook_category_create')
-                                <li><a href="{{ route('admin.ebooks.categories.create') }}">New E-Book</a></li>
+                                <li><a href="{{ route('admin.ebooks.categories.create') }}">New Category</a></li>
                             @endcan
 
                             @can('ebook_category_access')
-                                <li><a href="{{ route('admin.ebooks.categories.index') }}">All E-Books</a></li>
+                                <li><a href="{{ route('admin.ebooks.categories.index') }}">All Categories</a></li>
+                            @endcan
+                            @can('ebook_category_create')
+                                <li><a href="{{ route('admin.ebooks.create') }}">New E-Book</a></li>
+                            @endcan
+
+                            @can('ebook_category_access')
+                                <li><a href="{{ route('admin.ebooks.index') }}">All E-Books</a></li>
                             @endcan
 
                             @can('ebook_download_access')

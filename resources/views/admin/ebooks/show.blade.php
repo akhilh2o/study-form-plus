@@ -1,18 +1,18 @@
 <x-admin.layout>
-    <x-admin.breadcrumb title='Category Detail' :links="[
+    <x-admin.breadcrumb title='E-Book Detail' :links="[
 				['text' => 'Dashboard', 'url' => route('admin.dashboard') ],
-                ['text' => 'Categories', 'url' => route('admin.ebooks.categories.index')],
+                ['text' => 'E-Books', 'url' => route('admin.ebooks.index')],
                 ['text' => 'Detail']
 			]" :actions="[
-                ['text' => 'Create New', 'icon' => 'fas fa-plus', 'url' => route('admin.ebooks.categories.create'), 'class' => 'btn-success btn-loader'],
-                ['text' => 'All Categories', 'icon' => 'fas fa-list', 'url' => route('admin.ebooks.categories.index'), 'class' => 'btn-dark btn-loader'],
+                ['text' => 'Create New', 'icon' => 'fas fa-plus', 'url' => route('admin.ebooks.create'), 'class' => 'btn-success btn-loader'],
+                ['text' => 'All E-Books', 'icon' => 'fas fa-list', 'url' => route('admin.ebooks.index'), 'class' => 'btn-dark btn-loader'],
             ]" />
 
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h5 class="mb-0 text-dark">Category Detail</h5>
+                    <h5 class="mb-0 text-dark">E-Book Detail</h5>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -30,10 +30,13 @@
                             <td><b>Name:</b></td>
                             <td>{{ $category->name }}</td>
                         </tr>
-                        
+                        <tr>
+                            <td><b>By:</b></td>
+                            <td>{{ $category->professor }}</td>
+                        </tr>
                         <tr>
                             <td><b>Parent Category</b></td>
-                            <td>{{ $category?->parent?->name }}</td>
+                            <td>{{ $category?->parent?->parent?->name }} > {{ $category?->parent?->name }}</td>
                         </tr>
                         <tr>
                             <td><b>Short Description:</b></td>
@@ -66,7 +69,7 @@
                         </tr>
                         <tr>
                             <td colspan="1" class="text-center">
-                                <a href="{{ route('admin.ebooks.categories.edit', [$category]) }}"
+                                <a href="{{ route('admin.ebooks.edit', [$category]) }}"
                                     class="btn btn-success px-3"><i class="fas fa-edit"></i> Edit
                                 </a>
                             </td>

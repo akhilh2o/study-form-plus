@@ -1,26 +1,23 @@
 <x-admin.layout>
-    <x-admin.breadcrumb title='All Categories' :links="[
+    <x-admin.breadcrumb title='All E-Books' :links="[
         [
             'text' => 'Dashboard',
             'url' => route('admin.dashboard'),
         ],
         [
-            'text' => 'Ebook',
-        ],
-        [
-            'text' => 'Category',
+            'text' => 'E-Books',
         ],
     ]" :actions="[
         [
             'text' => 'Filter',
             'icon' => 'fas fa-filter',
             'class' => 'btn-secondary btn-loader',
-            'url' => route('admin.ebooks.categories.index', ['filter' => 1]),
+            'url' => route('admin.ebooks.index', ['filter' => 1]),
         ],
         [
             'text' => 'Create New',
             'icon' => 'fas fa-plus',
-            'url' => route('admin.ebooks.categories.create'),
+            'url' => route('admin.ebooks.create'),
             'class' => 'btn-dark btn-loader',
         ],
     ]" />
@@ -56,8 +53,9 @@
                     <tr>
                         <th>#</th>
                         <th>Thumbnail</th>
+                        <th>Category</th>
                         <th>Name</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -65,18 +63,10 @@
                     @foreach ($categories as $category)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ $category->imageThumb() }}" alt="cover image" width="50"
-                                    height="40"></td>
-                            <td>{{ $category->name }}
-                                @if ($category->children_category_count)
-                                <a href="{{ route('admin.ebooks.categories.index') }}?parent_id={{ $category->id }}">
-                                    <div>
-                                        <strong>({{ $category?->children_category_count }} Subcategory)</strong>
-                                    </div>
-                                </a>
-                                @endif
-                            </td>
-                            <td>
+                            <td><img src="{{ $category->imageThumb() }}" alt="cover image" width="50" height="40"></td>
+                            <td><strong>{{ $category?->parent?->parent?->name }} > {{ $category?->parent?->name }}</strong> </td>
+                            <td>{{ $category->name }}</td>
+                            {{-- <td>
                                 <div class="btn-group">
                                     <button type="button"
                                         class="btn btn-{{ $category->status ? 'success' : 'danger' }} text-nowrap btn-sm">
@@ -98,29 +88,19 @@
                                         </a>
                                     </div>
                                 </div>
-                            </td>
-                            <td width="25%">
-                                @if ($category->children_category_count)
-                                <form action="{{ route('admin.ebooks.categories.create') }}" class="d-inline-block">
-                                    <input type="hidden" name="parent_id" value="{{ $category->id }}">
-                                    <button class="btn btn-sm btn-warning btn-loader load-circle"
-                                        title="Add Subcategory">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </form>
-                                @endif
-
-                                <a href="{{ route('admin.ebooks.categories.show', [$category]) }}"
+                            </td> --}}
+                            <td width="15%">
+                                <a href="{{ route('admin.ebooks.show', [$category]) }}"
                                     class="btn btn-info btn-sm btn-loader load-circle">
                                     <i class="fas fa-info-circle"></i>
                                 </a>
 
-                                <a href="{{ route('admin.ebooks.categories.edit', [$category]) }}"
+                                <a href="{{ route('admin.ebooks.edit', [$category]) }}"
                                     class="btn btn-success btn-sm btn-loader load-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
-                                <form action="{{ route('admin.ebooks.categories.destroy', [$category]) }}" method="POST"
+                                <form action="{{ route('admin.ebooks.destroy', [$category]) }}" method="POST"
                                     class="d-inline-block">
                                     @csrf
                                     @method('DELETE')

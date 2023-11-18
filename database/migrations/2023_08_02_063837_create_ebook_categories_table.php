@@ -14,6 +14,7 @@ return new class() extends Migration
         Schema::create('ebook_categories', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->nullable()->default(0);
+            $table->boolean('is_ebook')->default(false);
             $table->string('name')->nullable()->default(null);
             $table->string('professor')->nullable()->default(null);
             $table->string('slug')->nullable();

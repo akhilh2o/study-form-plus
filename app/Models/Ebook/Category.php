@@ -32,7 +32,7 @@ class Category extends Model
     public function downloadable_file()
     {
         if ($this->download_file) {
-            return storage($this->download_file);
+            return public_path('storage/'.$this->download_file);
         } else {
             return 'https://ui-avatars.com/api/?name=NIL&background=random';
         }
@@ -41,6 +41,11 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function childrenCategory()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->where('is_ebook',false);
     }
 
     public function parent()

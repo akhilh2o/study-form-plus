@@ -1,20 +1,19 @@
 <x-admin.layout>
-    <x-admin.breadcrumb title='Edit Category' :links="[
+    <x-admin.breadcrumb title='Edit E-Book' :links="[
         ['text' => 'Dashboard', 'url' => route('admin.dashboard')],
-        ['text' => 'Category', 'url' => route('admin.ebooks.categories.index')],
         ['text' => 'Ebook'],
         ['text' => 'Edit'],
     ]" :actions="[
         [
             'text' => 'Create New',
             'icon' => 'fas fa-plus',
-            'url' => route('admin.ebooks.categories.create'),
+            'url' => route('admin.ebooks.create'),
             'class' => 'btn-success btn-loader',
         ],
         [
-            'text' => 'All Categories',
+            'text' => 'All E-Books',
             'icon' => 'fas fa-list',
-            'url' => route('admin.ebooks.categories.index'),
+            'url' => route('admin.ebooks.index'),
             'class' => 'btn-dark btn-loader',
         ],
     ]" />
@@ -22,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('admin.ebooks.categories.update', [$category]) }}" method="POST" class="card shadow-sm"
+            <form action="{{ route('admin.ebooks.update', [$category]) }}" method="POST" class="card shadow-sm"
                 enctype="multipart/form-data">
                 <div class="card-body">
                     @csrf
@@ -37,11 +36,18 @@
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="">Parent</label>
-                                <select name="parent_id" class="form-control select2">
+                                <label for="">Category <span class="text-danger">*</span></label>
+                                <select name="parent_id" class="form-control select2" required>
                                     <option value="">-- Select --</option>
                                     @foreach ($categories as $rootCategory)
-                                    <option value="{{ $rootCategory->id }}" @selected($category->parent_id==$rootCategory->id)>{{ $rootCategory->name }}</option>
+                                        <optgroup label="{{ $rootCategory->name }}">
+                                            @foreach ($rootCategory->children as $subCategory)
+                                                @include('admin.ebooks.categories.partials.subCategory', [
+                                                    'subCategory' => $subCategory,
+                                                    'selected' => $category->parent_id,
+                                                ])
+                                            @endforeach
+                                        </optgroup>
                                     @endforeach
                                 </select>
                             </div>
@@ -50,16 +56,33 @@
                     <div class="row">
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
+                                <label for="professor">By Professor <span class="text-danger">*</span></label>
+                                <input type="text" name="professor" class="form-control"
+                                    value="{{ $category->professor }}" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <div class="form-group">
                                 <label for="">Status <span class="text-danger">*</span></label>
                                 <select name="status" class="form-control" required>
                                     <option value="">-- Select --</option>
-                                    <option value="1" {{ $category->status == '1' ? 'selected' : '' }}>Active
+                                    <option value="1" selected>Active
                                     </option>
-                                    <option value="0" {{ $category->status == '0' ? 'selected' : '' }}>In-Active
-                                    </option>
+                                    {{-- <option value="0" {{ $category->status == '0' ? 'selected' : '' }}>In-Active
+                                    </option> --}}
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Short Description </label>
+                        <textarea name="short_content" class="form-control " id="content" cols="30" rows="3">{{ $category?->short_content }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Description </label>
+                        <textarea name="content" class="form-control " id="content" cols="30" rows="3">{{ $category?->content }}</textarea>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6 col-6">
                             <div class="d-flex">
                                 <div class="mr-2">
@@ -74,14 +97,20 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Short Description </label>
-                        <textarea name="short_content" class="form-control " id="content" cols="30" rows="3">{{ $category?->short_content }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Description </label>
-                        <textarea name="content" class="form-control " id="content" cols="30" rows="3">{{ $category?->content }}</textarea>
+                        <div class="col-sm-6 col-6">
+                            <div class="d-flex">
+                                <div class="mr-2">
+                                    <div id="main-image-preview">
+                                        <a href="{{ $category->downloadable_file() }}" download="true"><i
+                                                class="fas fa-file-alt"></i></a>
+                                    </div>
+                                </div>
+                                <div class="form-group flex-fill">
+                                    <label for="">PDF File</label>
+                                    <input type="file" name="download_file" class="form-control" id="download_file">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
