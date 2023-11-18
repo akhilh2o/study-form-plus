@@ -25,6 +25,7 @@
                                     <a href="{{ route('admin.categories.create') }}">
                                         New Categories
                                     </a>
+                                    
                                 </li>
                             @endcan
                             @can('category_create')
