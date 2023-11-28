@@ -15,29 +15,28 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="form-group">
-                        <label for="">Upload Avatar</label>
-                        <input type="file" class="form-control" name="avatar">
+                        <label for="avatar">Upload Avatar</label>
+                        <input type="file" id="avatar" class="form-control" name="avatar">
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="form-group">
-                        <label for="">Title <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="title" placeholder="Title or Name"
+                        <label for="title">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Title or Name"
                             value="{{ old('title') }}">
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="form-group">
-                        <label for="">Subtitle </label>
-                        <input type="text" class="form-control" name="subtitle" placeholder="Location or Degisnation"
+                        <label for="subtitle">Subtitle </label>
+                        <input type="text" class="form-control" name="subtitle" id="subtitle" placeholder="Location or Degisnation"
                             value="{{ old('subtitle') }}">
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Description <span class="text-danger">*</span> </label>
-                <textarea class="form-control text-editor" name="content" rows="3" placeholder="Write your description"
-                    required>{{ old('content') }}</textarea>
+                <label for="content">Description <span class="text-danger">*</span> </label>
+                <textarea class="form-control text-editor" name="content" id="content" rows="3" placeholder="Write your description">{{ old('content') }}</textarea>
             </div>
         </div>
         <div class="card-footer">
@@ -50,7 +49,7 @@
         <script>
             tinymce.init({
                 selector: '.text-editor',
-                plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap emoticons',
+                plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
                 imagetools_cors_hosts: ['picsum.photos'],
                 menubar: 'file edit view insert format tools table help',
                 toolbar1: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent',
