@@ -45,7 +45,7 @@
                             <div class="d-flex">
                                 <div class="mr-2">
                                     <div id="cover-image-preview">
-                                        <img src="{{ $course->thumbnail() }}" alt="image" width="75"
+                                        <img src="{{ $course->thumb() }}" alt="image" width="75"
                                             class="img-thumbnail">
                                     </div>
                                 </div>

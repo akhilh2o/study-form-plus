@@ -1,12 +1,22 @@
 <x-admin.layout>
     <x-admin.breadcrumb title='Course Detail' :links="[
-				['text' => 'Dashboard', 'url' => route('admin.dashboard') ],
-                ['text' => 'Course', 'url' => route('admin.courses.index')],
-                ['text' => 'Detail']
-			]" :actions="[
-                ['text' => 'Create New', 'icon' => 'fas fa-plus', 'url' => route('admin.courses.create'), 'class' => 'btn-success btn-loader'],
-                ['text' => 'All Courses', 'icon' => 'fas fa-list', 'url' => route('admin.courses.index'), 'class' => 'btn-dark btn-loader'],
-            ]" />
+        ['text' => 'Dashboard', 'url' => route('admin.dashboard')],
+        ['text' => 'Course', 'url' => route('admin.courses.index')],
+        ['text' => 'Detail'],
+    ]" :actions="[
+        [
+            'text' => 'Create New',
+            'icon' => 'fas fa-plus',
+            'url' => route('admin.courses.create'),
+            'class' => 'btn-success btn-loader',
+        ],
+        [
+            'text' => 'All Courses',
+            'icon' => 'fas fa-list',
+            'url' => route('admin.courses.index'),
+            'class' => 'btn-dark btn-loader',
+        ],
+    ]" />
 
     <div class="row">
         <div class="col-md-12">
@@ -15,7 +25,7 @@
                     <table class="table">
                         <tr>
                             <td><b>Thumbnail:</b></td>
-                            <td><img src="{{ $course->thumbnail() }}" alt="alt" srcset="{{ $course->thumbnail() }}"
+                            <td><img src="{{ $course->thumb() }}" alt="alt" srcset="{{ $course->thumb() }}"
                                     width="100"></td>
                         </tr>
                         <tr>
@@ -38,7 +48,31 @@
                         </tr>
                         <tr>
                             <td><b>Sale Price:</b></td>
-                            <td>{{ $course->sale_price }}</td>
+                            <td>{{ $course?->sale_price }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Language:</b></td>
+                            <td>{{ $course?->language }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Duration:</b></td>
+                            <td>{{ $course?->duration }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Exam Validity:</b></td>
+                            <td>{{ $course?->exam_validity }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Study Material:</b></td>
+                            <td>{{ $course?->order_type_pendrive ? 'Pendrive':'' }} {{ $course?->order_type_download ? 'Download':'' }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Faculties:</b></td>
+                            <td>{{ $course?->faculties }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Doubt Sovling Faculties:</b></td>
+                            <td>{{ $course?->faculties }}</td>
                         </tr>
                         <tr>
                             <td><b>Description:</b></td>

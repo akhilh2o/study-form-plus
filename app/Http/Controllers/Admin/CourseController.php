@@ -6,6 +6,7 @@ use App\Actions\CourseAction;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -34,11 +35,13 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::where('parent_id', 0)->with('children')->get();
-        return view('admin.courses.create')->with('categories', $categories);
+        $faculties = Faculty::select('id', 'title')->get();
+        return view('admin.courses.create')->with(['categories' => $categories, 'faculties' => $faculties]);
     }
 
     public function store(Request $request, CourseAction $action)
     {
+        // return $request;   
         $request->validate([
             'title'               =>  'required',
             'category_id'         =>  'required',
@@ -48,6 +51,13 @@ class CourseController extends Controller
             'popular'             =>  'required',
             'thumbnail'           =>  'nullable|image',
             'demo_link'           =>  'nullable',
+            'faculties'           =>  'required|array',
+            'doubt_solving_faculties'  =>  'required|array',
+            'language'            =>  'required',
+            'duration'            =>  'required',
+            'exam_validity'       =>  'required',
+            'order_type_pendrive' =>  'nullable',
+            'order_type_download' =>  'nullable',
             'net_price'           =>  'required',
             'sale_price'          =>  'required',
             'meta_title'          =>  'nullable',
@@ -68,9 +78,12 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
+        // return $course;
+        $faculties = Faculty::select('id', 'title')->get();
         $categories = Category::where('parent_id', 0)->with('children')->get();
         return view('admin.courses.edit')->with('course', $course)
-            ->with('categories', $categories);
+            ->with('categories', $categories)
+            ->with('faculties', $faculties);
     }
 
 
@@ -85,6 +98,13 @@ class CourseController extends Controller
             'popular'             =>  'required',
             'thumbnail'           =>  'nullable|image',
             'demo_link'           =>  'nullable',
+            'faculties'           =>  'required|array',
+            'doubt_solving_faculties'  =>  'required|array',
+            'language'            =>  'required',
+            'duration'            =>  'required',
+            'exam_validity'       =>  'required',
+            'order_type_pendrive' =>  'nullable',
+            'order_type_download' =>  'nullable',
             'net_price'           =>  'required',
             'sale_price'          =>  'required',
             'meta_title'          =>  'nullable',

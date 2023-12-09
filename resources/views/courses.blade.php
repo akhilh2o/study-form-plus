@@ -22,7 +22,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="course-select-item">
+                        {{-- <div class="course-select-item">
                             <select class="select-bar">
                                 <option value="o1">Select Order</option>
                                 <option value="o2">Latest</option>
@@ -30,7 +30,7 @@
                                 <option value="o3">Price (Low - High)</option>
                                 <option value="o3">Price (High - Low)</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

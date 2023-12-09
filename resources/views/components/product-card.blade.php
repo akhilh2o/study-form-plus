@@ -1,7 +1,7 @@
 <div class="course-item">
     <div class="thumb">
         <a href="{{ route('course', [$product]) }}">
-            <img src="{{ $product?->thumbnail() }}" alt="{{ $product?->title }}">
+            <img src="{{ $product?->thumb() }}" alt="{{ $product?->title }}">
         </a>
     </div>
     <div class="content">

@@ -17,6 +17,13 @@ class CourseAction
         $course->slug                      =  Str::slug($request->post('title'));
         $course->description               =  $request->post('description');
         $course->demo_link                 =  $this->getYoutubeEmbedUrl($request->post('demo_link'));
+        $course->faculties                 =  implode(', ', $request->post('faculties'));
+        $course->doubt_solving_faculties   =  implode(', ', $request->post('doubt_solving_faculties'));
+        $course->language                  =  $request->post('language');
+        $course->duration                  =  $request->post('duration');
+        $course->exam_validity             =  $request->post('exam_validity');
+        $course->order_type_pendrive       =  $request->post('order_type_pendrive') ?? false;
+        $course->order_type_download       =  $request->post('order_type_download') ?? false;
         $course->net_price                 =  $request->post('net_price');
         $course->sale_price                =  $request->post('sale_price');
         $course->status                    =  $request->post('status');
@@ -27,15 +34,15 @@ class CourseAction
 
         if ($request->file('thumbnail')) {
 
-            if ($course->thumbnail) {
-                Storage::disk('public')->delete($course->thumbnail);
+            if ($course?->thumbnail) {
+                Storage::disk('public')->delete($course?->thumbnail);
             }
 
             $course->thumbnail = 'courses/' . time() . '.' . $request->file('thumbnail')->extension();
             Imager::init($request->file('thumbnail'))
                 ->resizeFit(600, 500)
                 ->inCanvas('#fff')
-                ->save(Storage::disk('public')->path($course->thumbnail));
+                ->save(Storage::disk('public')->path($course?->thumbnail));
         }
         $course->save();
 
@@ -44,7 +51,7 @@ class CourseAction
 
     public function getYoutubeEmbedUrl($url)
     {
-        $youtube_id='';
+        $youtube_id = '';
         $shortUrlRegex = '/youtu.be\/([a-zA-Z0-9_-]+)\??/i';
         $longUrlRegex = '/youtube.com\/((?:embed)|(?:watch))((?:\?v\=)|(?:\/))([a-zA-Z0-9_-]+)/i';
 

@@ -7,7 +7,7 @@
                 <div class="card cart_item">
                     <div class="card-body d-flex gap-3">
                         <div class="my-auto">
-                            <img src="{{ $wishlist->thumbnail() }}" alt="" class="rounded course_img">
+                            <img src="{{ $wishlist->thumb() }}" alt="" class="rounded course_img">
                         </div>
                         <div class="my-auto">
                             <h6 class="mb-3 lh-1">{{ $wishlist?->title }}</h6>

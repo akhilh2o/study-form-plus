@@ -10,7 +10,7 @@ class Course extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function thumbnail()
+    public function thumb()
     {
         return $this->thumbnail ? storage($this->thumbnail) : 'https://picsum.photos/600/500';
     }
