@@ -55,8 +55,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="net_price">Faculties <span class="text-danger">*</span></label>
-                                <select name="faculties[]" class="form-control select2" multiple required>
+                                <label for="faculties">Faculties <span class="text-danger">*</span></label>
+                                <select name="faculties[]" id="faculties" class="form-control select2" multiple required>
                                     <option disabled>-- Select --</option>
                                     @foreach ($faculties as $faculty)
                                         <option value="{{ $faculty?->title }}" @selected(in_array($faculty?->title,old('faculties',[])))>
@@ -68,15 +68,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="net_price">Doubt Solving Faculties <span class="text-danger">*</span></label>
-                                <select name="doubt_solving_faculties[]" class="form-control select2" multiple required>
-                                    <option disabled>-- Select --</option>
-                                    @foreach ($faculties as $faculty)
-                                        <option value="{{ $faculty?->title }}" @selected(in_array($faculty?->title,old('doubt_solving_faculties',[])))>
-                                            {{ $faculty?->title }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label for="doubt_solving_faculties">Doubt Solving Facility <span class="text-danger">*</span></label>
+                                <input type="text" name="doubt_solving_faculties" id="doubt_solving_faculties" class="form-control"
+                                value="{{ old('doubt_solving_faculties') }}" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -95,10 +89,11 @@
                         </div>
                         <div class="col-md-3">
                             <label for="">Language <span class="text-danger">*</span></label>
-                            <select name="language" class="form-control" required>
+                            <select name="language" class="form-control select2" required>
                                 <option value="">-- Select --</option>
                                 <option value="English" {{ old('language', 'English') == 'English' ? 'selected' : '' }}>English</option>
                                 <option value="Hindi" {{ old('language') == 'Hindi' ? 'selected' : '' }}>Hindi</option>
+                                <option value="Hindi" {{ old('language') == 'Hindi' ? 'selected' : '' }}>English/Hindi</option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -116,7 +111,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="">Popular <span class="text-danger">*</span></label>
-                            <select name="popular" class="form-control" required>
+                            <select name="popular" class="form-control select2" required>
                                 <option value="">-- Select --</option>
                                 <option value="1" {{ old('popular', '1') == '1' ? 'selected' : '' }}>Yes</option>
                                 <option value="0" {{ old('popular') == '0' ? 'selected' : '' }}>No</option>
@@ -125,7 +120,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Status <span class="text-danger">*</span></label>
-                                <select name="status" class="form-control" required>
+                                <select name="status" class="form-control select2" required>
                                     <option value="">-- Select --</option>
                                     <option value="1" {{ old('status', '1') == '1' ? 'selected' : '' }}>Active
                                     </option>
@@ -141,13 +136,13 @@
                                     value="{{ old('duration') }}" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exam_validity">Exam Validity <span class="text-danger">*</span></label>
                                 <input type="text" name="exam_validity" class="form-control"
                                     value="{{ old('exam_validity') }}" required>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3">
                             <label for="order_type_download">Study Material <span class="text-danger">*</span></label>
                             <div class="form-group">
@@ -159,6 +154,29 @@
                                     <input class="form-check-input" name="order_type_download" type="checkbox" id="order_type_download" value="1" @checked(old('order_type_download'))>
                                     <label class="form-check-label" for="order_type_download">Downloadable</label>
                                   </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="attemp_type">Attemp Type <span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="attemp_type" type="radio" id="attemp_type" value="1" @checked(old('order_type_pendrive'))>
+                                    <label class="form-check-label" for="attemp_type">Yes</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="attemp_type" type="radio" id="attemp_type" value="1" @checked(old('order_type_download'))>
+                                    <label class="form-check-label" for="attemp_type">No</label>
+                                  </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="exam_validity">Exam Attemp <span class="text-danger">*</span></label>
+                                <input type="text" name="exam_validity" class="form-control"
+                                    value="{{ old('exam_validity') }}" required>
                             </div>
                         </div>
                     </div>

@@ -78,16 +78,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="net_price">Doubt Solving Faculties <span
+                                <label for="doubt_solving_faculties">Doubt Solving Facility <span
                                         class="text-danger">*</span></label>
-                                <select name="doubt_solving_faculties[]" class="form-control select2" multiple required>
-                                    <option disabled>-- Select --</option>
-                                    @foreach ($faculties as $faculty)
-                                        <option value="{{ $faculty?->title }}" @selected(in_array($faculty?->title, $course?->doubt_solving_faculties ? explode(', ', $course->doubt_solving_faculties) : []))>
-                                            {{ $faculty?->title }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="doubt_solving_faculties" class="form-control"
+                                    value="{{ $course->doubt_solving_faculties }}" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -107,10 +101,14 @@
 
                         <div class="col-md-3">
                             <label for="">Language <span class="text-danger">*</span></label>
-                            <select name="language" class="form-control" required>
+                            <select name="language" class="form-control select2" required>
                                 <option value="">-- Select --</option>
-                                <option value="English" {{$course->language == 'English' ? 'selected' : '' }}>English</option>
-                                <option value="Hindi" {{ $course->language == 'Hindi' ? 'selected' : '' }}>Hindi</option>
+                                <option value="English" {{ $course->language == 'English' ? 'selected' : '' }}>English
+                                </option>
+                                <option value="Hindi" {{ $course->language == 'Hindi' ? 'selected' : '' }}>Hindi
+                                </option>
+                                <option value="English/Hindi" {{ $course->language == 'English/Hindi' ? 'selected' : '' }}>English/Hindi
+                                </option>
                             </select>
                         </div>
 
@@ -129,7 +127,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="">Popular <span class="text-danger">*</span></label>
-                            <select name="popular" class="form-control" required>
+                            <select name="popular" class="form-control select2" required>
                                 <option value="">-- Select --</option>
                                 <option value="1" {{ $course->popular == '1' ? 'selected' : '' }}>Yes</option>
                                 <option value="0" {{ $course->popular == '0' ? 'selected' : '' }}>No</option>
@@ -138,7 +136,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Status <span class="text-danger">*</span></label>
-                                <select name="status" class="form-control" required>
+                                <select name="status" class="form-control select2" required>
                                     <option value="">-- Select --</option>
                                     <option value="1" {{ $course->status == '1' ? 'selected' : '' }}>Active
                                     </option>
@@ -165,13 +163,15 @@
                             <label for="order_type_download">Study Material <span class="text-danger">*</span></label>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="order_type_pendrive" type="checkbox" id="order_type_pendrive" value="1" @checked($course->order_type_pendrive)>
+                                    <input class="form-check-input" name="order_type_pendrive" type="checkbox"
+                                        id="order_type_pendrive" value="1" @checked($course->order_type_pendrive)>
                                     <label class="form-check-label" for="order_type_pendrive">Pendrive</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="order_type_download" type="checkbox" id="order_type_download" value="1" @checked($course->order_type_download)>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="order_type_download" type="checkbox"
+                                        id="order_type_download" value="1" @checked($course->order_type_download)>
                                     <label class="form-check-label" for="order_type_download">Downloadable</label>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>

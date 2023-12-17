@@ -18,7 +18,7 @@ class CourseAction
         $course->description               =  $request->post('description');
         $course->demo_link                 =  $this->getYoutubeEmbedUrl($request->post('demo_link'));
         $course->faculties                 =  implode(', ', $request->post('faculties'));
-        $course->doubt_solving_faculties   =  implode(', ', $request->post('doubt_solving_faculties'));
+        $course->doubt_solving_faculties   =  $request->post('doubt_solving_faculties');
         $course->language                  =  $request->post('language');
         $course->duration                  =  $request->post('duration');
         $course->exam_validity             =  $request->post('exam_validity');
