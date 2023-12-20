@@ -21,11 +21,11 @@ class CourseAction
         $course->doubt_solving_faculties   =  $request->post('doubt_solving_faculties');
         $course->language                  =  $request->post('language');
         $course->duration                  =  $request->post('duration');
-        $course->exam_validity             =  $request->post('exam_validity');
+        // $course->exam_validity             =  $request->post('exam_validity');
         $course->order_type_pendrive       =  $request->post('order_type_pendrive') ?? false;
         $course->order_type_download       =  $request->post('order_type_download') ?? false;
-        $course->net_price                 =  $request->post('net_price');
-        $course->sale_price                =  $request->post('sale_price');
+        // $course->net_price                 =  $request->post('net_price');
+        // $course->sale_price                =  $request->post('sale_price');
         $course->status                    =  $request->post('status');
         $course->popular                   =  $request->post('popular');
         $course->meta_title                =  $request->post('meta_title');
@@ -45,6 +45,20 @@ class CourseAction
                 ->save(Storage::disk('public')->path($course?->thumbnail));
         }
         $course->save();
+
+        if ($course->variations()->count() > 0) {
+            $course->variations()->delete();
+        }
+
+        foreach ($request->exam_attempt ?? [] as $key => $variation) {
+            $course->variations()->create([
+                'exam_attempt'          => $variation,
+                'net_price_download'    => $request->net_price_download[$key],
+                'net_price_pendrive'    => $request->net_price_pendrive[$key],
+                'sale_price_download'   => $request->sale_price_download[$key],
+                'sale_price_pendrive'   => $request->sale_price_pendrive[$key],
+            ]);
+        }
 
         return $course;
     }

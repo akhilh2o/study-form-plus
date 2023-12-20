@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="alert alert-success">
-                                        <p>Your Order has been confirmed! please checkout your email to status.</p>
+                                        <p><i class="fas fa-check"></i> Your Order has been confirmed! please check your email to track the order.</p>
                                     </div>
                                 </div>
                             </div>
@@ -126,6 +126,7 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Product</th>
+                                                <th scope="col">Attempt</th>
                                                 <th scope="col">Type</th>
                                                 <th scope="col">Price</th>
                                             </tr>
@@ -135,25 +136,26 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>{{ $item->title }}</td>
+                                                <td>{{ $item->exam_attempt }}</td>
                                                 <td>{{ ucfirst($item?->order_type) }}</td>
                                                 <td>{!! currencySymbol() !!} {{ $item?->price }}</td>
                                             </tr>
                                             @endforeach
                                             @if ($order?->coupon_code)
                                             <tr>
-                                                <td colspan="2"></td>
+                                                <td colspan="3"></td>
                                                 <th scope="row">Discount:</th>
                                                 <td><strong>-</strong> {!! currencySymbol() !!} {{
                                                     $order?->coupon_discount_amount }}</td>
                                             </tr>
                                             @endif
                                             <tr>
-                                                <td colspan="2"></td>
+                                                <td colspan="3"></td>
                                                 <th scope="row">Sub Total:</th>
                                                 <td>{!! currencySymbol() !!} {{ $order?->sub_total }}</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"></td>
+                                                <td colspan="3"></td>
                                                 <th scope="row">Total:</th>
                                                 <td>{!! currencySymbol() !!} {{ $order?->total }}</td>
                                             </tr>
@@ -168,4 +170,11 @@
         </div>
         </div>
     </section>
+    @push('scripts')
+    <script>
+        $(document).ready(function () {
+            sessionStorage.setItem("coupon_code", '');
+        });
+    </script>
+    @endpush
 </x-app-layout>

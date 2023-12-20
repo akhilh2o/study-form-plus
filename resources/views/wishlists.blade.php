@@ -11,16 +11,26 @@
                         </div>
                         <div class="my-auto">
                             <h6 class="mb-3 lh-1">{{ $wishlist?->title }}</h6>
+                            
+                            @if ($wishlist?->pivot?->course_type=='download')
+                                    <p class="mb-2">
+                                        <b>Download Price: </b>
+                                        <span>{!! currencySymbol() !!} {{ number_format($wishlist?->salePriceForDownload($wishlist?->pivot?->exam_attempt),2) }}</span>
+                                        <del>{!! currencySymbol() !!} {{ number_format($wishlist?->netPriceForDownload($wishlist?->pivot?->exam_attempt),2) }}</del>
+                                    </p>
+                                @endif
+                            @if ($wishlist?->pivot?->course_type=='pendrive')
+                                <p class="mb-2">
+                                    <b>Pendrive Price:</b>
+                                    <span>{!! currencySymbol() !!} {{ number_format($wishlist?->salePriceForPendrive($wishlist?->pivot?->exam_attempt), 2) }}</span>
+                                    <del>{!! currencySymbol() !!} {{ number_format($wishlist?->netPriceForPendrive($wishlist?->pivot?->exam_attempt), 2) }}</del>
+                                </p>
+                            @endif
                             <p class="mb-2">
                                 <b>Course Type:</b>
                                 <span>{{ Str::ucfirst($wishlist?->pivot?->course_type) }}</span>
                             </p>
-                            <p class="mb-2">
-                                <b>Price:</b>
-                                <span>{!! currencySymbol() !!} {{ $wishlist?->sale_price }}</span>
-                                <del>{!! currencySymbol() !!} {{ $wishlist?->net_price }}</del>
-                            </p>
-                            <a href="{{ route('wishlists.move_to_cart', [$wishlist, 'order_type' => $wishlist?->pivot?->course_type]) }}"
+                            <a href="{{ route('wishlists.move_to_cart', [$wishlist, 'order_type' => $wishlist?->pivot?->course_type ,'exam_attempt' => $wishlist?->pivot?->exam_attempt]) }}"
                                 class="badge bg-success">
                                 <i class="fas fa-shopping-cart"></i> Move To Cart
                             </a>

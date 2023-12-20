@@ -84,20 +84,6 @@
                                     value="{{ $course->doubt_solving_faculties }}" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="net_price">Net Price <span class="text-danger">*</span></label>
-                                <input type="number" name="net_price" class="form-control"
-                                    value="{{ $course->net_price }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="sale_price">Sale Price <span class="text-danger">*</span></label>
-                                <input type="number" name="sale_price" class="form-control"
-                                    value="{{ $course->sale_price }}" required>
-                            </div>
-                        </div>
 
                         <div class="col-md-3">
                             <label for="">Language <span class="text-danger">*</span></label>
@@ -107,7 +93,8 @@
                                 </option>
                                 <option value="Hindi" {{ $course->language == 'Hindi' ? 'selected' : '' }}>Hindi
                                 </option>
-                                <option value="English/Hindi" {{ $course->language == 'English/Hindi' ? 'selected' : '' }}>English/Hindi
+                                <option value="English/Hindi"
+                                    {{ $course->language == 'English/Hindi' ? 'selected' : '' }}>English/Hindi
                                 </option>
                             </select>
                         </div>
@@ -146,20 +133,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="duration">Duration <span class="text-danger">*</span></label>
-                                <input type="text" name="duration" class="form-control"
-                                    value="{{ $course->duration }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exam_validity">Exam Validity <span class="text-danger">*</span></label>
-                                <input type="text" name="exam_validity" class="form-control"
-                                    value="{{ $course->exam_validity }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
                             <label for="order_type_download">Study Material <span class="text-danger">*</span></label>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
@@ -173,6 +146,98 @@
                                     <label class="form-check-label" for="order_type_download">Downloadable</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="duration">Duration <span class="text-danger">*</span></label>
+                                <input type="text" name="duration" class="form-control"
+                                    value="{{ $course->duration }}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="title">
+                                Exam Attempts
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row" x-data="handler()">
+                        <div class="col table-responsive">
+                            <table class="table table-bordered align-items-center table-lg">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Exam Attempt <span class="text-danger">*</span></th>
+                                        <th>Net Price (Download)</th>
+                                        <th>Net Price (Pendrive)</th>
+                                        <th>Sale Price (Download)</th>
+                                        <th>Sale Price (Pendrive)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="(field, index) in fields" :key="index">
+                                        <tr>
+                                            <td x-text="index + 1"></td>
+                                            <td><input x-model="field.exam_attempt" type="text"
+                                                    name="exam_attempt[]" class="form-control" required></td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-rupee-sign"></i></span>
+                                                    <input type="text" class="form-control"
+                                                        x-model="field.net_price_download" name="net_price_download[]"
+                                                        aria-label="Amount (to the nearest amount)">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-rupee-sign"></i></span>
+                                                    <input type="text" class="form-control"
+                                                        x-model="field.net_price_pendrive" name="net_price_pendrive[]"
+                                                        aria-label="Amount (to the nearest amount)">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-rupee-sign"></i></span>
+                                                    <input type="text" class="form-control"
+                                                        x-model="field.sale_price_download"
+                                                        name="sale_price_download[]"
+                                                        aria-label="Amount (to the nearest amount)">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-rupee-sign"></i></span>
+                                                    <input type="text" class="form-control"
+                                                        x-model="field.sale_price_pendrive"
+                                                        name="sale_price_pendrive[]"
+                                                        aria-label="Amount (to the nearest amount)">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </td>
+                                            <td><button type="button" class="btn btn-danger btn-small"
+                                                    x-show="index > 0" @click="removeField(index)"><i
+                                                        class="fas fa-times"></i></button></td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-right"><button type="button"
+                                                class="btn btn-primary" @click="addNewField()"><i
+                                                    class="fas fa-plus"></i> Add Row</button></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                     <div class="form-group">
@@ -212,6 +277,26 @@
         </style>
     @endpush
     <x-slot name="script">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+        <script>
+            function handler() {
+                return {
+                    fields: @json($course->variations),
+                    addNewField() {
+                        this.fields.push({
+                            exam_attempt: '',
+                            net_price_download: '',
+                            net_price_pendrive: '',
+                            sale_price_download: '',
+                            sale_price_pendrive: '',
+                        });
+                    },
+                    removeField(index) {
+                        this.fields.splice(index, 1);
+                    }
+                }
+            }
+        </script>
         <script>
             var previewImg = {
                 width: '70px',

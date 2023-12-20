@@ -54,6 +54,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Phone/Email</th>
                         <th>Address</th>
                         <th>Amount</th>
                         <th>Status</th>
@@ -65,7 +66,13 @@
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td width="10%">{{ $order?->name }}</td>
-                        <td width="50%">
+                        <td width="15%">
+                            {{ $order?->mobile }}
+                            <div class="text-small">
+                                {{ $order?->email }}
+                            </div>
+                        </td>
+                        <td width="35%">
                             {{ $order->address }}
                             <div class="text-small">
                                 {{ $order->city }}
@@ -76,7 +83,7 @@
                             </div>
                         </td>
                         <td>{!! currencySymbol() !!} {{ $order?->total }}</td>
-                        <td>{{ $order?->payment_status ? 'Paid' : 'Unpaid' }}</td>
+                        <td>{!! $order?->payment_status ? '<span class="badge bg-success">Paid</span>' : '<span class="badge bg-danger">Unpaid</span>' !!}</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button"

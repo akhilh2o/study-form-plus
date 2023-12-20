@@ -42,14 +42,7 @@
                             <td><b>Sub Title:</b></td>
                             <td>{{ $course->sub_title }}</td>
                         </tr>
-                        <tr>
-                            <td><b>Net Price:</b></td>
-                            <td>{{ $course->net_price }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Sale Price:</b></td>
-                            <td>{{ $course?->sale_price }}</td>
-                        </tr>
+                        
                         <tr>
                             <td><b>Language:</b></td>
                             <td>{{ $course?->language }}</td>
@@ -57,10 +50,6 @@
                         <tr>
                             <td><b>Duration:</b></td>
                             <td>{{ $course?->duration }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Exam Validity:</b></td>
-                            <td>{{ $course?->exam_validity }}</td>
                         </tr>
                         <tr>
                             <td><b>Study Material:</b></td>

@@ -1,4 +1,8 @@
 <x-app-layout>
+
+    @section('meta_title', 'Courses | ' . config('app.name'))
+    @section('meta_description', $category?->name ? $category?->name . ' Courses | ' . config('app.name') : 'All '. 'Courses | ' . config('app.name') )
+
     <x-breadcrumb title="Courses" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Courses']]" />
 
     <!-- ~~~ Course Section ~~~ -->
@@ -13,9 +17,10 @@
                 <div class="col-lg-5">
                     <div class="d-flex flex-wrap justify-content-lg-end m--10">
                         <div class="course-select-item">
-                            <select class="select-bar">
+                            <select id="category" name="category" class="form-select"
+                                onchange="window.location.href='{{ route('courses') }}?category=' + this.value;">
                                 <option value="">-- Select Category --</option>
-                                @foreach ($categories as $cat)
+                                @foreach ($categories ?? [] as $cat)
                                     <option value="{{ $cat->slug }}" @selected($category?->id == $cat->id)>
                                         {{ $cat->name }}
                                     </option>
@@ -37,7 +42,7 @@
             <div class="row justify-content-center mb-30-none">
                 @foreach ($courses ?? [] as $course)
                     <div class="col-xl-4 col-md-6 col-sm-10">
-                       <x-product-card :product="$course" />
+                        <x-product-card :product="$course" />
                     </div>
                 @endforeach
             </div>

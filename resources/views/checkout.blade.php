@@ -13,55 +13,55 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Name*</label>
+                                            <label for="">Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="name" value="{{ auth()?->user()?->name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Mobile*</label>
+                                            <label for="">Mobile <span class="text-danger">*</span></label>
                                             <input type="tel" class="form-control" name="mobile" value="{{ auth()?->user()?->mobile }}" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="">Email*</label>
+                                            <label for="">Email <span class="text-danger">*</span></label>
                                             <input type="email" class="form-control" name="email" value="{{ auth()?->user()?->email }}" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="">Address Line 1*</label>
+                                            <label for="">Address Line 1 <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="address_link_1" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="">Landmark*</label>
-                                            <input type="text" class="form-control" name="landmark">
+                                            <label for="">Landmark <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="landmark" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">City*</label>
+                                            <label for="">City <span class="text-danger">*</span></label>
                                             <input type="text" name="city" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">State*</label>
+                                            <label for="">State <span class="text-danger">*</span></label>
                                             <input type="text" name="state" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Pincode*</label>
+                                            <label for="">Pincode <span class="text-danger">*</span></label>
                                             <input type="number" name="pincode" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Country*</label>
+                                            <label for="">Country <span class="text-danger">*</span></label>
                                             <input type="text" name="country" class="form-control" required />
                                         </div>
                                     </div>
@@ -76,11 +76,27 @@
                             @foreach($courses ?? [] as $id => $course)
                             <li class="list-group-item">
                                 <span class="fw-bold d-block">{{ $course?->title }}</span>
-                                <span><strong>Course Type -:</strong> {{
+                                <span>
+                                    <strong>Course Type -:</strong> {{
                                     Str::ucfirst($carts[$course?->id]['order_type']) }}</span> <br>
-                                <span><strong>Price -: </strong>{!! currencySymbol() !!} {{ number_format($course?->sale_price,2) }}</span>
+                                <span>
+                                    <strong>Price -: </strong> {!! currencySymbol() !!}
+                                    @if ($carts[$course?->id]['order_type']=='download')
+                                        {{ number_format($course?->salePriceForDownload($carts[$course?->id]['exam_attempt']),2) }}
+                                    @endif
+                                    @if ($carts[$course?->id]['order_type']=='pendrive')
+                                        {{ number_format($course?->salePriceForPendrive($carts[$course?->id]['exam_attempt']),2) }}
+                                    @endif
+                                </span>
                             </li>
-                            @php $total += $course?->sale_price @endphp
+                            @php
+                                if($carts[$course?->id]['order_type']=='download'){
+                                    $total += $course?->salePriceForDownload($carts[$course?->id]['exam_attempt']);
+                                }
+                                if ($carts[$course?->id]['order_type']=='pendrive'){
+                                    $total += $course?->salePriceForPendrive($carts[$course?->id]['exam_attempt']);
+                                }
+                            @endphp
                             @endforeach
                             @endif
                             <li class="list-group-item">
@@ -96,7 +112,6 @@
                             <li class="list-group-item">
                                 <h6 class="my-2" id="">
                                     Total: {!! currencySymbol() !!} <span id="total"> {{ number_format($total, 2) }}</span>
-
                                 </h6>
                                 <input type="hidden" name="total_amt" id="total_amt" value="{{ $total }}">
                             </li>

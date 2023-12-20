@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusUpdate;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -35,6 +37,11 @@ class OrderController extends Controller
     public function statusToggle(Order $order, Request $request)
     {
         $order->update(['status' => $request->status]);
+        try {
+            Mail::to($order->email)->send(new OrderStatusUpdate($order));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return back()->withSuccess('Status successfully updated');
     }
 

@@ -21,18 +21,24 @@ class CartController extends Controller
     public function addtoCart($id, Request $request)
     {
         if ($request?->submit == 'wishlist') {
-            return to_route('wishlists.toggle', [$id, 'course_type' => $request->order_type]);
+            return to_route('wishlists.toggle', [
+                $id,
+                'course_type' => $request->order_type,
+                'exam_attempt' => $request->exam_attempt
+            ]);
         }
         $course = Course::where('status', true)->findOrFail($id);
         $cart = session()->get('cart', []);
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
-            $cart[$id]['order_type'] = $request?->order_type;
+            $cart[$id]['order_type']    = $request?->order_type;
+            $cart[$id]['exam_attempt']  = $request?->exam_attempt;
         } else {
             $cart[$id] = [
                 "id"            => $course->id,
                 "quantity"      => 1,
-                "order_type"    => $request?->order_type
+                "order_type"    => $request?->order_type,
+                "exam_attempt"  => $request?->exam_attempt
             ];
         }
         session()->put('cart', $cart);
@@ -43,7 +49,7 @@ class CartController extends Controller
     {
         if ($request->id && $request->quantity) {
             $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
+            $cart[$request->id]["quantity"]     = $request->quantity;
             session()->put('cart', $cart);
             session()->flash('success', 'Course added to cart.');
         }

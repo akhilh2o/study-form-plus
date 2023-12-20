@@ -21,13 +21,18 @@ class CourseController extends Controller
                 ->first();
         }
 
-        $categories = Category::select('id', 'name')->get();
+        $categories = Category::select('id', 'name','slug')->get();
 
         $courses = Course::when($category, function ($query) use ($category) {
             $query->whereHas('category', function ($query) use ($category) {
                 $query->where('id', $category?->id);
             });
-        })->paginate()
+        })
+            ->withMax('variations', 'sale_price_download')
+            ->withMin('variations', 'sale_price_download')
+            ->withMax('variations', 'sale_price_pendrive')
+            ->withMin('variations', 'sale_price_pendrive')
+            ->paginate()
             ->withQueryString();
 
         return view('courses')->with([
@@ -37,9 +42,15 @@ class CourseController extends Controller
         ]);
     }
 
-    public function detail(Course $course)
+    public function detail(Course $course, Request $request)
     {
-        return view('course')->with('course', $course);
+        $course->load('variations');
+        if ($request->attempt) {
+            $attempt = $request->attempt;
+        } else {
+            $attempt = $course?->variations?->first()?->exam_attempt;
+        }
+        return view('course')->with('course', $course)->with('attempt', $attempt);
     }
 
     /**

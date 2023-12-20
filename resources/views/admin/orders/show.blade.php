@@ -32,7 +32,8 @@
                         </tr>
                         <tr>
                             <td><b>Payment Status:</b></td>
-                            <td>{{ $order?->payment_status ? 'Paid' : 'Unpaid' }}</td>
+                            <td>{!! $order?->payment_status ? '<span class="badge bg-success">Paid</span>' : '<span class="badge bg-danger">Unpaid</span>' !!}
+                            </td>
                         </tr>
                         <tr>
                             <td><b>Order Status:</b></td>
@@ -79,6 +80,10 @@
                         <tr>
                             <td><b>Order Type:</b></td>
                             <td>{{ ucfirst($item->order_type) }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Attempt:</b></td>
+                            <td>{{ ucfirst($item->exam_attempt) }}</td>
                         </tr>
                         @endforeach
                     </table>

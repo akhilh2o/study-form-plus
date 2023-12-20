@@ -24,6 +24,7 @@ class CourseController extends Controller
                 });
             })
             ->with('category')
+            ->with('variations')
             ->latest()
             ->paginate(25)
             ->withQueryString();
@@ -41,25 +42,34 @@ class CourseController extends Controller
 
     public function store(Request $request, CourseAction $action)
     {
-        // return $request;   
+        // return $request;
         $request->validate([
-            'title'               =>  'required',
-            'category_id'         =>  'required',
-            'sub_title'           =>  'nullable',
-            'description'         =>  'nullable',
-            'status'              =>  'required',
-            'popular'             =>  'required',
-            'thumbnail'           =>  'nullable|image',
-            'demo_link'           =>  'nullable',
-            'faculties'           =>  'required|array',
-            'doubt_solving_faculties'  =>  'required',
-            'language'            =>  'required',
-            'duration'            =>  'required',
-            'exam_validity'       =>  'required',
+            'title'                     =>  'required',
+            'category_id'               =>  'required',
+            'sub_title'                 =>  'nullable',
+            'description'               =>  'nullable',
+            'status'                    =>  'required',
+            'popular'                   =>  'required',
+            'thumbnail'                 =>  'nullable|image',
+            'demo_link'                 =>  'nullable',
+            'faculties'                 =>  'required|array',
+            'doubt_solving_faculties'   =>  'required',
+            'language'                  =>  'required',
+            'duration'                  =>  'required',
+
+            'exam_attempt'          =>  'required|array',
+            'exam_attempt.*'        =>  'required|string',
+            'net_price_download'    =>  'required|array',
+            'net_price_download.*'  =>  'required',
+            'net_price_pendrive'    =>  'required|array',
+            'net_price_pendrive.*'  =>  'required',
+            'sale_price_download'    =>  'required|array',
+            'sale_price_download.*'  =>  'required',
+            'sale_price_pendrive'    =>  'required|array',
+            'sale_price_pendrive.*'  =>  'required',
+
             'order_type_pendrive' =>  'nullable',
             'order_type_download' =>  'nullable',
-            'net_price'           =>  'required',
-            'sale_price'          =>  'required',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
             'meta_description'    =>  'nullable',
@@ -73,12 +83,13 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
+        $course->load('variations');
         return view('admin.courses.show')->with('course', $course);
     }
 
     public function edit(Course $course)
     {
-        // return $course;
+        $course->load('variations');
         $faculties = Faculty::select('id', 'title')->get();
         $categories = Category::where('parent_id', 0)->with('children')->get();
         return view('admin.courses.edit')->with('course', $course)
@@ -102,11 +113,21 @@ class CourseController extends Controller
             'doubt_solving_faculties'  =>  'required',
             'language'            =>  'required',
             'duration'            =>  'required',
-            'exam_validity'       =>  'required',
+
             'order_type_pendrive' =>  'nullable',
             'order_type_download' =>  'nullable',
-            'net_price'           =>  'required',
-            'sale_price'          =>  'required',
+
+            'exam_attempt'          =>  'required|array',
+            'exam_attempt.*'        =>  'required|string',
+            'net_price_download'    =>  'required|array',
+            'net_price_download.*'  =>  'required',
+            'net_price_pendrive'    =>  'required|array',
+            'net_price_pendrive.*'  =>  'required',
+            'sale_price_download'    =>  'required|array',
+            'sale_price_download.*'  =>  'required',
+            'sale_price_pendrive'    =>  'required|array',
+            'sale_price_pendrive.*'  =>  'required',
+
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
             'meta_description'    =>  'nullable',
@@ -119,7 +140,9 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        Storage::disk('public')->delete($course->thumbnail);
+        if (File::exists(Storage::disk('public')->path($course?->thumbnail ?? ''))) {
+            Storage::disk('public')->delete($course->thumbnail ?? '');
+        }
         $course->delete();
         return to_route('admin.courses.index')->withErrors('Course has been successfully deleted.');
     }

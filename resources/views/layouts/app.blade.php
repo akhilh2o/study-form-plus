@@ -210,13 +210,21 @@
                         <li class="wishlist me-3">
                             <a href="{{ route('wishlists.index') }}">
                                 <i class="fas fa-heart"></i> Wishlist
-                                <span class="badge bg-dark rounded-pill">0</span>
+                                <span class="badge bg-dark rounded-pill">
+                                     @if(auth()->check())
+                                        {{ auth()->user()?->wishlists->count() }}
+                                    @else
+                                    0
+                                    @endif
+                                </span>
                             </a>
                         </li>
                         <li class="cart">
                             <a href="{{ route('carts.index') }}">
                                 <i class="fas fa-shopping-cart"></i> Cart
-                                <span class="badge bg-dark rounded-pill">0</span>
+                                <span class="badge bg-dark rounded-pill">
+                                    {{ collect(session('cart', []))->count() }}
+                                </span>
                             </a>
                         </li>
                     </ul>

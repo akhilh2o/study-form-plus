@@ -3,7 +3,6 @@
 
     <section class="carts pt-120 pb-120">
         <div class="container">
-
             @if (session('cart'))
                 @php $total = 0 @endphp
                 @foreach ($courses ?? [] as $id => $course)
@@ -14,11 +13,20 @@
                             </div>
                             <div class="my-auto">
                                 <h6 class="mb-3 lh-1">{{ $course?->title }}</h6>
-                                <p class="mb-2">
-                                    <b>Price:</b>
-                                    <span>{!! currencySymbol() !!} {{ number_format($course?->sale_price, 2) }}</span>
-                                    <del>{!! currencySymbol() !!} {{ number_format($course?->net_price, 2) }}</del>
-                                </p>
+                                @if ($carts[$course?->id]['order_type']=='download')
+                                    <p class="mb-2">
+                                        <b>Download Price: </b>
+                                        <span>{!! currencySymbol() !!} {{ number_format($course?->salePriceForDownload($carts[$course?->id]['exam_attempt']),2) }}</span>
+                                        <del>{!! currencySymbol() !!} {{ number_format($course?->netPriceForDownload($carts[$course?->id]['exam_attempt']),2) }}</del>
+                                    </p>
+                                @endif
+                                @if ($carts[$course?->id]['order_type']=='pendrive')
+                                    <p class="mb-2">
+                                        <b>Pendrive Price:</b>
+                                        <span>{!! currencySymbol() !!} {{ number_format($course?->salePriceForPendrive($carts[$course?->id]['exam_attempt']), 2) }}</span>
+                                        <del>{!! currencySymbol() !!} {{ number_format($course?->netPriceForPendrive($carts[$course?->id]['exam_attempt']), 2) }}</del>
+                                    </p>
+                                @endif
                                 <p class="mb-2">
                                     <b>Course Type:</b>
                                     <span>{{ Str::ucfirst($carts[$course?->id]['order_type']) }}</span>
@@ -29,7 +37,14 @@
                             </div>
                         </div>
                     </div>
-                    @php $total += $course?->sale_price @endphp
+                    @php 
+                        if($carts[$course?->id]['order_type']=='download'){
+                            $total += $course?->salePriceForDownload($carts[$course?->id]['exam_attempt']);
+                        }
+                        if ($carts[$course?->id]['order_type']=='pendrive'){
+                            $total += $course?->salePriceForPendrive($carts[$course?->id]['exam_attempt']);
+                        }
+                    @endphp
                 @endforeach
 
                 <div class="mt-4 text-end d-flex gap-4 justify-content-between">

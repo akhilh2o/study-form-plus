@@ -54,9 +54,8 @@
                         <th>Thumbnail</th>
                         <th>Title</th>
                         <th>Category</th>
-                        <th>Language/Duration</th>
-                        <th>Exam Validity</th>
-                        <th>Price</th>
+                        <th>Language</th>
+                        <th>Duration</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -67,15 +66,13 @@
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td width="10%"><img src="{{ $course->thumb() }}" alt="cover image" width="50" height="40">
                         </td>
-                        <td width="50%">
+                        <td width="40%">
                             {{ $course->title }}
                             <div class="text-small">{{ Str::limit($course->sub_title,50) }}</div>
                         </td>
                         <td>{{ $course?->category?->name }}</td>
-                        <td>{{ $course?->language }}/{{ $course?->duration }}</td>
-                        <td>{{ $course?->exam_validity }}</td>
-                        <td><del>{{ $course?->net_price }}</del>
-                        {{ $course->sale_price }}</td>
+                        <td>{{ $course?->language }}</td>
+                        <td>{{ $course?->duration }}</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button"

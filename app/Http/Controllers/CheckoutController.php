@@ -39,19 +39,30 @@ class CheckoutController extends Controller
             'coupon_code'       => 'nullable',
             'coupon_id'         => 'nullable',
         ]);
+
         $total = 0;
         foreach ($this->courses ?? [] as $course) {
-            $total += $course?->sale_price;
+            $sale_price = null;
+            if ($this->carts[$course?->id]['order_type'] == 'download') {
+                $total += $course?->salePriceForDownload($this->carts[$course?->id]['exam_attempt']);
+                $sale_price = $course?->salePriceForDownload($this->carts[$course?->id]['exam_attempt']);
+            }
+            if ($this->carts[$course?->id]['order_type'] == 'pendrive') {
+                $total += $course?->salePriceForPendrive($this->carts[$course?->id]['exam_attempt']);
+                $sale_price = $course?->salePriceForPendrive($this->carts[$course?->id]['exam_attempt']);
+            }
+
             $orderItems[] = [
-                'course_id'  => $course->id,
-                'title'      => $course->title,
-                'sub_title'  => $course->sub_title,
-                'price'      => $course->sale_price,
-                'slug'       => $course->slug,
-                'thumbnail'   => $course->thumbnail,
-                'demo_link'   => $course->demo_link,
-                'description' => $course->description,
-                'order_type'  => $this->carts[$course?->id]['order_type']
+                'course_id'     => $course->id,
+                'title'         => $course->title,
+                'sub_title'     => $course->sub_title,
+                'price'         => $sale_price,
+                'slug'          => $course->slug,
+                'thumbnail'     => $course->thumbnail,
+                'demo_link'     => $course->demo_link,
+                'description'   => $course->description,
+                'order_type'    => $this->carts[$course?->id]['order_type'],
+                'exam_attempt'  => $this->carts[$course?->id]['exam_attempt'],
             ];
         }
 
@@ -87,7 +98,11 @@ class CheckoutController extends Controller
         $order->items()->createMany($orderItems);
         session()->put('cart', []);
 
-        Mail::to($order->email)->send(new OrderSuccess($order));
+        try {
+            Mail::to($order->email)->send(new OrderSuccess($order));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
         return to_route('checkout.success', [$order])
             ->with('success', 'Your Order has been completed');

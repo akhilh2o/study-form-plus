@@ -18,7 +18,10 @@ class WishlistController extends Controller
             auth()->user()->wishlists()->detach($course->id);
             return back()->withSuccess('SUCCESS !! Course is removed from wishlist');
         } else {
-            auth()->user()->wishlists()->attach($course->id, ['course_type' => $request?->course_type]);
+            auth()->user()->wishlists()->attach($course->id, [
+                'course_type'  => $request?->course_type,
+                'exam_attempt' => $request?->exam_attempt
+            ]);
             return back()->withSuccess('SUCCESS !! Course is added to wishlist');
         }
     }
@@ -41,11 +44,13 @@ class WishlistController extends Controller
             if (isset($cart[$course->id])) {
                 $cart[$course->id]['quantity']++;
                 $cart[$course->id]['order_type'] = $request?->order_type;
+                $cart[$course->id]['exam_attempt'] = $request?->exam_attempt;
             } else {
                 $cart[$course->id] = [
                     "id"            => $course->id,
                     "quantity"      => 1,
-                    "order_type"    => $request?->order_type
+                    "order_type"    => $request?->order_type,
+                    "exam_attempt"  => $request?->exam_attempt
                 ];
             }
             session()->put('cart', $cart);
