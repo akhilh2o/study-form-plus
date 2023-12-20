@@ -59,6 +59,6 @@ class Course extends Model
         $percentOff = (($netPrice - $salePrice) / $netPrice) * 100;
 
         // Return the calculated percentage off
-        return $percentOff;
+        return number_format($percentOff,2);
     }
 }
