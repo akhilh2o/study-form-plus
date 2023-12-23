@@ -286,36 +286,11 @@
             <div class="footer-support">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 col-sm-10">
+                        <div class="col-md-12 col-sm-10">
                             <div class="footer-support-item">
-                                <div class="icon">
-                                    <i class="flaticon-phone-call"></i>
-                                </div>
-                                <div class="content">
-                                    <h5 class="title">+216 499 49 47</h5>
-                                    <span class="info">Free Support Line</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10">
-                            <div class="footer-support-item">
-                                <div class="icon">
-                                    <i class="flaticon-headphone"></i>
-                                </div>
-                                <div class="content">
-                                    <h5 class="title">Support Center</h5>
-                                    <span class="info">365 days full support</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10">
-                            <div class="footer-support-item">
-                                <div class="icon">
-                                    <i class="flaticon-live"></i>
-                                </div>
-                                <div class="content">
-                                    <h5 class="title">Live Support</h5>
-                                    <span class="info">Write Online Now</span>
+                                <div class="content title">
+                                    <h5 class="title"><center>Experienced Faculties, Daily Doubt sessions, Ready to counsel any enquiry, supportive technical team and empowering staff is which differentiate</center></h5>
+                   
                                 </div>
                             </div>
                         </div>

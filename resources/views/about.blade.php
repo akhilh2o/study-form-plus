@@ -2,70 +2,7 @@
     <x-breadcrumb title="About Us" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'About Us']]" />
 
 
-    <!-- ~~~ Feature Section ~~~ -->
-    <section class="feature-section pt-120 pb-120">
-        <div class="container">
-            <div class="section-header">
-                <span class="category">Features</span>
-                <h2 class="title"><span>Our Special</span> Features</h2>
-            </div>
-            <div class="row justify-content-center mb-30-none">
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Education Services</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-laptop-house"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Online/Offline Class</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Expert Mentor</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Lifetime Support</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ~~~ Feature Section ~~~ -->
+
 
 
     <!-- ~~~ About Section ~~~ -->
@@ -79,18 +16,19 @@
                 </div>
                 <div class="col-lg-6 pb-120">
                     <div class="section-header text-lg-left mb-0">
-                        <h2 class="title"><span>Read </span>About Us</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nulla,
-                            finibus vitae blandit id, euismod vitae dolor. Nam eget tortor quam. Morbi
-                            posuere, dolor a porttitor facilisis, odio ante suscipit felis, nec aliquet
-                            ipsum dui sit amet massa. Nulla blandit mauris volutpat elit elementum,
-                            sed posuere turpis vulputate. Suspendisse rhoncus ante rhoncus elit
-                            ullamcorper egestas. Ut eu eleifend ipsum, vitae iaculis mauris. Aenean at
-                            nisi feugiat, elementum sem sit amet, congue odio.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nulla,
-                            finibus vitae blandit id, euismod vitae dolor. Nam eget tortor quam. Morbi
-                            posuere, dolor a porttitor facilisis, odio.</p>
-                        <a href="#0" class="custom-button theme-one">get in touch</a>
+                        <h2 class="title"><span>WELCOME to SFP Classes </span> Study Form Plus</h2>
+                        <p>In response to the dynamic changes in the world, a transformation in the 
+                        education system becomes imperative. In the contemporary landscape, 
+                        the inclination is towards optimizing time, eliminating the need for travel 
+                        or relocation for educational pursuits. With the guiding principle that 
+                        "If a student is ready, the teacher will appear!".</p>
+                        <p>The goal is to provide conceptual knowledge to all or any commerce 
+                        students instead of mugging up books. Video classes are provided for 
+                        CA/CMA/CS/B.Com-M.Com XI-XII (commerce) students in Pen-Drive/SD card/Download link 
+                        mode which may run on Windows 7 & above laptop/computer or android phone. We promise you that, 
+                        if we see you bringing one step forward then we'll take you to level up by our support and 
+                        care in getting the concepts clear for once and all.</p>
+                        <a href="#forms" class="custom-button theme-one">get in touch</a>
                     </div>
                 </div>
             </div>
@@ -98,10 +36,59 @@
     </section>
     <!-- ~~~ About Section ~~~ -->
 
+        <!-- ~~~ Feature Section ~~~ -->
+    <section class="feature-section pt-120 pb-120">
+        <div class="container">
+            <div class="section-header">
+                <span class="category">Features</span>
+                <h2 class="title"><span>Our Special</span> Features</h2>
+            </div>
+            <div class="row justify-content-center mb-30-none">
+                <div class="col-xl-4 col-md-4 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Books</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm">Updated books specially with latest amendments from institutes and universities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Video Classes</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm">HD-Quality videos lesson accessible in low network zone as well with pen drive facility too</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Expert Mentor</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm">Gain insights and guidance from an expert mentor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ~~~ Feature Section ~~~ -->
+
 
     <!-- ~~~ Counter Section ~~~ -->
     <section class="counter-section pt-120 pb-120 title-lay bg_img"
-        data-img="{{ asset('assets/frontend/images/counter/counter-bg.jpg') }}">
+        data-img="{{ asset('assets/frontend/images/counter/counter-bg.jpg') }}" id="forms">
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <div class="odo-area">
@@ -109,7 +96,7 @@
                         <div class="odo-item">
                             <div class="odo-in">
                                 <div class="odo-head">
-                                    <h2 class="title odometer" data-odo="60">0</h2>
+                                    <h2 class="title odometer" data-odo="25">0</h2>
                                     <h2 class="title">+</h2>
                                 </div>
                                 <h5 class="subtitle">Teachers</h5>
@@ -118,7 +105,7 @@
                         <div class="odo-item">
                             <div class="odo-in">
                                 <div class="odo-head">
-                                    <h2 class="title odometer" data-odo="8">0</h2>
+                                    <h2 class="title odometer" data-odo="5">0</h2>
                                     <h2 class="title">k+</h2>
                                 </div>
                                 <h5 class="subtitle">Students</h5>
@@ -127,7 +114,7 @@
                         <div class="odo-item">
                             <div class="odo-in">
                                 <div class="odo-head">
-                                    <h2 class="title odometer" data-odo="75">0</h2>
+                                    <h2 class="title odometer" data-odo="50">0</h2>
                                     <h2 class="title">+</h2>
                                 </div>
                                 <h5 class="subtitle">Courses</h5>
@@ -136,7 +123,7 @@
                         <div class="odo-item">
                             <div class="odo-in">
                                 <div class="odo-head">
-                                    <h2 class="title odometer" data-odo="13">0</h2>
+                                    <h2 class="title odometer" data-odo="10">0</h2>
                                     <h2 class="title">+</h2>
                                 </div>
                                 <h5 class="subtitle">National Awards</h5>
