@@ -90,7 +90,7 @@
                     <div class="col-md-12">
                         <div class="contact-form-group">
                             <label class="icon" for="content"><i class="far fa-envelope"></i></label>
-                            <textarea name="content" id="content" placeholder="content" name="content">{{ old('content') }}</textarea>
+                            <textarea name="content" id="content" placeholder="Message" name="content">{{ old('content') }}</textarea>
                         </div>
                     </div>
                     <div class="col-12 text-center mt-4">
