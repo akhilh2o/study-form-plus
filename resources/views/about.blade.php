@@ -230,57 +230,24 @@
         <div class="container">
             <div class="section-header">
                 <span class="category">our teachers</span>
-                <h2 class="title"><span>Awesome </span>Instructors</h2>
+                <h2 class="title"><span>Awesome </span>Faculties</h2>
             </div>
             <div class="row justify-content-center mb-30-none">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="instructor-item">
-                        <div class="instructor-thumb">
-                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/01.png') }}"
-                                    alt="instructor"></a>
-                        </div>
-                        <div class="instructor-content">
-                            <h6 class="title"><a href="#0">SANDRA RILEY</a></h6>
-                            <span class="details">TEACHER</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="instructor-item">
-                        <div class="instructor-thumb">
-                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/02.png') }}"
-                                    alt="instructor"></a>
-                        </div>
-                        <div class="instructor-content">
-                            <h6 class="title"><a href="#0">Alison Bekar</a></h6>
-                            <span class="details">TEACHER</span>
+                @foreach ($faculties ?? [] as $faculty)
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="instructor-item">
+                            <div class="instructor-thumb">
+                                <a href="{{ route('faculty', [$faculty]) }}"><img src="{{ $faculty->avatarUrl() }}"
+                                        alt="instructor"></a>
+                            </div>
+                            <div class="instructor-content">
+                                <h6 class="title"><a href="{{ route('faculty', [$faculty]) }}">{{ $faculty?->title }}</a></h6>
+                                <span class="details">{{ strtoupper($faculty?->subtitle) }}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="instructor-item">
-                        <div class="instructor-thumb">
-                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/03.png') }}"
-                                    alt="instructor"></a>
-                        </div>
-                        <div class="instructor-content">
-                            <h6 class="title"><a href="#0">Frank Armany</a></h6>
-                            <span class="details">TEACHER</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="instructor-item">
-                        <div class="instructor-thumb">
-                            <a href="#0"><img src="{{ asset('assets/frontend/images/instructor/04.png') }}"
-                                    alt="instructor"></a>
-                        </div>
-                        <div class="instructor-content">
-                            <h6 class="title"><a href="#0">Manuel Nuer</a></h6>
-                            <span class="details">TEACHER</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+               
             </div>
         </div>
     </section>

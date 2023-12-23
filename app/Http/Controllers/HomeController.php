@@ -20,9 +20,15 @@ class HomeController extends Controller
     }
     public function home()
     {
-        $courses = Course::where('popular', true)->limit(3)->get();
+        $courses = Course::where('popular', true)
+            ->withMax('variations', 'sale_price_download')
+            ->withMin('variations', 'sale_price_download')
+            ->withMax('variations', 'sale_price_pendrive')
+            ->withMin('variations', 'sale_price_pendrive')
+            ->limit(3)
+            ->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();
-        $faculties = Faculty::select(['id','avatar', 'title', 'subtitle',])->limit(8)->get();
+        $faculties = Faculty::select(['id', 'avatar', 'title', 'subtitle',])->limit(8)->get();
         return view('home')->with('courses', $courses)
             ->with('testimonials', $testimonials)
             ->with('faculties', $faculties);
@@ -35,8 +41,11 @@ class HomeController extends Controller
 
     public function about()
     {
+        $faculties = Faculty::select(['id', 'avatar', 'title', 'subtitle',])->limit(4)->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->get();
-        return view('about')->with('testimonials', $testimonials);
+        return view('about')
+            ->with('testimonials', $testimonials)
+            ->with('faculties', $faculties);
     }
 
     public function page(Page $page)
