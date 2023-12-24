@@ -36,10 +36,10 @@
     <x-alertt-alert />
     <div class="all-sections">
         <!-- ~~~ Loader & Go-Top ~~~ -->
-        <div class="overlayer"></div>
-        <div class="loader">
+        {{-- <div class="overlayer"></div> --}}
+        {{-- <div class="loader">
             <div class="inner"></div>
-        </div>
+        </div> --}}
         <span class="go-top">
             <i class="fas fa-angle-up"></i>
         </span>
@@ -359,11 +359,8 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a
-                                                href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
-                                                {{ setting('general_settings')?->option_value['support_phone'] ??
-                                                    '+91
-                                                                                                                                                                                                                                                                                                9638-9638-9638' }}
+                                            <a href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
+                                                {{ setting('general_settings')?->option_value['support_phone'] ?? '+91 9638-9638-9638' }}
                                             </a>
                                         </div>
                                     </li>
@@ -372,8 +369,7 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a
-                                                href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
+                                            <a href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
                                                 {{ setting('general_settings')?->option_value['support_email'] ?? 'info@example.com' }}
                                             </a>
                                         </div>

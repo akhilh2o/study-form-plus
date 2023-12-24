@@ -941,6 +941,22 @@ blockquote::before,
     padding-bottom: 80px;
 }
 
+.pt-100 {
+    padding-top: 60px;
+}
+
+.pb-100 {
+    padding-bottom: 60px;
+}
+
+.pt-40 {
+    padding-top: 40px;
+}
+
+.pb-40 {
+    padding-bottom: 40px;
+}
+
 @media (min-width: 1200px) {
     .pl-xl-10 {
         padding-left: 10px;
@@ -958,6 +974,20 @@ blockquote::before,
 
     .pb-120 {
         padding-bottom: 120px;
+    }
+    .pt-100 {
+        padding-top: 100px;
+    }
+
+    .pb-100 {
+        padding-bottom: 100px;
+    }
+    .pt-40 {
+        padding-top: 40px;
+    }
+
+    .pb-40 {
+        padding-bottom: 40px;
     }
 }
 /*Section Header*/
@@ -1027,7 +1057,7 @@ blockquote::before,
 }
 
 .section-header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
 }
 
@@ -1054,7 +1084,7 @@ blockquote::before,
 }
 
 .section-header .title {
-    margin-bottom: 26px;
+    margin-bottom: 16px;
     text-transform: capitalize;
 }
 
@@ -1072,7 +1102,7 @@ blockquote::before,
 
 @media (min-width: 576px) {
     .section-header {
-        margin-bottom: 35px;
+        margin-bottom: 25px;
     }
 }
 
@@ -2649,7 +2679,7 @@ header.active {
 /*Banner Section*/
 .custom-container {
     padding: 0 15px;
-    max-width: 1780px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -2660,24 +2690,24 @@ header.active {
 }
 
 .banner-section {
-    padding: 130px 0;
+    padding: 80px 0;
 }
 
 @media (min-width: 576px) {
     .banner-section {
-        padding: 170px 0 160px;
+        padding: 90px 0 90px;
     }
 }
 
 @media (min-width: 992px) {
     .banner-section {
-        padding: 200px 0;
+        padding: 90px 0;
     }
 }
 
 @media screen and (min-width: 1531px) {
     .banner-section {
-        padding: 265px 0 205px;
+        padding: 80px 0 85px;
     }
 }
 
@@ -2806,6 +2836,7 @@ header.active {
 
 .banner-thumb img {
     position: relative;
+    max-width: 540px;
 }
 
 .banner-thumb .rounded-shape {
@@ -2848,7 +2879,7 @@ header.active {
     }
 
     .banner-thumb img {
-        max-width: 700px;
+        max-width: 440px;
     }
 
     .banner-thumb .rounded-shape.shape-1 {
@@ -2873,7 +2904,7 @@ header.active {
     }
 
     .banner-thumb img {
-        max-width: 650px;
+        max-width: 340px;
     }
 }
 

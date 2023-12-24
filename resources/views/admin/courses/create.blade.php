@@ -172,8 +172,8 @@
                                         <th>#</th>
                                         <th>Exam Attempt <span class="text-danger">*</span></th>
                                         <th>Net Price (Download)</th>
-                                        <th>Net Price (Pendrive)</th>
                                         <th>Sale Price (Download)</th>
+                                        <th>Net Price (Pendrive)</th>
                                         <th>Sale Price (Pendrive)</th>
                                         <th>Action</th>
                                     </tr>
@@ -199,7 +199,8 @@
                                                     <span class="input-group-text"><i
                                                             class="fas fa-rupee-sign"></i></span>
                                                     <input type="text" class="form-control"
-                                                        x-model="field.net_price_pendrive" name="net_price_pendrive[]"
+                                                        x-model="field.sale_price_download"
+                                                        name="sale_price_download[]"
                                                         aria-label="Amount (to the nearest amount)">
                                                     <span class="input-group-text">.00</span>
                                                 </div>
@@ -209,8 +210,7 @@
                                                     <span class="input-group-text"><i
                                                             class="fas fa-rupee-sign"></i></span>
                                                     <input type="text" class="form-control"
-                                                        x-model="field.sale_price_download"
-                                                        name="sale_price_download[]"
+                                                        x-model="field.net_price_pendrive" name="net_price_pendrive[]"
                                                         aria-label="Amount (to the nearest amount)">
                                                     <span class="input-group-text">.00</span>
                                                 </div>

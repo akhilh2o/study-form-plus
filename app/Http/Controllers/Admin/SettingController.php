@@ -26,10 +26,12 @@ class SettingController extends Controller
             // banner section
             'banner_heading'        => $request->input('banner_heading'),
             'banner_subheading'     => $request->input('banner_subheading'),
+            'banner_description'    => $request->input('banner_description'),
             'banner_action_name1'   => $request->input('banner_action_name1'),
             'banner_action_name2'   => $request->input('banner_action_name2'),
             'banner_action_url1'    => $request->input('banner_action_url1'),
             'banner_action_url2'    => $request->input('banner_action_url2'),
+            'banner_text'           => $request->input('banner_text'),
 
 
             'meta_title'            => $request->input('meta_title'),

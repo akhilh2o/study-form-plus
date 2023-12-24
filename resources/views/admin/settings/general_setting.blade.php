@@ -93,7 +93,7 @@
 
                 <div class="row">
                     <h3 class="my-3">Banner Setting</h3>
-                    <div class="col-sm-12">
+                    {{-- <div class="col-sm-12">
                         <div class="d-flex">
                             @if(!empty($setting_value['banner']))
                             <div class="mr-3">
@@ -125,6 +125,14 @@
                         </div>
                     </div>
 
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <input type="text" class="form-control" name="banner_description" placeholder="Banner Description"
+                                value="{{ $setting_value['banner_description'] ?? '' }}">
+                        </div>
+                    </div>
+
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="">Action Button 1</label>
@@ -153,8 +161,14 @@
                             <input type="url" class="form-control" name="banner_action_url2" placeholder="Full URL"
                                 value="{{ $setting_value['banner_action_url2'] ?? '' }}">
                         </div>
+                    </div> --}}
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Banner Text</label>
+                            <input type="text" class="form-control" name="banner_text" placeholder="Banner Text"
+                                value="{{ $setting_value['banner_text'] ?? '' }}">
+                        </div>
                     </div>
-
                 </div>
 
             </div>

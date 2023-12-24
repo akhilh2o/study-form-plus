@@ -22,16 +22,45 @@
         </div>
     </section>
     <!-- ~~~ Banner Section ~~~ -->
-    <section class="notice-section pt-20 pb-20 justify" style="background-color: red;">
-        <div class="container text-center">
-            <h6 class="text-white my-0">
-                NEED ASSISTANCE IN BUYING/ ORDERING? CALL 91XXXXXXXXX, 93XXXXXXXX NOW [Office Timing 10AM to 7PM]
-            </h6>
+    @if (setting('general_settings')?->option_value['banner_text'])
+        <section class="notice-section pt-10 pb-9 justify" style="background-color: red;">
+            <div class="container text-center">
+                <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+                    <h6 class="text-white my-0">
+                        {{-- NEED ASSISTANCE IN BUYING/ ORDERING? CALL 91XXXXXXXXX, 93XXXXXXXX NOW [Office Timing 10AM to 7PM] --}}
+                        {{ setting('general_settings')?->option_value['banner_text'] }}
+                    </h6>
+                </marquee>
+            </div>
+        </section>
+    @endif
+
+       <!-- ~~~ Course Section ~~~ -->
+       <section class="course-section pt-40 pb-40 section-bg oh pos-rel">
+        <div class="course-top-shape">
+            <img src="{{ asset('assets/frontend/images/course/course-top-shape.png') }}" alt="course">
+        </div>
+        <div class="course-bottom-shape">
+            <img src="{{ asset('assets/frontend/images/course/course-bottom-shape.png') }}" alt="course">
+        </div>
+        <div class="container">
+            <div class="section-header">
+                {{-- <span class="category">TOP COURSES</span> --}}
+                <h2 class="title"><span>Featured</span> Online Courses</h2>
+            </div>
+            <div class="row justify-content-center mb-30-none">
+                @foreach ($courses ?? [] as $course)
+                    <div class="col-xl-4 col-md-6 col-sm-10">
+                        <x-product-card :product="$course" />
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
+    <!-- ~~~ Course Section ~~~ -->
 
     <!-- ~~~ Feature Section ~~~ -->
-    <section class="feature-section pt-120 pb-120">
+    <section class="feature-section pt-100 pb-100">
         <div class="container">
             <div class="section-header">
                 {{-- <span class="category">Features</span> --}}
@@ -95,29 +124,7 @@
     </section>
     <!-- ~~~ Feature Section ~~~ -->
 
-    <!-- ~~~ Course Section ~~~ -->
-    <section class="course-section pt-120 pb-120 section-bg oh pos-rel">
-        <div class="course-top-shape">
-            <img src="{{ asset('assets/frontend/images/course/course-top-shape.png') }}" alt="course">
-        </div>
-        <div class="course-bottom-shape">
-            <img src="{{ asset('assets/frontend/images/course/course-bottom-shape.png') }}" alt="course">
-        </div>
-        <div class="container">
-            <div class="section-header">
-                <span class="category">TOP COURSES</span>
-                <h2 class="title"><span>Featured</span> Online Courses</h2>
-            </div>
-            <div class="row justify-content-center mb-30-none">
-                @foreach ($courses ?? [] as $course)
-                    <div class="col-xl-4 col-md-6 col-sm-10">
-                        <x-product-card :product="$course" />
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <!-- ~~~ Course Section ~~~ -->
+ 
 
     <!-- ~~~ Counter Section ~~~ -->
     <section class="counter-section pt-120 pb-120 title-lay bg_img"
@@ -193,10 +200,10 @@
     <!-- ~~~ Counter Section ~~~ -->
 
     <!-- ~~~ Instructor Section ~~~ -->
-    <section class="instructor-section pt-120 pb-120 gradient-bg">
+    <section class="instructor-section pt-40 pb-40 gradient-bg">
         <div class="container">
             <div class="section-header">
-                <span class="category">our faculties</span>
+                {{-- <span class="category">our faculties</span> --}}
                 <h2 class="title"><span>Awesome </span>faculties</h2>
             </div>
             <div class="row g-3 justify-content-center mb-30-none">
@@ -211,7 +218,7 @@
     <!-- ~~~ Instructor Section ~~~ -->
 
     <!-- ~~~ Testimonial Section ~~~ -->
-    <section class="testimonial-section pt-120 pb-120">
+    <section class="testimonial-section pt-100 pb-100">
         <div class="container">
             <div class="slider-header">
                 <div class="section-header left-style">

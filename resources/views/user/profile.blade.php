@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-breadcrumb title="Profile" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Profile']]" />
 
-    <section class="carts pt-120 pb-120">
+    <section class="carts pt-40 pb-120">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

@@ -2,11 +2,8 @@
     <x-breadcrumb title="About Us" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'About Us']]" />
 
 
-
-
-
     <!-- ~~~ About Section ~~~ -->
-    <section class="about-section">
+    <section class="about-section pt-40 pb-100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 align-self-end d-none d-lg-block">

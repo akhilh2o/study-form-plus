@@ -3,7 +3,7 @@
 
 
     <!-- ~~~ Contact Section ~~~ -->
-    <section class="contact-section pt-120 pb-50">
+    <section class="contact-section pt-50 pb-50">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-6 col-xl-5">

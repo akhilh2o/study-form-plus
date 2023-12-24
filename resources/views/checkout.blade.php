@@ -2,7 +2,7 @@
     <x-breadcrumb title="Checkout"
         :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Carts', 'url' => route('carts.index')], ['text' => 'Checkout']]" />
 
-    <section class="carts pt-120 pb-120">
+    <section class="carts pt-50 pb-120">
         <div class="container">
             <form action="{{ route('checkout.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

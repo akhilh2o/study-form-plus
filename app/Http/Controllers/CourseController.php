@@ -45,11 +45,13 @@ class CourseController extends Controller
     public function detail(Course $course, Request $request)
     {
         $course->load('variations');
+        $course->load('category');
         if ($request->attempt) {
             $attempt = $request->attempt;
         } else {
             $attempt = $course?->variations?->first()?->exam_attempt;
         }
+        // return $course;
         return view('course')->with('course', $course)->with('attempt', $attempt);
     }
 

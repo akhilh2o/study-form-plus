@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-breadcrumb title="Carts" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Carts']]" />
 
-    <section class="carts pt-120 pb-120">
+    <section class="carts pt-40 pb-120">
         <div class="container">
             @if (session('cart'))
                 @php $total = 0 @endphp

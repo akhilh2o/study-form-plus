@@ -7,11 +7,11 @@
     <x-breadcrumb :title="$course?->title" :links="[
         ['text' => 'Home', 'url' => route('home')],
         ['text' => 'Courses', 'url' => route('courses')],
-        ['text' => $course?->title],
+        // ['text' => $course?->title],
     ]" />
 
     <!-- ~~~ Course Section ~~~ -->
-    <section class="course-details-section pt-120 pb-120">
+    <section class="course-details-section pt-50 pb-120">
         <div class="container">
             <form action="{{ route('carts.add', $course->id) }}" method="GET" enctype="multipart/form-data">
                 @csrf
@@ -20,8 +20,19 @@
                         <img src="{{ $course->thumb() }}" alt="thumbnail" class="rounded w-100">
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h4 class="title mb-4">{{ $course?->title }}</h4>
-                        <h6 class="mb-4">{{ $course?->sub_title }}</h6>
+                        <h4 class="title mb-3">{{ $course?->title }}</h4>
+                        <p class="mb-3">{{ $course?->category?->name }}</p>
+                        <div class="row mb-3 gap-2">
+                            <div class="col-12 col-md-9">
+                                <p class="d-flex gap-1 align-content-center">
+                                    <strong>By:</strong> 
+                                    <a href="javasvcript:void(0)">{{ $course?->faculties }}</a>
+                                </p>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <a href="#demovideo">View Demo <span><i class="fa fa-arrow-down"></i></span> </a>
+                            </div>
+                        </div>
                         @if ($course->order_type_download)
                             <p class="lead">
                                 <strong>Download Price: </strong>
@@ -161,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" id="demovideo">
                     <div class="col-12 mt-4">
                         <div class="card">
                             <div class="card-header">

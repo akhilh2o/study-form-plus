@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-breadcrumb title="Faculties" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Faculties']]" />
     <!-- ~~~ faculties Section ~~~ -->
-    <section class="course-section pt-120 pb-120">
+    <section class="course-section pt-50 pb-120">
         <div class="container">
             <div class="row g-3 justify-content-center mb-30-none">
                 @foreach ($faculties ?? [] as $faculty)

@@ -6,7 +6,7 @@
     <x-breadcrumb title="Courses" :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Courses']]" />
 
     <!-- ~~~ Course Section ~~~ -->
-    <section class="course-section pt-120 pb-120">
+    <section class="course-section pt-50 pb-120">
         <div class="container">
             <div class="row align-items-center section-header">
                 <div class="col-lg-7">

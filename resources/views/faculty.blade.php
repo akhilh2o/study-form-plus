@@ -6,7 +6,7 @@
     ]" />
 
     <!-- ~~~ Faculty Section ~~~ -->
-    <section class="course-details-section pt-120 pb-120">
+    <section class="course-details-section pt-50 pb-120">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

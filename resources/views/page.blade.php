@@ -3,7 +3,7 @@
 
 
     <!-- ~~~ Blog Section ~~~ -->
-    <div class="blog-section pt-120 pb-120">
+    <div class="blog-section pt-50 pb-120">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
