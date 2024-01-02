@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group flex-fill">
                                     <label for="">Thumbnail</label>
-                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image">
+                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image" accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -298,13 +298,13 @@
             }
         </script>
         <script>
-            var previewImg = {
+            /* var previewImg = {
                 width: '70px',
                 height: '70px',
                 rounded: '50px',
                 targetId: 'cover-image-preview'
             };
-            imageCropper('crop-cover-image', 16 / 9, previewImg);
+            imageCropper('crop-cover-image', 16 / 9, previewImg); */
 
 
             tinymce.init({
