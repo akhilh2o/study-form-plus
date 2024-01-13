@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group flex-fill">
                                     <label for="">Thumbnail</label>
-                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image">
+                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image" accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -75,20 +75,7 @@
                                     class="form-control" value="{{ old('doubt_solving_faculties') }}" required>
                             </div>
                         </div>
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="net_price">Net Price <span class="text-danger">*</span></label>
-                                <input type="number" name="net_price" class="form-control"
-                                    value="{{ old('net_price') }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="sale_price">Sale Price <span class="text-danger">*</span></label>
-                                <input type="number" name="sale_price" class="form-control"
-                                    value="{{ old('sale_price') }}" required>
-                            </div>
-                        </div> --}}
+
                         <div class="col-md-3">
                             <label for="">Language <span class="text-danger">*</span></label>
                             <select name="language" class="form-control select2" required>
@@ -308,12 +295,12 @@
             }
         </script>
         <script>
-            var previewImg = {
+            /* var previewImg = {
                 width: '70px',
                 height: '70px',
                 targetId: 'cover-image-preview'
             };
-            imageCropper('crop-cover-image', 6 / 5, previewImg);
+            imageCropper('crop-cover-image', 6 / 5, previewImg); */
 
             tinymce.init({
                 toolbar: 'fontselect fontsizeselect | bold italic underline strikethrough | aligncenter alignjustify alignleft alignright | indent outdent |  table forecolor backcolor image code',
