@@ -16,8 +16,12 @@ class AppLayout extends Component
     public function __construct()
     {
         $this->pages = Page::orderBy('title', 'ASC')->get();
-        $this->categories = Category::where('parent_id', 0)
-            ->orderBy('name', 'ASC')->get();
+        $this->categories = Category::query()
+            ->with('children')
+            ->where('parent_id', 0)
+            ->orderBy('name', 'ASC')
+            ->get();
+
         $this->ebookCategories = EbookCategory::where('parent_id', 0)
             ->orderBy('name', 'ASC')
             ->get();

@@ -86,156 +86,204 @@
                             @endif
                         </a>
                     </div>
-                    <button class="navbar-toggler navbar-togglerBtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                      <i class="fas fa-bars"></i>
+                    <button class="navbar-toggler navbar-togglerBtn" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavbar">
+                        <i class="fas fa-bars"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="menu d-lg-flex flex-wrap">
-                        <li>
-                            <a href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                Courses
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('courses') }}">
-                                        All Courses
-                                    </a>
-                                </li>
-                                @foreach ($categories as $category)
+                        <ul class="menu d-lg-flex flex-wrap">
+                            <li>
+                                <a href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown">
+                                    Courses
+                                </a>
+                                <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item"
-                                            href="{{ route('courses', ['category' => $category->slug]) }}">
-                                            {{ $category->name }}
+                                        <a class="dropdown-item" href="{{ route('courses') }}">
+                                            All Courses
                                         </a>
                                     </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                E-Books
-                            </a>
-                            <ul class="dropdown-menu">
-                                @foreach ($ebookCategories ?? [] as $category)
-                                    <li class="nav-item dropdown">
-                                        <a class="dropdown-item nav-link dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown">
-                                            {{ $category->name }}
-                                        </a>
-                                        @if ($category->children)
-                                            <ul class="dropdown-submenu">
-                                                @foreach ($category->children ?? [] as $childrens)
-                                                    <li class="nav-item dropdown">
-                                                        <a class="dropdown-item nav-link dropdown-toggle"
-                                                            href="{{ route('ebooks.category', ['parent'=>$category, 'child'=>$childrens]) }}"
-                                                            role="button" data-bs-toggle="dropdown">
-                                                            {{ $childrens->name }}
-                                                        </a>
-                                                        @if ($childrens->children)
-                                                            <ul class="dropdown-submenu">
-                                                                @foreach ($childrens->children ?? [] as $child)
-                                                                    <li class="nav-item">
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ route('ebooks.detail',[$child->slug]) }}">
-                                                                            {{ $child->name }}
-                                                                        </a>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{ route('faculties') }}">Faculties</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('about') }}">About Us</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('contact') }}">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown">
-                                {{ auth()->check() ? auth()->user()->name : 'My Account' }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                @guest
-                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                                @else
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('user.dashboard') }}">
-                                            Dashboard
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('user.profile') }}">
-                                            Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('wishlists.index') }}">
-                                            Wishlist
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('user.orders') }}">
-                                            Orders
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('user.password') }}">
-                                            Change Password
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('login') }}"
-                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                    </li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
-                                @endguest
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="menu d-lg-flex flex-wrap ms-auto">
-                        <li class="wishlist me-3">
-                            <a href="{{ route('wishlists.index') }}">
-                                <i class="fas fa-heart"></i> Wishlist
-                                <span class="badge bg-dark rounded-pill">
-                                     @if(auth()->check())
-                                        {{ auth()->user()?->wishlists->count() }}
-                                    @else
-                                    0
-                                    @endif
-                                </span>
-                            </a>
-                        </li>
-                        <li class="cart">
-                            <a href="{{ route('carts.index') }}">
-                                <i class="fas fa-shopping-cart"></i> Cart
-                                <span class="badge bg-dark rounded-pill">
-                                    {{ collect(session('cart', []))->count() }}
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
+                                    @foreach ($categories as $category)
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item nav-link dropdown-toggle" href="{{ route('courses', ['category' => $category->slug]) }}"
+                                                role="button" data-bs-toggle="{{ $category->children->count() ? 'dropdown' : '' }}">
+                                                {{ $category->name }}
+                                            </a>
+                                            @if ($category->children->count())
+                                                <ul class="dropdown-submenu">
+                                                    @foreach ($category->children ?? [] as $childrens)
+                                                        <li class="nav-item dropdown">
+                                                            <a class="dropdown-item nav-link dropdown-toggle"
+                                                                href="{{ route('courses', ['category' => $childrens->slug]) }}"
+                                                                role="button" data-bs-toggle="{{ $childrens->children->count() ? 'dropdown' : '' }}">
+                                                                {{ $childrens->name }}
+                                                            </a>
+                                                            @if ($childrens->children->count())
+                                                                <ul class="dropdown-submenu">
+                                                                    @foreach ($childrens->children ?? [] as $child)
+                                                                        <li class="nav-item">
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('courses', ['category' => $child->slug]) }}">
+                                                                                {{ $child->name }}
+                                                                            </a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
 
-                </div>
+                                        {{-- <li class="{{ $category->children->count() ? 'dropdown' : '' }}">
+                                            <a class="dropdown-item "
+                                                href="{{ route('courses', ['category' => $category->slug]) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                            @if ($category->children->count())
+                                                <ul class="dropdown-submenu">
+                                                    @foreach ($category->children ?? [] as $child)
+                                                        <li class="nav-item dropdown">
+                                                            <a class="dropdown-item nav-link dropdown-toggle"
+                                                                href="{{ route('courses', ['category' => $child->slug]) }}"
+                                                                role="button" data-bs-toggle="dropdown">
+                                                                {{ $category->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li> --}}
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown">
+                                    E-Books
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach ($ebookCategories ?? [] as $category)
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item nav-link dropdown-toggle" href="#"
+                                                role="button" data-bs-toggle="dropdown">
+                                                {{ $category->name }}
+                                            </a>
+                                            @if ($category->children)
+                                                <ul class="dropdown-submenu">
+                                                    @foreach ($category->children ?? [] as $childrens)
+                                                        <li class="nav-item dropdown">
+                                                            <a class="dropdown-item nav-link dropdown-toggle"
+                                                                href="{{ route('ebooks.category', ['parent' => $category, 'child' => $childrens]) }}"
+                                                                role="button" data-bs-toggle="dropdown">
+                                                                {{ $childrens->name }}
+                                                            </a>
+                                                            @if ($childrens->children)
+                                                                <ul class="dropdown-submenu">
+                                                                    @foreach ($childrens->children ?? [] as $child)
+                                                                        <li class="nav-item">
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('ebooks.detail', [$child->slug]) }}">
+                                                                                {{ $child->name }}
+                                                                            </a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{{ route('faculties') }}">Faculties</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('about') }}">About Us</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('contact') }}">Contact</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown">
+                                    {{ auth()->check() ? auth()->user()->name : 'My Account' }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @guest
+                                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                    @else
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.dashboard') }}">
+                                                Dashboard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.profile') }}">
+                                                Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('wishlists.index') }}">
+                                                Wishlist
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.orders') }}">
+                                                Orders
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.password') }}">
+                                                Change Password
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('login') }}"
+                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+                                        </li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @endguest
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="menu d-lg-flex flex-wrap ms-auto">
+                            <li class="wishlist me-3">
+                                <a href="{{ route('wishlists.index') }}">
+                                    <i class="fas fa-heart"></i> Wishlist
+                                    <span class="badge bg-dark rounded-pill">
+                                        @if (auth()->check())
+                                            {{ auth()->user()?->wishlists->count() }}
+                                        @else
+                                            0
+                                        @endif
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="cart">
+                                <a href="{{ route('carts.index') }}">
+                                    <i class="fas fa-shopping-cart"></i> Cart
+                                    <span class="badge bg-dark rounded-pill">
+                                        {{ collect(session('cart', []))->count() }}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
 
                 </div>
             </div>
@@ -300,8 +348,12 @@
                         <div class="col-md-12 col-sm-10">
                             <div class="footer-support-item">
                                 <div class="content title">
-                                    <h5 class="title"><center>Experienced Faculties, Daily Doubt sessions, Ready to counsel any enquiry, supportive technical team and empowering staff is which differentiate</center></h5>
-                   
+                                    <h5 class="title">
+                                        <center>Experienced Faculties, Daily Doubt sessions, Ready to counsel any
+                                            enquiry, supportive technical team and empowering staff is which
+                                            differentiate</center>
+                                    </h5>
+
                                 </div>
                             </div>
                         </div>
@@ -370,7 +422,8 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
+                                            <a
+                                                href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
                                                 {{ setting('general_settings')?->option_value['support_phone'] ?? '+91 9638-9638-9638' }}
                                             </a>
                                         </div>
@@ -380,7 +433,8 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
+                                            <a
+                                                href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
                                                 {{ setting('general_settings')?->option_value['support_email'] ?? 'info@example.com' }}
                                             </a>
                                         </div>
