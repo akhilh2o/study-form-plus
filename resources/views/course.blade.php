@@ -23,19 +23,19 @@
                         <h4 class="title mb-3">{{ $course?->title }}</h4>
                         <p class="mb-3">{{ $course?->category?->name }}</p>
                         <div class="row mb-3 gap-2">
-                            <div class="col-12 col-md-9">
+                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 col-xxl-9">
                                 <p class="d-flex gap-1 align-content-center">
                                     <strong>By:</strong> 
                                     <a href="javasvcript:void(0)">{{ $course?->faculties }}</a>
                                 </p>
                             </div>
-                            <div class="col-12 col-md-2">
+                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
                                 <a href="#demovideo">View Demo <span><i class="fa fa-arrow-down"></i></span> </a>
                             </div>
                         </div>
                         @if ($course->order_type_download)
                             <p class="lead">
-                                <strong>Download Price: </strong>
+                                <i class="fas fa-download me-2"></i><strong>Download Price: </strong>
                                 <del>{!! currencySymbol() !!} {{ $course?->netPriceForDownload($attempt) }}</del>
                                 <span class="text-danger">{!! currencySymbol() !!}
                                     {{ $course?->salePriceForDownload($attempt) }}</span>
@@ -45,7 +45,7 @@
                         @endif
                         @if ($course->order_type_pendrive)
                             <p class="lead">
-                                <strong>Pendrive Price: </strong>
+                                <i class="fas fa-hdd me-2"></i><strong>Pendrive Price: </strong>
                                 <del>{!! currencySymbol() !!} {{ $course?->netPriceForPendrive($attempt) }}</del>
                                 <span class="text-danger">{!! currencySymbol() !!}
                                     {{ $course?->salePriceForPendrive($attempt) }}</span>
@@ -78,14 +78,16 @@
                         </div>
                         <div class="d-grid gap-2 d-md-block">
                             <button type="submit"
-                                class="btn btn-block px-3 rounded-pill {{ auth()->user()?->wishlists?->pluck('id')?->contains($course->id)? 'btn-danger': 'btn-secondary text-white' }}"
+                                class="btn btn-block px-3 wishlistsBtn rounded-pill {{ auth()->user()?->wishlists?->pluck('id')?->contains($course->id)? 'btn-danger': 'btn-secondary text-white' }}"
                                 style="height:auto" name="submit" value="wishlist">
-                                <i class="fas fa-heart text-white"></i> Add to wishlist
+                                <i class="fas fa-heart text-white"></i> 
+                                <!-- Add to wishlist -->
                             </button>
                             <button type="submit" class="btn btn-dark px-3 rounded-pill" style="height:auto"
                                 name="submit" value="add-to-cart">
                                 <i class="fas fa-shopping-cart"></i> Add to cart
                             </button>
+                            <a href="#" class="btn btn-success buyNowBtn"><i class="fas fa-shopping-bag me-2"></i>Buy now</a>
                         </div>
                     </div>
                 </div>
