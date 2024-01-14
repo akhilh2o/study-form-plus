@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Faculty;
 use Takshak\Adash\Models\Page;
@@ -29,8 +30,10 @@ class HomeController extends Controller
             ->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();
         $faculties = Faculty::select(['id', 'avatar', 'title', 'subtitle',])->limit(8)->get();
+        $categories = Category::where('parent_id', 0)->with(['children:id,parent_id,name'])->orderBy('name', 'ASC')->get();
         return view('home')->with('courses', $courses)
             ->with('testimonials', $testimonials)
+            ->with('categories', $categories)
             ->with('faculties', $faculties);
     }
 

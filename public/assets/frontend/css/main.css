@@ -2517,6 +2517,9 @@ header.active {
     .header-area .menu li a {
         font-size: 14px;
     }
+    
+
+
 }
 
 @media screen and (max-width: 1365px) {
@@ -2686,6 +2689,9 @@ header.active {
 @media (min-width: 768px) {
     .custom-container {
         padding: 0 30px;
+    }
+    .header-area .menu li .dropdown-item::after {
+       transform: rotate(270deg);
     }
 }
 
@@ -3522,6 +3528,7 @@ div[class*="col"]:nth-of-type(4n + 4) .feature-item:hover .content .shape {
     .odo-item .odo-in .odo-head .title {
         font-size: 60px;
     }
+    .menu li a { padding: 7px 6px !important; }
 }
 
 .odo-area {
@@ -4601,6 +4608,8 @@ div[class*="col"]:nth-of-type(4n + 4) .feature-item:hover .content .shape {
     .about-thumb img {
         max-width: 650px;
     }
+    .header-area .menu li a {
+    font-size: 14px;}
 }
 
 .hero-thumb {
@@ -6630,7 +6639,7 @@ header .dropdown .dropdown-menu {
     display: none;
     max-width: 70vh;
     padding: 0.5rem 0;
-    margin: 0;
+/*    margin: 0;*/
     font-size: 1rem;
     color: #212529;
     text-align: left;
@@ -6638,5 +6647,92 @@ header .dropdown .dropdown-menu {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.15);
-    border-radius: 0.25rem;
+    border-radius: 0.25rem;    
+    min-width: 210px; top:0px;
+    right: -209px;
 }
+
+.navbar-togglerBtn {     background: #eee;
+    font-size: 24px;
+    height: auto;
+    padding: 10px 14px; }
+
+
+@media(max-width:991px) {
+    .header-area .navbar-collapse { position: fixed; z-index: 10; background: #fff; left: 0px; right: 0px; top: 128px; bottom: 0px; }
+    header.active .header-area .navbar-collapse { top:93px }
+    .menu li { border-bottom: 1px solid #eee; }
+    .header-area .dropdown .dropdown-menu { position: relative; border-radius: 0px; padding: 0px; border: none; }
+    .header-area .dropdown .dropdown-menu .dropdown-item { padding: 10px 15px; border-top: 1px solid #eee; font-weight: 400; }
+    .header-area ul li ul li {border: none; padding: 0px;}
+    .header-area .dropdown-item.active, .header-area .dropdown-item:active, .nav-link:focus { background:#ffffff !important; }
+    .dropdown-submenu {
+    position: relative;
+    right: 0px;
+    left: 0px;
+    border: none;
+    padding: 0px 10px 0px 20px;
+    background: none;
+}
+}
+
+
+
+@media (max-width: 767px) {
+    .instructor-section .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .instructor-section .carousel-inner .carousel-item > div:first-child {
+        display: block; width: 100%;
+    }
+}
+
+.instructor-section .carousel-inner .carousel-item.active,
+.instructor-section .carousel-inner .carousel-item-next,
+.instructor-section .carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+    
+    .instructor-section .carousel-inner .carousel-item-end.active,
+    .instructor-section .carousel-inner .carousel-item-next {
+      transform: translateX(25%);
+    }
+
+    .instructor-section .carousel-inner .carousel-item-start.active, 
+    .instructor-section .carousel-inner .carousel-item-prev {
+      transform: translateX(-25%);
+    }
+}
+
+.instructor-section .carousel-inner .carousel-item-end,
+.instructor-section .carousel-inner .carousel-item-start { 
+  transform: translateX(0);
+}
+.instructor-section .carousel-control-prev {   position: absolute;
+    background-color: #ff7700 !IMPORTANT;
+    margin-top: -60px;
+    width: 46px;
+    border-radius: 100%;
+    height: 46px;
+    right: 72px;
+    left: auto; opacity: 1;}
+.instructor-section .carousel-control-next {    position: absolute;
+    background-color: #ff7700 !IMPORTANT;
+    margin-top: -60px;
+    width: 46px;
+    border-radius: 100%; opacity: 1;
+    height: 46px;
+    right: 10px;}
+.instructor-section .carousel-control-next-icon, .instructor-section .carousel-control-prev-icon { width: 20px; }
+.instructor-section .section-header { padding-right: 120px; }
+.buyNowBtn {    border-radius: 100px;
+    padding-right: 20px;
+    text-transform: capitalize;
+    background-color: #2eca7f;
+    border-color: #2eca7f;}
+.wishlistsBtn { width: 38px;
+    text-align: center;
+    padding: 6px 9px 6px 9px !IMPORTANT; }

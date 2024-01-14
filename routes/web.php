@@ -56,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('{course}', [WishlistController::class, 'toggle'])->name('toggle');
     });
 
+    Route::get('buy-now/{course:slug}',[CartController::class,'buyNow'])->name('buy-now');
+
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.store');
 

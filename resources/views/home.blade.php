@@ -35,8 +35,8 @@
         </section>
     @endif
 
-       <!-- ~~~ Course Section ~~~ -->
-       <section class="course-section pt-40 pb-40 section-bg oh pos-rel">
+    <!-- ~~~ Course Section ~~~ -->
+    <section class="course-section pt-40 pb-40 section-bg oh pos-rel">
         <div class="course-top-shape">
             <img src="{{ asset('assets/frontend/images/course/course-top-shape.png') }}" alt="course">
         </div>
@@ -44,8 +44,34 @@
             <img src="{{ asset('assets/frontend/images/course/course-bottom-shape.png') }}" alt="course">
         </div>
         <div class="container">
-            <div class="section-header">
-                {{-- <span class="category">TOP COURSES</span> --}}
+            @foreach ($categories ?? [] as $category)
+            <div class="section-header mt-3">
+                @php
+                    $words = explode(' ', $category->name);
+                    $firstWord = head($words);
+                    $secondWord = count($words) > 1 ? $words[1] : null;
+                    $category_ids = [$category?->id];
+                    foreach ($category['children'] as $key => $child) {
+                        $category_ids[]= $child['id'];
+                    }
+                @endphp
+                <h2 class="title">
+                    <span>{{ $firstWord }}</span>{{ $secondWord ? ' ' . $secondWord : '' }}
+                </h2>
+                {{-- <h2 class="title"><span>Featured</span> Online Courses</h2> --}}
+            </div>
+            
+            <div class="row justify-content-center mb-30-none">
+                @foreach (courseByCategory($category_ids) ?? [] as $course)
+                    <div class="col-xl-4 col-md-6 col-sm-10">
+                        <x-product-card :product="$course" />
+                    </div>
+                @endforeach
+            </div>
+            @endforeach
+
+
+            {{-- <div class="section-header">
                 <h2 class="title"><span>Featured</span> Online Courses</h2>
             </div>
             <div class="row justify-content-center mb-30-none">
@@ -54,7 +80,7 @@
                         <x-product-card :product="$course" />
                     </div>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
     </section>
     <!-- ~~~ Course Section ~~~ -->
@@ -124,7 +150,7 @@
     </section>
     <!-- ~~~ Feature Section ~~~ -->
 
- 
+
 
     <!-- ~~~ Counter Section ~~~ -->
     <section class="counter-section pt-120 pb-120 title-lay bg_img"
@@ -200,10 +226,10 @@
     <!-- ~~~ Counter Section ~~~ -->
 
     <!-- ~~~ Instructor Section ~~~ -->
-    <section class="instructor-section pt-40 pb-40 gradient-bg">
+    {{-- <section class="instructor-section pt-40 pb-40 gradient-bg">
         <div class="container">
             <div class="section-header">
-                {{-- <span class="category">our faculties</span> --}}
+                <span class="category">our faculties</span>
                 <h2 class="title"><span>Awesome </span>faculties</h2>
             </div>
             <div class="row g-3 justify-content-center mb-30-none">
@@ -212,6 +238,44 @@
                         <x-faculty-card :faculty="$faculty" />
                     </div>
                 @endforeach
+            </div>
+        </div>
+    </section> --}}
+
+    <section class="instructor-section pt-40 pb-40 gradient-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="title"><span>Awesome </span>faculties</h2>
+            </div>
+            <div class="row mx-auto my-auto justify-content-center">
+                <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        @foreach ($faculties ?? [] as $key => $faculty)
+                            <div class="carousel-item @if ($key == 0) active @endif">
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <a href="{{ route('faculty', [$faculty]) }}"
+                                            class="d-block fw-bold fs-5 mb-1">
+                                            <img class="card-img-top" src="{{ $faculty->avatarUrl() }}"
+                                                alt="Card image">
+                                            <div class="card-body lh-1">
+                                                {{ $faculty?->title }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -265,3 +329,21 @@
     </section>
     <!-- ~~~ Testimonial Section ~~~ -->
 </x-app-layout>
+<script type="text/javascript">
+    let items = document.querySelectorAll('.carousel .carousel-item')
+
+    items.forEach((el) => {
+        const minPerSlide = 4
+        let next = el.nextElementSibling
+        for (var i=1; i<minPerSlide; i++) {
+            if (!next) {
+                // wrap carousel by using first child
+                next = items[0]
+            }
+            let cloneChild = next.cloneNode(true)
+            el.appendChild(cloneChild.children[0])
+            next = next.nextElementSibling
+        }
+    })
+
+</script>

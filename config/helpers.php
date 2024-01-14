@@ -3,6 +3,9 @@
 /**
  * write code for getting value of setting
  */
+
+use App\Models\Course;
+
 if (!function_exists('setting')) {
     function setting($type)
     {
@@ -16,5 +19,18 @@ if (!function_exists('currencySymbol')) {
     function currencySymbol()
     {
         return '<i class="fas fa-rupee-sign"></i>';
+    }
+}
+
+if (!function_exists('courseByCategory')) {
+    function courseByCategory($category_ids)
+    {
+        return Course::whereIn('category_id',$category_ids)
+        ->withMax('variations', 'sale_price_download')
+        ->withMin('variations', 'sale_price_download')
+        ->withMax('variations', 'sale_price_pendrive')
+        ->withMin('variations', 'sale_price_pendrive')
+        ->limit(3)
+        ->get();
     }
 }

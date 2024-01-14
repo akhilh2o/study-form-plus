@@ -72,8 +72,10 @@
             </div>
         </div>
         <header>
+
             <div class="container">
-                <div class="header-area">
+
+                <div class="header-area navbar navbar-expand-lg">
                     <div class="logo">
                         <a href="{{ route('home') }}">
                             @if (setting('general_settings')?->option_value['logo'])
@@ -84,7 +86,11 @@
                             @endif
                         </a>
                     </div>
-                    <ul class="menu d-none d-lg-flex flex-wrap">
+                    <button class="navbar-toggler navbar-togglerBtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                      <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="menu d-lg-flex flex-wrap">
                         <li>
                             <a href="{{ route('home') }}">Home</a>
                         </li>
@@ -206,7 +212,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu d-none d-lg-flex flex-wrap">
+                    <ul class="menu d-lg-flex flex-wrap ms-auto">
                         <li class="wishlist me-3">
                             <a href="{{ route('wishlists.index') }}">
                                 <i class="fas fa-heart"></i> Wishlist
@@ -228,8 +234,13 @@
                             </a>
                         </li>
                     </ul>
+
+                </div>
+
                 </div>
             </div>
+
+
         </header>
         <!-- ~~~ Header Section ~~~ -->
 
