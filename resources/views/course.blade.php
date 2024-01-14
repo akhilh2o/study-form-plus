@@ -88,7 +88,6 @@
                                 <i class="fas fa-shopping-cart"></i> Add to cart
                             </button>
                             <button type="submit" name="submit" value="buy-now" class="btn btn-success buyNowBtn" style="height: auto"><i class="fas fa-shopping-bag me-2"></i>Buy now</button>
-                            {{-- <a href="#" class="btn btn-success buyNowBtn"><i class="fas fa-shopping-bag me-2"></i>Buy now</a> --}}
                         </div>
                     </div>
                 </div>
