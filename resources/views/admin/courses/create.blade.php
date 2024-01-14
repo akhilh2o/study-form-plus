@@ -18,7 +18,7 @@
             <form action="{{ route('admin.courses.store') }}" method="POST" class="card shadow-sm"
                 enctype="multipart/form-data">
                 @csrf
-                <div class="card-body">
+                <div class="card-body" x-data="handler()">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -94,9 +94,19 @@
                                 <select name="category_id" class="form-control select2" required>
                                     <option value="">-- Select --</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category?->id }}" @selected(old('category_id') == $category?->id)>
-                                            {{ $category?->name }}
-                                        </option>
+                                        @if ($category?->children->count() > 0)
+                                            <optgroup label="{{ $category?->name }}">
+                                                @foreach ($category?->children as $children)
+                                                    <option value="{{ $children?->id }}" @selected(old('category_id') == $children?->id)>
+                                                        {{ $children?->name }}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option value="{{ $category?->id }}" @selected(old('category_id') == $category?->id)>
+                                                {{ $category?->name }}
+                                            </option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -126,12 +136,12 @@
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="order_type_pendrive" type="checkbox"
-                                        id="order_type_pendrive" value="1" @checked(old('order_type_pendrive'))>
+                                        id="order_type_pendrive" value="1" @checked(old('order_type_pendrive')) x-model="orderTypePendrive">
                                     <label class="form-check-label" for="order_type_pendrive">Pendrive</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="order_type_download" type="checkbox"
-                                        id="order_type_download" value="1" @checked(old('order_type_download'))>
+                                        id="order_type_download" value="1" @checked(old('order_type_download')) x-model="orderTypeDownload">
                                     <label class="form-check-label" for="order_type_download">Download</label>
                                 </div>
                             </div>
@@ -151,17 +161,17 @@
                             </h2>
                         </div>
                     </div>
-                    <div class="row" x-data="handler()">
+                    <div class="row">
                         <div class="col table-responsive">
                             <table class="table table-bordered align-items-center table-lg">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>#</th>
                                         <th>Exam Attempt <span class="text-danger">*</span></th>
-                                        <th>Net Price (Download)</th>
-                                        <th>Sale Price (Download)</th>
-                                        <th>Net Price (Pendrive)</th>
-                                        <th>Sale Price (Pendrive)</th>
+                                        <th x-show="orderTypeDownload">Net Price (Download)</th>
+                                        <th x-show="orderTypeDownload">Sale Price (Download)</th>
+                                        <th x-show="orderTypePendrive">Net Price (Pendrive)</th>
+                                        <th x-show="orderTypePendrive">Sale Price (Pendrive)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -171,7 +181,7 @@
                                             <td x-text="index + 1"></td>
                                             <td><input x-model="field.exam_attempt" type="text"
                                                     name="exam_attempt[]" class="form-control" required></td>
-                                            <td>
+                                            <td x-show="orderTypeDownload">
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-rupee-sign"></i></span>
@@ -181,7 +191,7 @@
                                                     <span class="input-group-text">.00</span>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td x-show="orderTypeDownload">
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-rupee-sign"></i></span>
@@ -192,7 +202,7 @@
                                                     <span class="input-group-text">.00</span>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td x-show="orderTypePendrive">
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-rupee-sign"></i></span>
@@ -202,7 +212,7 @@
                                                     <span class="input-group-text">.00</span>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td x-show="orderTypePendrive">
                                                 <div class="input-group">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-rupee-sign"></i></span>
@@ -213,8 +223,9 @@
                                                     <span class="input-group-text">.00</span>
                                                 </div>
                                             </td>
-                                            <td><button type="button" class="btn btn-danger btn-small"  x-show="index > 0"
-                                                    @click="removeField(index)"><i class="fas fa-times"></i></button></td>
+                                            <td><button type="button" class="btn btn-danger btn-small"
+                                                    x-show="index > 0" @click="removeField(index)"><i
+                                                        class="fas fa-times"></i></button></td>
                                         </tr>
                                     </template>
                                 </tbody>
@@ -259,6 +270,8 @@
         <script>
             function handler() {
                 return {
+                    orderTypeDownload: true,
+                    orderTypePendrive: true,
                     fields: [{
                         exam_attempt: 'Dec-2024',
                         net_price_download: '',
@@ -277,7 +290,7 @@
                     },
                     removeField(index) {
                         this.fields.splice(index, 1);
-                    }
+                    },
                 }
             }
         </script>

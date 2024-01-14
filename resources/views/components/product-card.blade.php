@@ -6,7 +6,7 @@
     </div>
     <div class="content">
         <h5 class="title mb-3">
-            <a href="{{ route('course', [$product]) }}">{{ $product?->title }}</a>
+            <a href="{{ route('course', [$product]) }}">{{ str($product?->title)->words(6) }}</a>
         </h5>
         <p class="fs-5">
             <b>Price: </b>
@@ -24,7 +24,7 @@
             <a href="{{ route('course', [$product]) }}" class="btn btn-dark px-3 rounded-pill">
                 <i class="fas fa-info-circle"></i> More Details
             </a>
-            <a href="#" class="btn btn-success buyNowBtn"><i class="fas fa-shopping-bag me-2"></i>Buy now</a>
+            <a href="{{ route('buy-now', [$product]) }}" class="btn btn-success buyNowBtn"><i class="fas fa-shopping-bag me-2"></i>Buy now</a>
         </div>
     </div>
 </div>

@@ -18,6 +18,25 @@ class CartController extends Controller
             ->with('courses', $courses);
     }
 
+    public function buyNow(Course $course)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$course?->id])) {
+            $cart[$course?->id]['quantity']++;
+            $cart[$course?->id]['order_type']    = $course->order_type_pendrive ? 'pendrive' : 'download';
+            $cart[$course?->id]['exam_attempt']  = $course?->variations?->first()?->exam_attempt;
+        } else {
+            $cart[$course?->id] = [
+                "id"            => $course->id,
+                "quantity"      => 1,
+                "order_type"    => $course->order_type_pendrive ? 'pendrive' : 'download',
+                "exam_attempt"  => $course?->variations?->first()?->exam_attempt
+            ];
+        }
+        session()->put('cart', $cart);
+        return to_route('checkout');
+    }
+
     public function addtoCart($id, Request $request)
     {
         if ($request?->submit == 'wishlist') {
@@ -27,6 +46,7 @@ class CartController extends Controller
                 'exam_attempt' => $request->exam_attempt
             ]);
         }
+
         $course = Course::where('status', true)->findOrFail($id);
         $cart = session()->get('cart', []);
         if (isset($cart[$id])) {
@@ -42,6 +62,9 @@ class CartController extends Controller
             ];
         }
         session()->put('cart', $cart);
+        if ($request?->submit == 'buy-now') {
+            return to_route('checkout');
+        }
         return to_route('carts.index')->with('success', 'Course has been added to cart!');
     }
 

@@ -35,7 +35,7 @@
                         </div>
                         @if ($course->order_type_download)
                             <p class="lead">
-                                <i class="fas fa-download me-2"></i><strong>Download Price: </strong>
+                                <i class="fas fa-download me-2"></i><strong>D.Link: </strong>
                                 <del>{!! currencySymbol() !!} {{ $course?->netPriceForDownload($attempt) }}</del>
                                 <span class="text-danger">{!! currencySymbol() !!}
                                     {{ $course?->salePriceForDownload($attempt) }}</span>
@@ -45,7 +45,7 @@
                         @endif
                         @if ($course->order_type_pendrive)
                             <p class="lead">
-                                <i class="fas fa-hdd me-2"></i><strong>Pendrive Price: </strong>
+                                <i class="fas fa-hdd me-2"></i><strong>Pendrive: </strong>
                                 <del>{!! currencySymbol() !!} {{ $course?->netPriceForPendrive($attempt) }}</del>
                                 <span class="text-danger">{!! currencySymbol() !!}
                                     {{ $course?->salePriceForPendrive($attempt) }}</span>
@@ -87,7 +87,7 @@
                                 name="submit" value="add-to-cart">
                                 <i class="fas fa-shopping-cart"></i> Add to cart
                             </button>
-                            <a href="#" class="btn btn-success buyNowBtn"><i class="fas fa-shopping-bag me-2"></i>Buy now</a>
+                            <button type="submit" name="submit" value="buy-now" class="btn btn-success buyNowBtn" style="height: auto"><i class="fas fa-shopping-bag me-2"></i>Buy now</button>
                         </div>
                     </div>
                 </div>
