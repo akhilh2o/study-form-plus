@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <!-- ~~~ Banner Section ~~~ -->
     <section class="banner-section banner-overlay bg_img"
@@ -46,29 +45,28 @@
         </div>
         <div class="container">
             @foreach ($categories ?? [] as $category)
-            <div class="section-header mt-3">
-                @php
-                    $words = explode(' ', $category->name);
-                    $firstWord = head($words);
-                    $secondWord = count($words) > 1 ? $words[1] : null;
-                    $category_ids = [$category?->id];
-                    foreach ($category['children'] as $key => $child) {
-                        $category_ids[]= $child['id'];
-                    }
-                @endphp
-                <h2 class="title">
-                    <span>{{ $firstWord }}</span>{{ $secondWord ? ' ' . $secondWord : '' }}
-                </h2>
-                {{-- <h2 class="title"><span>Featured</span> Online Courses</h2> --}}
-            </div>
-            
-            <div class="row justify-content-center mb-30-none">
-                @foreach (courseByCategory($category_ids) ?? [] as $course)
-                    <div class="col-xl-4 col-md-6 col-sm-10">
-                        <x-product-card :product="$course" />
-                    </div>
-                @endforeach
-            </div>
+                <div class="section-header mt-3">
+                    @php
+                        $words = explode(' ', $category->name);
+                        $firstWord = head($words);
+                        $secondWord = count($words) > 1 ? $words[1] : null;
+                        $category_ids = [$category?->id];
+                        foreach ($category['children'] as $key => $child) {
+                            $category_ids[] = $child['id'];
+                        }
+                    @endphp
+                    <h2 class="title">
+                        <span>{{ $firstWord }}</span>{{ $secondWord ? ' ' . $secondWord : '' }}
+                    </h2>
+                </div>
+
+                <div class="row justify-content-center mb-30-none">
+                    @foreach (courseByCategory($category_ids) ?? [] as $course)
+                        <div class="col-xl-4 col-md-6 col-sm-10">
+                            <x-product-card :product="$course" />
+                        </div>
+                    @endforeach
+                </div>
             @endforeach
 
 
@@ -266,102 +264,122 @@
     <!-- ~~~ Instructor Section ~~~ -->
 
     <section class="instructor-section pt-40 pb-40 gradient-bg">
-    <div class="container">
-    <div class="section-header">
-        <h2 class="title"><span>Awesome </span>faculties</h2>
-    </div>
-    <div class="row mx-auto my-auto justify-content-center">
-        <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <a href="https://dev.texmith.com/study-form-plus/faculty/15" class="d-block fw-bold fs-5 mb-1">
-                            <img class="card-img-top" src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/063548000-1701866683.png" alt="Card image">
-                            <div class="card-body lh-1">
-                                    Prof. Vinit Kumar
-                                    
+        <div class="container">
+            <div class="section-header">
+                <h2 class="title"><span>Awesome </span>faculties</h2>
+            </div>
+            <div class="row mx-auto my-auto justify-content-center">
+                <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <a href="https://dev.texmith.com/study-form-plus/faculty/15"
+                                        class="d-block fw-bold fs-5 mb-1">
+                                        <img class="card-img-top"
+                                            src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/063548000-1701866683.png"
+                                            alt="Card image">
+                                        <div class="card-body lh-1">
+                                            Prof. Vinit Kumar
+
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <a href="https://dev.texmith.com/study-form-plus/faculty/16"
+                                        class="d-block fw-bold fs-5 mb-1">
+                                        <img class="card-img-top"
+                                            src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/015427800-1701866763.png"
+                                            alt="Card image">
+                                        <div class="card-body lh-1">
+                                            Santosh Kumar
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <a href="https://dev.texmith.com/study-form-plus/faculty/17"
+                                        class="d-block fw-bold fs-5 mb-1">
+                                        <img class="card-img-top"
+                                            src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/050476600-1701866853.png"
+                                            alt="Card image">
+                                        <div class="card-body lh-1">
+                                            Prof. Nitin Bhardwaj
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <a href="https://dev.texmith.com/study-form-plus/faculty/18"
+                                        class="d-block fw-bold fs-5 mb-1">
+                                        <img class="card-img-top"
+                                            src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/059150100-1701866934.png"
+                                            alt="Card image">
+                                        <div class="card-body lh-1">
+                                            CA Raghav Goel
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <a href="https://dev.texmith.com/study-form-plus/faculty/19"
+                                        class="d-block fw-bold fs-5 mb-1">
+                                        <img class="card-img-top"
+                                            src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/018837800-1701867092.png"
+                                            alt="Card image">
+                                        <div class="card-body lh-1">
+                                            Mayank Agarwal
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <a href="https://dev.texmith.com/study-form-plus/faculty/20"
+                                        class="d-block fw-bold fs-5 mb-1">
+                                        <img class="card-img-top"
+                                            src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/026323100-1701867206.png"
+                                            alt="Card image">
+                                        <div class="card-body lh-1">
+                                            ACCA Amarjit Kaur
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <a href="https://dev.texmith.com/study-form-plus/faculty/16" class="d-block fw-bold fs-5 mb-1">
-                            <img class="card-img-top" src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/015427800-1701866763.png" alt="Card image">
-                            <div class="card-body lh-1">
-                                    Santosh Kumar
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <a href="https://dev.texmith.com/study-form-plus/faculty/17" class="d-block fw-bold fs-5 mb-1">
-                            <img class="card-img-top" src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/050476600-1701866853.png" alt="Card image">
-                            <div class="card-body lh-1">
-                                    Prof. Nitin Bhardwaj
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <a href="https://dev.texmith.com/study-form-plus/faculty/18" class="d-block fw-bold fs-5 mb-1">
-                            <img class="card-img-top" src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/059150100-1701866934.png" alt="Card image">
-                            <div class="card-body lh-1">
-                                    CA Raghav Goel
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <a href="https://dev.texmith.com/study-form-plus/faculty/19" class="d-block fw-bold fs-5 mb-1">
-                            <img class="card-img-top" src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/018837800-1701867092.png" alt="Card image">
-                            <div class="card-body lh-1">
-                                    Mayank Agarwal
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <a href="https://dev.texmith.com/study-form-plus/faculty/20" class="d-block fw-bold fs-5 mb-1">
-                            <img class="card-img-top" src="https://dev.texmith.com/study-form-plus/storage/app/public/faculties/026323100-1701867206.png" alt="Card image">
-                            <div class="card-body lh-1">
-                                    ACCA Amarjit Kaur
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
-            <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
         </div>
-    </div>
-</div>
-</section>
+    </section>
 
 
 
@@ -419,7 +437,7 @@
     items.forEach((el) => {
         const minPerSlide = 4
         let next = el.nextElementSibling
-        for (var i=1; i<minPerSlide; i++) {
+        for (var i = 1; i < minPerSlide; i++) {
             if (!next) {
                 // wrap carousel by using first child
                 next = items[0]
