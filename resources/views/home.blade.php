@@ -60,7 +60,7 @@
                     </h2>
                 </div>
 
-                <div class="row justify-content-center mb-30-none">
+                <div class="row mb-50 none">
                     @foreach (courseByCategory($category_ids) ?? [] as $course)
                         <div class="col-xl-4 col-md-6 col-sm-10">
                             <x-product-card :product="$course" />
