@@ -81,7 +81,7 @@
                         </div>
                         <div class="d-grid gap-2 d-md-block">
                             <button type="submit"
-                                class="btn btn-block px-3 wishlistsBtn rounded-pill {{ auth()->user()?->wishlists?->pluck('id')?->contains($course->id)? 'btn-danger': 'btn-secondary text-white' }}"
+                                class="btn btn-block wishlistsBtn rounded-pill {{ auth()->user()?->wishlists?->pluck('id')?->contains($course->id)? 'btn-danger': 'btn-secondary text-white' }}"
                                 style="height:auto" name="submit" value="wishlist">
                                 <i class="fas fa-heart text-white"></i>
                                 <!-- Add to wishlist -->
@@ -100,7 +100,7 @@
                         <div class="col-lg-6 mt-4">
                             <div class="card">
                                 <div class="card-header">
-                                    Description
+                                    <h5 class="py-2">Description</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="description">
@@ -113,7 +113,7 @@
                     <div class="{{ $course?->description ?  'col-lg-6' : 'col-lg-12'}}  mt-4">
                         <div class="card">
                             <div class="card-header">
-                                More Information
+                                <h5 class="py-2">More Information</h5>
                             </div>
                             <div class="card-body">
                                 <div class="description">
@@ -184,7 +184,7 @@
                     <div class="col-12 mt-4">
                         <div class="card">
                             <div class="card-header">
-                                Demo Videos
+                                <h5 class="py-2">Demo Videos</h5>
                             </div>
                             <div class="card-body">
                                 <div class="description">

@@ -55,16 +55,15 @@
                             $category_ids[] = $child['id'];
                         }
                     @endphp
-                    <h2 class="title">
+                    <h2 class="title mb-0 pb-0">
                         <span>{{ $firstWord }}</span>{{ $secondWord ? ' ' . $secondWord : '' }}
+                        <a href="{{ route('courses', ['category' => $category->slug]) }}" class="fs-5">[View all]</a>
                     </h2>
                 </div>
 
-                <div class="row mb-50 none">
-                    @foreach (courseByCategory($category_ids) ?? [] as $course)
-                        <div class="col-xl-4 col-md-6 col-sm-10">
-                            <x-product-card :product="$course" />
-                        </div>
+                <div class="mb-50 none owl-carousel course_slider">
+                    @foreach (courseByCategory($category_ids, 6) ?? [] as $course)
+                        <x-product-card :product="$course" />
                     @endforeach
                 </div>
             @endforeach
@@ -148,8 +147,6 @@
         </div>
     </section>
     <!-- ~~~ Feature Section ~~~ -->
-
-
 
     <!-- ~~~ Counter Section ~~~ -->
     <section class="counter-section pt-120 pb-120 title-lay bg_img"
@@ -381,8 +378,6 @@
         </div>
     </section>
 
-
-
     <!-- ~~~ Testimonial Section ~~~ -->
     <section class="testimonial-section pt-100 pb-100">
         <div class="container">
@@ -430,21 +425,55 @@
         </div>
     </section>
     <!-- ~~~ Testimonial Section ~~~ -->
-</x-app-layout>
-<script type="text/javascript">
-    let items = document.querySelectorAll('.carousel .carousel-item')
 
-    items.forEach((el) => {
-        const minPerSlide = 4
-        let next = el.nextElementSibling
-        for (var i = 1; i < minPerSlide; i++) {
-            if (!next) {
-                // wrap carousel by using first child
-                next = items[0]
+
+    @push('scripts')
+        <style>
+            .course_slider .owl-nav {
+                position: absolute;
+                top: -3rem;
+                right: 0;
             }
-            let cloneChild = next.cloneNode(true)
-            el.appendChild(cloneChild.children[0])
-            next = next.nextElementSibling
-        }
-    });
-</script>
+        </style>
+        <script type="text/javascript">
+            $('.course_slider').owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: true,
+                autoplay: true,
+                autoplayHoverPause: true,
+                navText: [
+                    '<span class="btn btn-sm btn-dark me-1"><i class="fas fa-arrow-left"></i></span>',
+                    '<span class="btn btn-sm btn-dark"><i class="fas fa-arrow-right"></i></span>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1200: {
+                        items: 3
+                    }
+                }
+            });
+
+            let items = document.querySelectorAll('.carousel .carousel-item')
+
+            items.forEach((el) => {
+                const minPerSlide = 4
+                let next = el.nextElementSibling
+                for (var i = 1; i < minPerSlide; i++) {
+                    if (!next) {
+                        // wrap carousel by using first child
+                        next = items[0]
+                    }
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
+            });
+        </script>
+    @endpush
+</x-app-layout>
