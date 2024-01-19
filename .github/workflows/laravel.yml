@@ -19,3 +19,11 @@ jobs:
         username: study-form-plus
         password: DfFXEg41THhnJbuW
         server-dir: /
+
+    - name: 📂 Sync files to live
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftp.studyforumplus.in
+        username: u185528066.tiwari
+        password: Z$RF&*JL)(%#cd4t
+        server-dir: /
