@@ -321,6 +321,7 @@
                 loop: false,
                 margin: 10,
                 nav: true,
+                dots: false,
                 autoplay: true,
                 autoplayHoverPause: true,
                 navText: [
