@@ -4097,7 +4097,7 @@ div[class*="col"]:nth-of-type(4n + 4) .feature-item:hover .content .shape {
 
 @media (min-width: 576px) and (min-width: 992px) {
     .testimonial-item::before {
-        font-size: 100px;
+        font-size: 75px;
     }
 }
 
