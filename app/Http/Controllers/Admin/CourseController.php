@@ -17,19 +17,29 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
+
         $courses = Course::query()
             ->when($request->get('search'), function ($query) use ($request) {
                 $query->where(function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . $request->get('search') . '%');
+                    $query->where('title', 'like', '%' . $request->get('search') . '%');
+                    $query->orWhere('sub_title', 'like', '%' . $request->get('search') . '%');
+                    $query->orWhere('slug', 'like', '%' . $request->get('search') . '%');
+                    $query->orWhere('description', 'like', '%' . $request->get('search') . '%');
                 });
             })
+            ->columnFilter()
             ->with('category')
             ->with('variations')
             ->latest()
-            ->paginate(25)
-            ->withQueryString();
+            ->paginate(50);
+
+        $categories = collect();
+        if ($request->get('filter')) {
+            $categories = Category::where('parent_id', 0)->with('children.parent')->get();
+        }
 
         return view('admin.courses.index')
+            ->with('categories', $categories)
             ->with('courses', $courses);
     }
 

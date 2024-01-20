@@ -88,37 +88,9 @@
                     </li>
                 @endcan
 
-                @canany(['roles_access', 'permissions_access', 'users_access'])
-                    <li class="menu-title">Manage Users</li>
-                    @can('roles_access')
-                        <li>
-                            <a href="{{ route('admin.roles.index') }}" class="waves-effect">
-                                <i class="fas fa-users-cog"></i>
-                                <span>All Roles</span>
-                            </a>
-                        </li>
-                    @endcan
 
-                    @can('permissions_access')
-                        <li>
-                            <a href="{{ route('admin.permissions.index') }}" class="waves-effect">
-                                <i class="fas fa-user-shield"></i>
-                                <span>All Permissions</span>
-                            </a>
-                        </li>
-                    @endcan
-
-                    @can('users_access')
-                        <li>
-                            <a href="{{ route('admin.users.index') }}" class="waves-effect">
-                                <i class="fas fa-users"></i>
-                                <span>All Users</span>
-                            </a>
-                        </li>
-                    @endcan
-                @endcanany
                 <li class="menu-title">Manage CMS</li>
-                @canany(['ebook_category_access','ebook_download_access'])
+                @canany(['ebook_category_access', 'ebook_download_access'])
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fas fa-book"></i>
@@ -164,8 +136,6 @@
                         </ul>
                     </li>
                 @endcanany
-
-
 
                 @canany(['pages_create', 'pages_access'])
                     <li>
@@ -219,22 +189,53 @@
                         </ul>
                     </li>
                 @endcanany
-                @canany(['setting_access'])
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        @can('setting_access')
+
+                @canany(['roles_access', 'permissions_access', 'users_access'])
+                    <li class="menu-title">Manage Users</li>
+                    @can('roles_access')
                         <li>
-                            <a href="{{ route('admin.settings.index') }}" class="active">
-                                General Settings
+                            <a href="{{ route('admin.roles.index') }}" class="waves-effect">
+                                <i class="fas fa-users-cog"></i>
+                                <span>All Roles</span>
                             </a>
                         </li>
-                        @endcan
-                    </ul>
-                </li>
+                    @endcan
+
+                    @can('permissions_access')
+                        <li>
+                            <a href="{{ route('admin.permissions.index') }}" class="waves-effect">
+                                <i class="fas fa-user-shield"></i>
+                                <span>All Permissions</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('users_access')
+                        <li>
+                            <a href="{{ route('admin.users.index') }}" class="waves-effect">
+                                <i class="fas fa-users"></i>
+                                <span>All Users</span>
+                            </a>
+                        </li>
+                    @endcan
+                @endcanany
+
+                @canany(['setting_access'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fa fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('setting_access')
+                                <li>
+                                    <a href="{{ route('admin.settings.index') }}" class="active">
+                                        General Settings
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
                 @endcanany
                 <li class="menu-title">Manage Account</li>
                 <li>

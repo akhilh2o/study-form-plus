@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $category->name                      =  $request->post('name');
         $category->parent_id                 =  $request->post('parent_id') ?? 0;
         $category->status                    =  $request->post('status');
-        $category->slug                      =  Str::slug($request->post('name'));
+        $category->slug                      =  str()->of($request->post('name'))->append(time());
         $category->content                   =  $request->post('content');
         $category->meta_title                =  $request->post('meta_title');
         $category->meta_keyword              =  $request->post('meta_keyword');
@@ -104,7 +104,6 @@ class CategoryController extends Controller
         $category->name                      =  $request->post('name');
         $category->parent_id                 =  $request->post('parent_id') ?? 0;
         $category->status                    =  $request->post('status');
-        $category->slug                      =  Str::slug($request->post('name'));
         $category->content                   =  $request->post('content');
         $category->meta_title                =  $request->post('meta_title');
         $category->meta_keyword              =  $request->post('meta_keyword');
@@ -133,11 +132,18 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        Storage::disk('public')->delete($category->image);
-        Storage::disk('public')->delete($category->image_thumb);
+        if ($category->children->count()) {
+            return back()->withErrors('SORRY !! Cannot delete parent category, please delete the subcategories first.');
+        }
+        if($category->image) {
+            Storage::disk('public')->delete([$category->image]);
+        }
+        if($category->image_thumb) {
+            Storage::disk('public')->delete($category->image_thumb);
+        }
         $category->courses()->delete();
         $category->delete();
-        return to_route('admin.categories.index')->withErrors('Category has been successfully deleted.');
+        return back()->withErrors('Category has been successfully deleted.');
     }
 
     public function statusToggle(Category $category)

@@ -21,7 +21,7 @@ class CourseController extends Controller
                 ->first();
         }
 
-        $categories = Category::select('id', 'name','slug')->get();
+        $categories = Category::select('id', 'name', 'slug')->get();
 
         $courses = Course::when($category, function ($query) use ($category) {
             $query->whereHas('category', function ($query) use ($category) {
@@ -55,51 +55,5 @@ class CourseController extends Controller
         return view('course')->with('course', $course)->with('attempt', $attempt);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

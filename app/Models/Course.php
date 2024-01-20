@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ColumnFilterTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class Course extends Model
 {
     use HasFactory;
+    use ColumnFilterTrait;
+
     protected $guarded = [];
 
     public function thumb()
