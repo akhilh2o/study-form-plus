@@ -13,6 +13,7 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
+        $category = collect([]);
         $categoryIds = collect([]);
         if ($request->get('category')) {
             $category = Category::query()
