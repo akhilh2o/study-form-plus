@@ -61,7 +61,7 @@
                     </h2>
                 </div>
 
-                <div class="mb-50 none owl-carousel course_slider">
+                <div class="none owl-carousel course_slider {{ !$loop->last ? 'mb-0' : '' }}">
                     @foreach (courseByCategory($category_ids, 6, true) ?? [] as $course)
                         <x-product-card :product="$course" />
                     @endforeach
