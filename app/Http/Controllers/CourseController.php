@@ -13,26 +13,30 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $category = null;
+        $categoryIds = collect([]);
         if ($request->get('category')) {
             $category = Category::query()
+                ->with('children')
                 ->where('id', $request->category)
                 ->orWhere('slug', $request->category)
                 ->first();
+
+            $categoryIds = collect([$category->id])->merge($category->children->pluck('id'));
         }
 
         $categories = Category::select('id', 'name', 'slug')->get();
 
-        $courses = Course::when($category, function ($query) use ($category) {
-            $query->whereHas('category', function ($query) use ($category) {
-                $query->where('id', $category?->id);
-            });
-        })
+        $courses = Course::query()
+            ->when($categoryIds->count(), function ($query) use ($categoryIds) {
+                $query->whereHas('category', function ($query) use ($categoryIds) {
+                    $query->whereIn('id', $categoryIds);
+                });
+            })
             ->withMax('variations', 'sale_price_download')
             ->withMin('variations', 'sale_price_download')
             ->withMax('variations', 'sale_price_pendrive')
             ->withMin('variations', 'sale_price_pendrive')
-            ->paginate()
+            ->paginate(24)
             ->withQueryString();
 
         return view('courses')->with([
@@ -54,6 +58,4 @@ class CourseController extends Controller
         // return $course;
         return view('course')->with('course', $course)->with('attempt', $attempt);
     }
-
-
 }
