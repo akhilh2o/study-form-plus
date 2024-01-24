@@ -4,13 +4,32 @@
         data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
         <div class="container">
             <div class="banner-content cl-white">
-                <h3 class="subtitle">Looking to Explore</h3>
-                <h1 class="title">Your Knowledge</h1>
-                <p>Donec quis fermentum metus. Fusce nec eleifend urna. Sed id placerat erat. Aenean congue, metus sit
-                    amet sagittis tincidunt, augue odio vulputate meg ipsum dolor sit amet, consectetur ad.</p>
+                @if (!empty(setting('general_settings')?->option_value['banner_subheading']))
+                    <h3 class="subtitle">{{ setting('general_settings')?->option_value['banner_subheading'] }}</h3>
+                @endif
+
+                @if (!empty(setting('general_settings')?->option_value['banner_heading']))
+                    <h1 class="title">{{ setting('general_settings')?->option_value['banner_heading'] }}</h1>
+                @endif
+
+                @if (!empty(setting('general_settings')?->option_value['banner_description']))
+                    <p>{{ setting('general_settings')?->option_value['banner_description'] }}</p>
+                @endif
+
                 <div class="banner-button-area">
-                    <a href="#" class="custom-button btn-md">view courses<i class="fas fa-play-circle"></i></a>
-                    <a href="#apply" class="custom-button btn-md theme-one">Apply now<i class="flaticon-tap-1"></i></a>
+                    @if (!empty(setting('general_settings')?->option_value['banner_action_name1']))
+                        <a href="{{ setting('general_settings')?->option_value['banner_action_url1'] ?? '#' }}" class="custom-button btn-md">
+                            {{ setting('general_settings')?->option_value['banner_action_name1'] }}
+                            <i class="fas fa-play-circle"></i>
+                        </a>
+                    @endif
+
+                    @if (!empty(setting('general_settings')?->option_value['banner_action_name2']))
+                        <a href="{{ setting('general_settings')?->option_value['banner_action_url2'] ?? '#' }}" class="custom-button btn-md theme-one">
+                            {{ setting('general_settings')?->option_value['banner_action_name2'] }}
+                            <i class="flaticon-tap-1"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -21,13 +40,13 @@
             <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
         </div>
     </section>
+
     <!-- ~~~ Banner Section ~~~ -->
     @if (setting('general_settings')?->option_value['banner_text'])
         <section class="notice-section pt-10 pb-9 justify" style="background-color: red;">
             <div class="container text-center">
                 <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
                     <h6 class="text-white my-0">
-                        {{-- NEED ASSISTANCE IN BUYING/ ORDERING? CALL 91XXXXXXXXX, 93XXXXXXXX NOW [Office Timing 10AM to 7PM] --}}
                         {{ setting('general_settings')?->option_value['banner_text'] }}
                     </h6>
                 </marquee>

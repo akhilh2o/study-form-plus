@@ -168,9 +168,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Exam Attempt <span class="text-danger">*</span></th>
-                                        <th x-show="orderTypeDownload">Net Price (Download)</th>
+                                        <th x-show="orderTypeDownload">MRP (Download)</th>
                                         <th x-show="orderTypeDownload">Sale Price (Download)</th>
-                                        <th x-show="orderTypePendrive">Net Price (Pendrive)</th>
+                                        <th x-show="orderTypePendrive">MRP (Pendrive)</th>
                                         <th x-show="orderTypePendrive">Sale Price (Pendrive)</th>
                                         <th>Action</th>
                                     </tr>

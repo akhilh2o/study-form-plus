@@ -107,7 +107,7 @@
                                 <input type="file" class="form-control" name="banner">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -161,7 +161,8 @@
                             <input type="url" class="form-control" name="banner_action_url2" placeholder="Full URL"
                                 value="{{ $setting_value['banner_action_url2'] ?? '' }}">
                         </div>
-                    </div> --}}
+                    </div>
+
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="">Banner Text</label>
