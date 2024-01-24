@@ -65,6 +65,7 @@ class CourseController extends Controller
             ->withMin('variations', 'sale_price_download')
             ->withMax('variations', 'sale_price_pendrive')
             ->withMin('variations', 'sale_price_pendrive')
+            ->orderBy('priority', 'ASC')
             ->limit(6)
             ->get();
 

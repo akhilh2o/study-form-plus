@@ -268,6 +268,13 @@
                         <label for="meta_description">Meta Description</label>
                         <textarea name="meta_description" class="form-control" id="meta_description" rows="2">{{ old('meta_description') }}</textarea>
                     </div>
+
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <label for="">Priority</label>
+                            <input type="number" name="priority" class="form-control" value="{{ old('priority') }}">
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-dark btn-loader">

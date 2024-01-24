@@ -26,6 +26,7 @@ class HomeController extends Controller
             ->withMin('variations', 'sale_price_download')
             ->withMax('variations', 'sale_price_pendrive')
             ->withMin('variations', 'sale_price_pendrive')
+            ->orderBy('priority', 'ASC')
             ->limit(3)
             ->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();

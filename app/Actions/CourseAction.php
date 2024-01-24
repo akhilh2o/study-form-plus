@@ -32,6 +32,7 @@ class CourseAction
         $course->meta_title                =  $request->post('meta_title');
         $course->meta_keyword              =  $request->post('meta_keyword');
         $course->meta_description          =  $request->post('meta_description');
+        $course->priority          =  $request->post('priority');
         $course->with_handbook              =  $request->boolean('with_handbook');
 
         if ($request->file('thumbnail')) {

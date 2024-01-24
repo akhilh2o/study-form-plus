@@ -24,6 +24,7 @@ return new class () extends Migration {
             $table->boolean('popular')->default(true);
             $table->boolean('with_handbook')->nullable()->default(false);
             $table->boolean('status')->default(true);
+            $table->integer('priority')->nullable()->default(null);
             $table->text('meta_title')->nullable()->default(null);
             $table->text('meta_keyword')->nullable()->default(null);
             $table->text('meta_description')->nullable()->default(null);

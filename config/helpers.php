@@ -31,6 +31,7 @@ if (!function_exists('courseByCategory')) {
             ->withMax('variations', 'sale_price_pendrive')
             ->withMin('variations', 'sale_price_pendrive')
             ->when($popular, fn($q) => $q->where('popular', true))
+            ->orderBy('priority', 'ASC')
             ->limit($limit)
             ->get();
     }

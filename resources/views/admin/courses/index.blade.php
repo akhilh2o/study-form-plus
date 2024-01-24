@@ -139,6 +139,12 @@
                                         </a>
                                     </div>
                                 </div>
+
+                                @if ($course->priority)
+                                    <span class="d-block small">
+                                        <b>Priority:</b> {{ $course->priority }}
+                                    </span>
+                                @endif
                             </td>
                             <td width="15%">
                                 <a href="{{ route('admin.courses.show', [$course]) }}"
