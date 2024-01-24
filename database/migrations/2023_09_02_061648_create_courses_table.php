@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->string('demo_link')->nullable()->default(null);
             $table->longText('description')->nullable()->default(null);
             $table->boolean('popular')->default(true);
+            $table->boolean('with_handbook')->nullable()->default(false);
             $table->boolean('status')->default(true);
             $table->text('meta_title')->nullable()->default(null);
             $table->text('meta_keyword')->nullable()->default(null);

@@ -37,6 +37,7 @@ class CourseController extends Controller
             ->withMin('variations', 'sale_price_download')
             ->withMax('variations', 'sale_price_pendrive')
             ->withMin('variations', 'sale_price_pendrive')
+            ->where('status', true)
             ->paginate(24)
             ->withQueryString();
 
@@ -56,7 +57,16 @@ class CourseController extends Controller
         } else {
             $attempt = $course?->variations?->first()?->exam_attempt;
         }
-        // return $course;
-        return view('course')->with('course', $course)->with('attempt', $attempt);
+
+        $relatedCourses = Course::query()
+            ->where('category_id', $course->category_id)
+            ->where('status', true)
+            ->limit(6)
+            ->get();
+
+        return view('course')
+        ->with('course', $course)
+        ->with('attempt', $attempt)
+        ->with('relatedCourses', $relatedCourses);
     }
 }

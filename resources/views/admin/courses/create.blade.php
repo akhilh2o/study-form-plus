@@ -41,7 +41,8 @@
                                 </div>
                                 <div class="form-group flex-fill">
                                     <label for="">Thumbnail</label>
-                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image" accept="image/*">
+                                    <input type="file" name="thumbnail" class="form-control" id="crop-cover-image"
+                                        accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -133,16 +134,28 @@
                         </div>
                         <div class="col-md-6">
                             <label for="order_type_download">Study Material <span class="text-danger">*</span></label>
-                            <div class="form-group">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="order_type_pendrive" type="checkbox"
-                                        id="order_type_pendrive" value="1" @checked(old('order_type_pendrive')) x-model="orderTypePendrive">
-                                    <label class="form-check-label" for="order_type_pendrive">Pendrive</label>
+                            <div class="d-flex flex-wrap gap-3">
+                                <div class="form-group my-auto">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="order_type_pendrive" type="checkbox"
+                                            id="order_type_pendrive" value="1" @checked(old('order_type_pendrive'))
+                                            x-model="orderTypePendrive">
+                                        <label class="form-check-label mb-0" for="order_type_pendrive">Pendrive</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="order_type_download" type="checkbox"
+                                            id="order_type_download" value="1" @checked(old('order_type_download'))
+                                            x-model="orderTypeDownload">
+                                        <label class="form-check-label mb-0" for="order_type_download">Download</label>
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="order_type_download" type="checkbox"
-                                        id="order_type_download" value="1" @checked(old('order_type_download')) x-model="orderTypeDownload">
-                                    <label class="form-check-label" for="order_type_download">Download</label>
+                                <span class="text-dark fs-3">|</span>
+                                <div class="form-group my-auto">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="with_handbook" type="checkbox"
+                                            id="with_handbook" value="1" @checked(old('with_handbook'))>
+                                        <label class="form-check-label mb-0" for="with_handbook">With handbook</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -296,11 +309,11 @@
         </script>
         <script>
             /* var previewImg = {
-                width: '70px',
-                height: '70px',
-                targetId: 'cover-image-preview'
-            };
-            imageCropper('crop-cover-image', 6 / 5, previewImg); */
+                        width: '70px',
+                        height: '70px',
+                        targetId: 'cover-image-preview'
+                    };
+                    imageCropper('crop-cover-image', 6 / 5, previewImg); */
 
             tinymce.init({
                 toolbar: 'fontselect fontsizeselect | bold italic underline strikethrough | aligncenter alignjustify alignleft alignright | indent outdent |  table forecolor backcolor image code',

@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Course;
+use App\Models\CourseVariation;
 use Illuminate\Support\Facades\Storage;
 use Takshak\Imager\Facades\Imager;
 use Illuminate\Support\Str;
@@ -31,6 +32,7 @@ class CourseAction
         $course->meta_title                =  $request->post('meta_title');
         $course->meta_keyword              =  $request->post('meta_keyword');
         $course->meta_description          =  $request->post('meta_description');
+        $course->with_handbook              =  $request->boolean('with_handbook');
 
         if ($request->file('thumbnail')) {
 
@@ -51,7 +53,8 @@ class CourseAction
         }
 
         foreach ($request->exam_attempt ?? [] as $key => $variation) {
-            $course->variations()->create([
+            CourseVariation::create([
+                'course_id'          => $course->id,
                 'exam_attempt'          => $variation,
                 'net_price_download'    => $request->net_price_download[$key],
                 'net_price_pendrive'    => $request->net_price_pendrive[$key],
