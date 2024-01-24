@@ -61,6 +61,10 @@ class CourseController extends Controller
         $relatedCourses = Course::query()
             ->where('category_id', $course->category_id)
             ->where('status', true)
+            ->withMax('variations', 'sale_price_download')
+            ->withMin('variations', 'sale_price_download')
+            ->withMax('variations', 'sale_price_pendrive')
+            ->withMin('variations', 'sale_price_pendrive')
             ->limit(6)
             ->get();
 
