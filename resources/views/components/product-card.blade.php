@@ -1,4 +1,4 @@
-<div class="course-item">
+<div {{ $attributes->merge(['class' => 'course-item']) }}>
     <div class="thumb">
         <a href="{{ route('course', [$product]) }}">
             <img src="{{ $product?->thumb() }}" alt="{{ $product?->title }}">

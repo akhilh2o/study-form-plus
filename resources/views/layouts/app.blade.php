@@ -48,7 +48,7 @@
         <!-- ~~~ Header Section ~~~ -->
         <div class="custom-container top-header" style="background-color: #202c45!important;color: #aab1c6;">
             <div class="d-flex justify-content-end align-items-center justify-content-lg-between py-2">
-                <div class="left d-none d-lg-flex">
+                <div class="left ">
                     <p class="text-white m-0 small" style="line-height: 0px">
                         Study Form Plus
                     </p>

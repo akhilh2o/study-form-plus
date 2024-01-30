@@ -80,24 +80,15 @@
                     </h2>
                 </div>
 
-                <div class="none owl-carousel course_slider {{ !$loop->last ? 'mb-0' : '' }}">
+                <div class="row g-2 course_slider mb-5">
                     @foreach (courseByCategory($category_ids, 6, true) ?? [] as $course)
-                        <x-product-card :product="$course" />
+                    <div class="col-md-4 col-sm-6">
+                        <x-product-card :product="$course" class="mb-0" />
+                    </div>
                     @endforeach
                 </div>
             @endforeach
 
-
-            {{-- <div class="section-header">
-                <h2 class="title"><span>Featured</span> Online Courses</h2>
-            </div>
-            <div class="row justify-content-center mb-30-none">
-                @foreach ($courses ?? [] as $course)
-                    <div class="col-xl-4 col-md-6 col-sm-10">
-                        <x-product-card :product="$course" />
-                    </div>
-                @endforeach
-            </div> --}}
         </div>
     </section>
     <!-- ~~~ Course Section ~~~ -->
@@ -336,7 +327,7 @@
             }
         </style>
         <script type="text/javascript">
-            $('.course_slider').owlCarousel({
+            /*$('.course_slider').owlCarousel({
                 loop: false,
                 margin: 10,
                 nav: true,
@@ -358,10 +349,9 @@
                         items: 3
                     }
                 }
-            });
+            });*/
 
             let items = document.querySelectorAll('.carousel .carousel-item')
-
             items.forEach((el) => {
                 const minPerSlide = 4
                 let next = el.nextElementSibling
