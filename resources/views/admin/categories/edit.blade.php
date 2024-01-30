@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label for="content">Description </label>
                         <textarea name="content" class="form-control " id="content" cols="30"
-                            rows="3">{{ $category?->content }}</textarea>
+                            rows="3" required>{{ $category?->content }}</textarea>
                     </div>
                     <div class="d-flex">
                         <div class="mr-2">

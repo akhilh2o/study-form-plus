@@ -101,6 +101,13 @@
                                                     <option value="{{ $children?->id }}" @selected(old('category_id') == $children?->id)>
                                                         {{ $children?->name }}
                                                     </option>
+
+                                                    @foreach ($children?->children as $child)
+                                                        <option value="{{ $child?->id }}"
+                                                            @selected(old('category_id') == $child?->id)>
+                                                        - - {{ $child?->name }}
+                                                        </option>
+                                                    @endforeach
                                                 @endforeach
                                             </optgroup>
                                         @else
@@ -140,13 +147,15 @@
                                         <input class="form-check-input" name="order_type_pendrive" type="checkbox"
                                             id="order_type_pendrive" value="1" @checked(old('order_type_pendrive'))
                                             x-model="orderTypePendrive">
-                                        <label class="form-check-label mb-0" for="order_type_pendrive">Pendrive</label>
+                                        <label class="form-check-label mb-0"
+                                            for="order_type_pendrive">Pendrive</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" name="order_type_download" type="checkbox"
                                             id="order_type_download" value="1" @checked(old('order_type_download'))
                                             x-model="orderTypeDownload">
-                                        <label class="form-check-label mb-0" for="order_type_download">Download</label>
+                                        <label class="form-check-label mb-0"
+                                            for="order_type_download">Download</label>
                                     </div>
                                 </div>
                                 <span class="text-dark fs-3">|</span>
@@ -272,7 +281,8 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                             <label for="">Priority</label>
-                            <input type="number" name="priority" class="form-control" value="{{ old('priority') }}">
+                            <input type="number" name="priority" class="form-control"
+                                value="{{ old('priority') }}">
                         </div>
                     </div>
                 </div>
@@ -316,11 +326,11 @@
         </script>
         <script>
             /* var previewImg = {
-                        width: '70px',
-                        height: '70px',
-                        targetId: 'cover-image-preview'
-                    };
-                    imageCropper('crop-cover-image', 6 / 5, previewImg); */
+                                width: '70px',
+                                height: '70px',
+                                targetId: 'cover-image-preview'
+                            };
+                            imageCropper('crop-cover-image', 6 / 5, previewImg); */
 
             tinymce.init({
                 toolbar: 'fontselect fontsizeselect | bold italic underline strikethrough | aligncenter alignjustify alignleft alignright | indent outdent |  table forecolor backcolor image code',

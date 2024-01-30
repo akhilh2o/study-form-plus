@@ -107,21 +107,26 @@
                                         </a>
                                     </li>
                                     @foreach ($categories as $category)
-                                        <li class="nav-item dropdown">
-                                            <a class="dropdown-item nav-link dropdown-toggle" href="{{ route('courses', ['category' => $category->slug]) }}"
-                                                role="button" data-bs-toggle="{{ $category->children->count() ? 'dropdown' : '' }}">
+                                        <li class="nav-item dropdown d-flex justify-content-between">
+                                            <a href="{{ route('courses', ['category' => $category->slug]) }}">
                                                 {{ $category->name }}
                                             </a>
+
                                             @if ($category->children->count())
+                                                <a class="dropdown-item nav-link dropdown-toggle text-end"
+                                                    role="button" data-bs-toggle="dropdown">
+                                                </a>
+
                                                 <ul class="dropdown-submenu">
                                                     @foreach ($category->children ?? [] as $childrens)
-                                                        <li class="nav-item dropdown">
-                                                            <a class="dropdown-item nav-link dropdown-toggle"
-                                                                href="{{ route('courses', ['category' => $childrens->slug]) }}"
-                                                                role="button" data-bs-toggle="{{ $childrens->children->count() ? 'dropdown' : '' }}">
+                                                        <li class="nav-item dropdown d-flex justify-content-between">
+                                                            <a href="{{ route('courses', ['category' => $childrens->slug]) }}" class="text-nowrap">
                                                                 {{ $childrens->name }}
                                                             </a>
                                                             @if ($childrens->children->count())
+                                                                <a class="dropdown-item nav-link dropdown-toggle text-end" role="button" data-bs-toggle="dropdown">
+                                                                </a>
+
                                                                 <ul class="dropdown-submenu">
                                                                     @foreach ($childrens->children ?? [] as $child)
                                                                         <li class="nav-item">

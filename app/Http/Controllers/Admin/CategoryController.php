@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Takshak\Imager\Facades\Imager;
 
 class CategoryController extends Controller
@@ -30,9 +28,17 @@ class CategoryController extends Controller
         return view('admin.categories.index')->with('categories', $categories);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $categories = Category::where('parent_id', 0)->get();
+         $categories = Category::query()
+            ->when($request->get('parent_id'), function ($query) {
+                $query->where('id', request('parent_id'));
+            })
+            ->when(!$request->get('parent_id'), function ($query) {
+                $query->where('parent_id', 0);
+            })
+            ->get();
+
         return view('admin.categories.create')->with('categories', $categories);
     }
 
@@ -135,10 +141,10 @@ class CategoryController extends Controller
         if ($category->children->count()) {
             return back()->withErrors('SORRY !! Cannot delete parent category, please delete the subcategories first.');
         }
-        if($category->image) {
+        if ($category->image) {
             Storage::disk('public')->delete([$category->image]);
         }
-        if($category->image_thumb) {
+        if ($category->image_thumb) {
             Storage::disk('public')->delete($category->image_thumb);
         }
         $category->courses()->delete();
