@@ -47,8 +47,8 @@
 
         <!-- ~~~ Header Section ~~~ -->
         <div class="custom-container top-header" style="background-color: #202c45!important;color: #aab1c6;">
-            <div class="d-flex justify-content-end align-items-center justify-content-lg-between py-2">
-                <div class="left ">
+            <div class="d-flex justify-content-end align-items-center justify-content-between py-2">
+                <div class="text-end">
                     <p class="text-white m-0 small" style="line-height: 0px">
                         Study Form Plus
                     </p>
@@ -120,11 +120,13 @@
                                                 <ul class="dropdown-submenu">
                                                     @foreach ($category->children ?? [] as $childrens)
                                                         <li class="nav-item dropdown d-flex justify-content-between">
-                                                            <a href="{{ route('courses', ['category' => $childrens->slug]) }}" class="text-nowrap">
+                                                            <a href="{{ route('courses', ['category' => $childrens->slug]) }}"
+                                                                class="text-nowrap">
                                                                 {{ $childrens->name }}
                                                             </a>
                                                             @if ($childrens->children->count())
-                                                                <a class="dropdown-item nav-link dropdown-toggle text-end" role="button" data-bs-toggle="dropdown">
+                                                                <a class="dropdown-item nav-link dropdown-toggle text-end"
+                                                                    role="button" data-bs-toggle="dropdown">
                                                                 </a>
 
                                                                 <ul class="dropdown-submenu">
@@ -473,7 +475,51 @@
             </div>
         </footer>
         <!-- ~~~ Footer Section ~~~ -->
+
+        <div class="modal" id="quick_contact_popup">
+            <div class="modal-dialog">
+                <form method="POST" action="{{ route('queries.store') }}" class="modal-content"
+                    id="quick_contact_form">
+                    @csrf
+                    <!-- Modal Header -->
+                    <div class="modal-header d-block" style="background-color: #202c45">
+                        <h6 class="text-center fw-normal text-light">
+                            Get classes of best faculties from
+                            <br />
+                            <b class="text-warning">Study Form Plus</b>
+                            <br />
+                            <span class="text-success">Call Now!</span>
+                            <a href="tel:+918810344366" class="fw-bold text-light">+91 8810 344 366</a>
+                            <br />
+                            <span class="text-success">Or Register below</span> <span>We will contact you</span>
+                        </h6>
+                        <button type="button" class="btn-close " data-bs-dismiss="modal"
+                            style="position: absolute; right: 1rem; top: 1rem;"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input type="text" name="name" class="form-control mb-3" placeholder="Enter your name"
+                            required>
+                        <input type="tel" name="mobile" class="form-control" placeholder="Enter mobile no."
+                            required>
+                        <input type="hidden" name="subject" value="Quick contact">
+                        <input type="hidden" name="title" value="Quick contact">
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer justify-content-start">
+                        <button type="submit" class="btn btn-dark px-4">
+                            <i class="fas fa-save"></i> Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+
+
     <script src="{{ asset('assets/frontend/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/isotope.pkgd.min.js') }}"></script>
@@ -484,6 +530,19 @@
     <script src="{{ asset('assets/frontend/js/nice-select.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/owl.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    <script>
+        if (localStorage.getItem("quick_contact") != '1') {
+            setTimeout(() => {
+                new bootstrap.Modal('#quick_contact_popup').show(true);
+            }, 5000);
+        }
+
+        $(document).ready(function() {
+            $("#quick_contact_form").submit(function() {
+                localStorage.setItem("quick_contact", "1");
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 
