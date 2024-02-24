@@ -86,7 +86,7 @@ class CourseController extends Controller
         ]);
 
         $action->save(new Course(), $request);
-
+        cache()->flush();
         return to_route('admin.courses.index')->withSuccess('SUCCESS !! New Course is successfully created');
     }
 
@@ -144,6 +144,7 @@ class CourseController extends Controller
         ]);
 
         $action->save($course, $request);
+        cache()->flush();
         return to_route('admin.courses.index')->withSuccess('SUCCESS !! Course is successfully updated');
     }
 
@@ -154,6 +155,7 @@ class CourseController extends Controller
             Storage::disk('public')->delete($course->thumbnail ?? '');
         }
         $course->delete();
+        cache()->flush();
         return to_route('admin.courses.index')->withErrors('Course has been successfully deleted.');
     }
 

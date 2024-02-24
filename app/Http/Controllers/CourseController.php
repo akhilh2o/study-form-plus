@@ -33,6 +33,7 @@ class CourseController extends Controller
                     $query->whereIn('id', $categoryIds);
                 });
             })
+            ->with('variations')
             ->withMax('variations', 'sale_price_download')
             ->withMin('variations', 'sale_price_download')
             ->withMax('variations', 'sale_price_pendrive')
@@ -61,6 +62,7 @@ class CourseController extends Controller
         $relatedCourses = Course::query()
             ->where('category_id', $course->category_id)
             ->where('status', true)
+            ->with('variations')
             ->withMax('variations', 'sale_price_download')
             ->withMin('variations', 'sale_price_download')
             ->withMax('variations', 'sale_price_pendrive')
@@ -70,8 +72,8 @@ class CourseController extends Controller
             ->get();
 
         return view('course')
-        ->with('course', $course)
-        ->with('attempt', $attempt)
-        ->with('relatedCourses', $relatedCourses);
+            ->with('course', $course)
+            ->with('attempt', $attempt)
+            ->with('relatedCourses', $relatedCourses);
     }
 }

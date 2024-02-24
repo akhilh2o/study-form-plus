@@ -16,7 +16,7 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        $setting    = !empty(setting('general_settings')) ? setting('general_settings')->option_value : NULL;
+        $setting = !empty(setting('general_settings')) ? setting('general_settings')->option_value : NULL;
         $option_value = array(
             'app_name'              => $request->input('app_name'),
             'support_email'         => $request->input('support_email'),
@@ -63,7 +63,7 @@ class SettingController extends Controller
             'option_key'   => 'general_settings',
             'option_value' => $option_value
         ]);
-
+        cache()->flush();
         return back()->withSuccess('SUCCESS !! Setting is successfully updated');
     }
 }

@@ -16,13 +16,17 @@ class AppLayout extends Component
     public function __construct()
     {
         $this->pages = Page::orderBy('title', 'ASC')->get();
-        $this->categories = Category::query()
+        $this->categories = cache()->remember('home_categories', 3600 * 24, function () {
+            return Category::query()
+                ->with('children.children.children')
+                ->where('parent_id', 0)
+                ->orderBy('name', 'ASC')
+                ->get();
+        });
+
+        $this->ebookCategories = EbookCategory::query()
             ->with('children')
             ->where('parent_id', 0)
-            ->orderBy('name', 'ASC')
-            ->get();
-
-        $this->ebookCategories = EbookCategory::where('parent_id', 0)
             ->orderBy('name', 'ASC')
             ->get();
     }

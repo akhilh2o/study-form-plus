@@ -78,6 +78,7 @@ class CategoryController extends Controller
         }
 
         $category->save();
+        cache()->flush();
         return to_route('admin.categories.index')->withSuccess('SUCCESS !! New Category is successfully created');
     }
 
@@ -132,6 +133,7 @@ class CategoryController extends Controller
         }
 
         $category->save();
+        cache()->flush();
         return to_route('admin.categories.index')->withSuccess('SUCCESS !! Category is successfully updated');
     }
 
@@ -149,12 +151,14 @@ class CategoryController extends Controller
         }
         $category->courses()->delete();
         $category->delete();
+        cache()->flush();
         return back()->withErrors('Category has been successfully deleted.');
     }
 
     public function statusToggle(Category $category)
     {
         $category->update(['status' => $category->status ? false : true]);
+        cache()->flush();
         return back()->withSuccess('Status successfully updated');
     }
 }

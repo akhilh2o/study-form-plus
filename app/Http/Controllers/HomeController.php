@@ -31,7 +31,17 @@ class HomeController extends Controller
             ->get();
         $testimonials = Testimonial::select(['avatar', 'title', 'subtitle', 'rating', 'content'])->limit(4)->get();
         $faculties = Faculty::select(['id', 'avatar', 'title', 'subtitle',])->limit(8)->get();
-        $categories = Category::where('parent_id', 0)->with(['children:id,parent_id,name'])->orderBy('name', 'ASC')->get();
+        $categories = Category::query()
+            ->has('courses')
+            ->where('parent_id', 0)
+            ->with(['children' => function ($query) {
+                $query->select('id', 'parent_id', 'name');
+                $query->has('courses');
+            }])
+            ->orderBy('name', 'ASC')
+            ->withCount('courses')
+            ->get();
+
         return view('home')->with('courses', $courses)
             ->with('testimonials', $testimonials)
             ->with('categories', $categories)
