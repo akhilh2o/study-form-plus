@@ -35,7 +35,7 @@ class HomeController extends Controller
             ->has('courses')
             ->where('parent_id', 0)
             ->with(['children' => function ($query) {
-                $query->select('id', 'parent_id', 'name');
+                $query->select('id', 'parent_id', 'name', 'slug');
                 $query->has('courses');
             }])
             ->orderBy('name', 'ASC')

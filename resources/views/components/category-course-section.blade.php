@@ -4,6 +4,11 @@
             $words = explode(' ', $category->name);
             $firstWord = head($words);
             $secondWord = count($words) > 1 ? $words[1] : null;
+
+            $categoryIds = [$category?->id];
+            if($category->children->count()){
+                $categoryIds = $category->children->pluck('id')->push($category?->id)->toArray();
+            }
         @endphp
         <h2 class="title mb-0 pb-0">
             <span>{{ $firstWord }}</span>{{ $secondWord ? ' ' . $secondWord : '' }}
@@ -12,7 +17,7 @@
     </div>
 
     <div class="row g-2 course_slider mb-5">
-        @foreach (courseByCategory([$category?->id], 6, true) ?? [] as $course)
+        @foreach (courseByCategory($categoryIds, 6, true) ?? [] as $course)
             <div class="col-md-4 col-sm-6">
                 <x-product-card :product="$course" class="mb-0" />
             </div>
