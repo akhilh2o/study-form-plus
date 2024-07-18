@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-breadcrumb title="Checkout"
-        :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Carts', 'url' => route('carts.index')], ['text' => 'Checkout']]" />
+        :links="[['text' => 'Home', 'url' => route('home')], ['text' => 'Carts', 'url' => route('carts.index')], ['text' => 'Payment']]" />
+
     <section class="carts pt-50 pb-120">
         <div class="container">
             <div class="row">
@@ -9,8 +10,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="alert alert-success">
-                                        <p><i class="fas fa-check"></i> Your Order has been confirmed! please check your email to track the order.</p>
+                                    <div class="alert alert-info">
+                                        <p><i class="fas fa-check"></i> Please pay {!! currencySymbol() !!} {{ $order?->total }} to complete your order.</p>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +74,7 @@
                                         <strong class="title">Order Status</strong>
                                         <ul>
                                             <li>
-                                                <a href="javascript:void(0)" class="badge {{ $order?->status == 'pending' ? 'bg-warning' : 'bg-success' }} text-white">{{ ucfirst($order?->status) }}</a>
+                                                <a href="javascript:void(0)" class="badge bg-warning text-white">{{ ucfirst($order?->status) }}</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -83,7 +84,7 @@
                                         <strong class="title">Payment Status</strong>
                                         <ul>
                                             <li>
-                                                <a href="javascript:void(0)" class="badge {{ $order?->payment_status ? 'bg-success' : 'bg-danger' }} text-white">{{ $order?->payment_status ? 'Paid' :
+                                                <a href="javascript:void(0)" class="badge bg-danger text-white">{{ $order?->payment_status ? 'Paid' :
                                                     'Unpaid' }}</a>
                                             </li>
                                         </ul>
@@ -167,14 +168,56 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <form action="{{ route('checkout.payment.success') }}" method="POST">
+                @csrf
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="text-end">
+                            <button type="submit" id="paynow" 
+                            class="btn btn-lg btn-dark px-4 rounded-pill">Pay Now</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
     @push('scripts')
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         $(document).ready(function () {
-            sessionStorage.setItem("coupon_code", '');
+            let callbackUrl = "{{ route('checkout.payment.success') }}";
+            var options = {
+                "key": "{{ env('RAZOR_KEY') }}", 
+                "amount": "{{ $razorpayOrder['amount'] }}",
+                "currency": "{{ $razorpayOrder['currency'] }}",
+                "name": "{{ config('app.name') }}", //your business name
+                "description": "Payment for the order id {{ $razorpayOrder['id'] }}",
+                "image": "https://www.studyforumplus.in/public/assets/images/logo.jpeg",
+                "order_id": "{{ $razorpayOrder['id'] }}", 
+                "callback_url": callbackUrl,
+                "prefill": { 
+                    "name": "{{ $order?->name }}", 
+                    "email": "{{ $order?->email }}", 
+                    "contact": "{{ $order?->mobile }}" 
+                },
+                "notes": {
+                    "address": "{{ $order?->full_address }}"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+
+            // document.getElementById('paynow').click();  
+
+            var rzp1 = new Razorpay(options);
+
+            document.getElementById('paynow').onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
         });
+
     </script>
     @endpush
 </x-app-layout>
