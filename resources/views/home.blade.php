@@ -1,45 +1,162 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Optional: Add custom styles for Owl Carousel */
+        .banner-content {
+            position: relative;
+            z-index: 10;
+        }
+        .banner-thumb {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .banner-section {
+    position: relative;
+}
+
+.owl-dots {
+    text-align: center; /* Center the dots */
+    position: absolute;
+    bottom: 20px; /* Adjust the distance from the bottom */
+    width: 100%;
+    z-index: 10; /* Ensure dots are above other elements */
+}
+
+.owl-dot {
+    background: rgba(0, 0, 0, 0.5); /* Background color for inactive dots */
+    border-radius: 50%;
+    width: 12px; /* Size of dots */
+    height: 12px; /* Size of dots */
+    margin: 0 5px; /* Spacing between dots */
+    display: inline-block;
+    position: relative;
+    top: 50px;
+}
+
+.owl-dot.active {
+    background: #fff; /* Background color for the active dot */
+}
+
+.owl-carousel .owl-nav {
+    display: none; /* Hide default navigation arrows */
+}
+
+#main-carousel{
+    z-index: 9999;
+}
+.notice-board{
+    z-index: 9;
+    border: 5px solid #F7941F;
+    border-radius: 10px;
+    padding: 20px 0;
+    background-color: #10147B;
+    height: max-content;
+}
+
+.notice-board .box p{
+    color: #F7941F;
+}
+.notice-board .box ul li button{
+    background-color: #F7941F;
+    width: 100%;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+    </style>
 <x-app-layout>
     <!-- ~~~ Banner Section ~~~ -->
     <section class="banner-section banner-overlay bg_img"
-        data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
-        <div class="container">
-            <div class="banner-content cl-white">
-                @if (!empty(setting('general_settings')?->option_value['banner_subheading']))
-                    <h3 class="subtitle">{{ setting('general_settings')?->option_value['banner_subheading'] }}</h3>
-                @endif
+         data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
+    <div class="container-fluid" >
+        <div class="row mx-lg-3 mx-md-2  gap-lg-0 g-3 " >
+            <!-- Left Column -->
+            <div class="col-lg-3 col-md-6 notice-board" >
+                <div class="box text-center p-3">
+                 
+                   <span >
+                      <h6 class="bg-white py-2 w-100 rounded-3 fw-bold"> NOTICE BOARD</h6>
+                   </span>
+                   <p class="mt-4 fw-bold">IMPORTANT REMINDER</p>
+                   <hr>
+                   <ul class="text-white px-4" style="list-style: disc; text-align:left;">
+                    <li style="list-style: disc; ">
+                    Daily Live Classes are Taking Place On COC Commerce School
+                    </li>
+                    <li style="list-style: disc; ">
+                    Get Latest Studio Recorded Classes For CMA & CA June/Dec 24 Attempt
+                    </li>
+                    <li style="list-style: disc; ">
+                    Get Latest Studio Recorded Classes For CMA & CA June/Dec 24 Attempt
+                    </li>
+                   </ul>
+                </div>
+            </div>
+            
+            <!-- Middle Column with .banner-thumb Carousel -->
+            <div class="col-lg-6 col-md-6 d-lg-block d-md-none d-none">
+           
+        <div id="bannerCarousel" class="owl-carousel owl-theme">
+            <!-- Slide 1 -->
+            <div class="item">
+          
+        <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
+    
 
-                @if (!empty(setting('general_settings')?->option_value['banner_heading']))
-                    <h1 class="title">{{ setting('general_settings')?->option_value['banner_heading'] }}</h1>
-                @endif
+            </div>
+            <div class="item">
+          
+        <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
+  
 
-                @if (!empty(setting('general_settings')?->option_value['banner_description']))
-                    <p>{{ setting('general_settings')?->option_value['banner_description'] }}</p>
-                @endif
+            </div>
+            <div class="item">
+            
+        <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
+    
 
-                <div class="banner-button-area">
-                    @if (!empty(setting('general_settings')?->option_value['banner_action_name1']))
-                        <a href="{{ setting('general_settings')?->option_value['banner_action_url1'] ?? '#' }}" class="custom-button btn-md">
-                            {{ setting('general_settings')?->option_value['banner_action_name1'] }}
-                            <i class="fas fa-play-circle"></i>
-                        </a>
-                    @endif
+            </div>
+            </div>
+            </div>
 
-                    @if (!empty(setting('general_settings')?->option_value['banner_action_name2']))
-                        <a href="{{ setting('general_settings')?->option_value['banner_action_url2'] ?? '#' }}" class="custom-button btn-md theme-one">
-                            {{ setting('general_settings')?->option_value['banner_action_name2'] }}
-                            <i class="flaticon-tap-1"></i>
-                        </a>
-                    @endif
+            <!-- Right Column -->
+            <div class="col-lg-3 col-md-6  notice-board" >
+                <div class="box text-center p-3">
+                 
+                  <p>Click & Visit Our</p>
+                   <p class="mt-4 fw-bold">👇Different Courses👇</p>
+                   <hr>
+                   <ul class="text-white px-4" style="list-style: disc; text-align:left;">
+                    <li>
+                   <button>CA (Chartered Accountant)</button>
+                    </li>
+                    <li>
+                   <button>CMA (Cost and management accounting)</button>
+                    </li>
+                    <li>
+                   <button>11th</button>
+                    </li>
+                    <li>
+                   <button>12th</button>
+                    </li>
+                    <li>
+                   <button>B.COM</button>
+                    </li>
+                   
+                   </ul>
                 </div>
             </div>
         </div>
-        <div class="banner-thumb">
-            <div class="rounded-shape shape-1"></div>
-            <div class="rounded-shape shape-2"></div>
-            <div class="rounded-shape shape-3"></div>
-            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-        </div>
-    </section>
+    </div>
+</section>
+
+
+
+
+
 
     <!-- ~~~ Banner Section ~~~ -->
     @if (setting('general_settings')?->option_value['banner_text'])
@@ -295,6 +412,27 @@
     <!-- ~~~ Testimonial Section ~~~ -->
 
     @push('scripts')
+
+
+ <!-- jQuery -->
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#bannerCarousel").owlCarousel({
+            loop: true,                // Infinite loop
+            margin: 10,                // Margin between slides
+            nav: false,                // Disable navigation arrows
+            dots: true,                // Enable dots
+            autoplay: true,           // Enable autoplay
+            autoplayTimeout: 3000,    // Autoplay timeout in milliseconds
+            items: 1,                  // Number of items to display
+            autoplayHoverPause: true  // Pause autoplay on hover
+        });
+    });
+</script>
+
+
         <style>
             .course_slider .owl-nav {
                 position: absolute;

@@ -18,7 +18,7 @@
 
     <div class="row g-2 course_slider mb-5">
         @foreach (courseByCategory($categoryIds, 6, true) ?? [] as $course)
-            <div class="col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <x-product-card :product="$course" class="mb-0" />
             </div>
         @endforeach
