@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Razorpay\Api\Api;
 
 class CheckoutController extends Controller
 {
@@ -17,6 +18,7 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
         $this->cartItems();
+
         return view('checkout')
             ->with('carts', $this->carts)
             ->with('courses', $this->courses);
@@ -92,11 +94,81 @@ class CheckoutController extends Controller
             }
         }
 
-        $order->payment_status   = true;
+        $order->payment_status   = false;
         $order->save();
 
         $order->items()->createMany($orderItems);
         session()->put('cart', []);
+
+        // payment gateway
+        return to_route('checkout.payment', [$order])->with('success', 'Please make payment to complete your order');
+
+        // try {
+        //     Mail::to($order->email)->send(new OrderSuccess($order));
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
+
+        // return to_route('checkout.success', [$order])
+        //     ->with('success', 'Your Order has been completed');
+    }
+
+    public function payment(Order $order)
+    {
+
+        $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
+
+        $razorpayOrder = $api->order->create(
+            array(
+                'receipt'   =>  "" . $order->id . "",
+                'amount'    =>  $order?->total * 100,
+                'currency'  => 'INR',
+                // 'notes'     => array('key1' => 'value3', 'key2' => 'value2')s
+            )
+        )->toArray();
+
+        if (array_key_exists('error', $razorpayOrder)) {
+            return back()->with('error', $razorpayOrder['error']['description']);
+        }
+
+        $order->transaction_id = $razorpayOrder['id'];
+        $order->payment_status = false;
+        $order->save();
+        $order->load('items');
+
+        return view('payment', compact('order', 'razorpayOrder'));
+    }
+
+    public function cartItems()
+    {
+        $this->carts = collect(session('cart', []));
+        $this->courses = Course::whereIn('id', $this->carts->pluck('id'))->get();
+    }
+
+    public function success(Request $request)
+    {
+        $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
+
+        $api->utility->verifyPaymentSignature(array(
+            'razorpay_order_id' => $request->razorpay_order_id,
+            'razorpay_payment_id' => $request->razorpay_payment_id,
+            'razorpay_signature' => $request->razorpay_signature,
+        ));
+
+        $order = Order::where('transaction_id', $request->razorpay_order_id)->first();
+
+        if (!$order) {
+            return back()->with('error', 'Order not found');
+        }
+
+        $order->status = 'confirmed';
+        $order->payment_status = true;
+        $order->payment_id = $request->razorpay_payment_id;
+        $order->payment_type = 'Razorpay';
+        $order->payment_detail = json_encode($request->all());
+        $order->save();
+
+        $order->load('items');
 
         try {
             Mail::to($order->email)->send(new OrderSuccess($order));
@@ -104,19 +176,9 @@ class CheckoutController extends Controller
             //throw $th;
         }
 
-        return to_route('checkout.success', [$order])
+        return view('checkout_success')
+            ->with('order', $order)
             ->with('success', 'Your Order has been completed');
-    }
-    public function cartItems()
-    {
-        $this->carts = collect(session('cart', []));
-        $this->courses = Course::whereIn('id', $this->carts->pluck('id'))->get();
-    }
-
-    public function success(Order $order)
-    {
-        $order->load('items');
-        return view('checkout_success')->with('order', $order);
     }
 
     public function verifyCoupon(Request $request)

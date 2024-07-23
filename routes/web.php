@@ -61,7 +61,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.store');
 
-    Route::get('checkout/{order}/success',[CheckoutController::class,'success'])->name('checkout.success');
+    Route::get('checkout/{order}/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
+    Route::post('checkout/payment/success',[CheckoutController::class,'success'])->name('checkout.payment.success');
 
     Route::post('/checkout/verify-coupon', [CheckoutController::class,'verifyCoupon'])->name('checkout.verify-coupon');
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');

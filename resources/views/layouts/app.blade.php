@@ -50,7 +50,7 @@
             <div class="d-flex justify-content-end align-items-center justify-content-between py-2">
                 <div class="text-end">
                     <p class="text-white m-0 small" style="line-height: 0px">
-                        Study Form Plus
+                        Study Forum Plus
                     </p>
                 </div>
                 <div class="right ">

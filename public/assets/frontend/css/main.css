@@ -4030,7 +4030,7 @@ div[class*="col"]:nth-of-type(4n + 4) .feature-item:hover .content .shape {
     font-size: 60px;
     line-height: 1;
     content: "\f10d";
-    background: -webkit-linear-gradient(#e6eff9, #cbe1f8);
+    background: -webkit-linear-gradient(#e6eff9, #cbe1f80a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 600;

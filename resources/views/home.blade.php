@@ -89,8 +89,7 @@
                         <div class="content">
                             <h6 class="title">Education Services</h6>
                             <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
+                            <p class="fs-sm"><p>
                         </div>
                     </div>
                 </div>
@@ -102,8 +101,7 @@
                         <div class="content">
                             <h6 class="title">Online/Offline Class</h6>
                             <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
+                            <p class="fs-sm"></p>
                         </div>
                     </div>
                 </div>
@@ -115,8 +113,7 @@
                         <div class="content">
                             <h6 class="title">Expert Mentor</h6>
                             <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
+                            <p class="fs-sm"></p>
                         </div>
                     </div>
                 </div>
@@ -128,8 +125,7 @@
                         <div class="content">
                             <h6 class="title">Lifetime Support</h6>
                             <span class="shape"></span>
-                            <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis
-                                fermentum metus.</p>
+                            <p class="fs-sm"></p>
                         </div>
                     </div>
                 </div>
