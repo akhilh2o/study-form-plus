@@ -11,17 +11,17 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         foreach ($this->data() as $item) {
-            $permission = Permission::create([
+            $permission = Permission::firstOrCreate([
                 'name'    =>    $item['name'],
                 'title'    =>    $item['title'],
             ]);
 
             if (count($item['children']) > 0) {
                 foreach ($item['children'] as $child) {
-                    Permission::create([
-                        'name'        =>    $child['name'],
+                    Permission::firstOrCreate([
+                        'name'             =>    $child['name'],
                         'permission_id'    =>    $permission->id,
-                        'title'        =>    $child['title'],
+                        'title'            =>    $child['title'],
                     ]);
                 }
             }
@@ -192,6 +192,28 @@ class PermissionSeeder extends Seeder
                     ['name'    => 'faculties_show',   'title' =>    'Faculty Show'],
                     ['name'    => 'faculties_update', 'title' =>    'Faculty Update'],
                     ['name'    => 'faculties_delete', 'title' =>    'Faculty Delete'],
+                ]
+            ],
+
+            [
+                'name'        =>    'banners_access',
+                'title'        =>    'Banners Management',
+                'children'    =>    [
+                    ['name'    => 'banners_create', 'title' =>    'Banner Create'],
+                    ['name'    => 'banners_show',   'title' =>    'Banner Show'],
+                    ['name'    => 'banners_update', 'title' =>    'Banner Update'],
+                    ['name'    => 'banners_delete', 'title' =>    'Banner Delete'],
+                ]
+            ],
+
+            [
+                'name'        =>    'reviews_access',
+                'title'        =>    'Reviews Management',
+                'children'    =>    [
+                    ['name'    => 'reviews_create', 'title' =>    'Review Create'],
+                    ['name'    => 'reviews_show',   'title' =>    'Review Show'],
+                    ['name'    => 'reviews_update', 'title' =>    'Review Update'],
+                    ['name'    => 'reviews_delete', 'title' =>    'Review Delete'],
                 ]
             ],
 

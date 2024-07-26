@@ -66,4 +66,28 @@ class SettingController extends Controller
         cache()->flush();
         return back()->withSuccess('SUCCESS !! Setting is successfully updated');
     }
+
+    public function notices(Request $request){
+        $notices = setting('notices') ?? NULL;
+        return view('admin.settings.notice_setting', compact('notices'));
+    }
+
+    public function noticeStore(Request $request)
+    {
+        $option_value = array(
+            'notice_1'              => $request->input('notice_1'),
+            'notice_2'              => $request->input('notice_2'),
+            'notice_3'              => $request->input('notice_3'),
+            'notice_4'              => $request->input('notice_4'),
+        );
+
+        // return $option_value;
+
+        Setting::updateOrCreate(['id' => $request->input('RecordId')], [
+            'option_key'   => 'notices',
+            'option_value' => $option_value
+        ]);
+        cache()->flush();
+        return back()->withSuccess('SUCCESS !! Notice is successfully updated');
+    }
 }

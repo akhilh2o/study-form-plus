@@ -190,6 +190,27 @@
                     </li>
                 @endcanany
 
+                @canany(['banners_access', 'banners_create'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-users"></i>
+                            <span>Banner</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('banners_create')
+                                <li><a href="{{ route('admin.banners.create') }}">New Banner</a></li>
+                            @endcan
+
+                            @can('banners_access')
+                                <li><a href="{{ route('admin.banners.index') }}">All Banner</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcanany
+                @canany(['reviews_access', 'reviews_create'])
+                <x-areviews-areviews:admin-sidebar-links />
+                @endcanany
+
                 @canany(['roles_access', 'permissions_access', 'users_access'])
                     <li class="menu-title">Manage Users</li>
                     @can('roles_access')
@@ -233,7 +254,13 @@
                                         General Settings
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('admin.settings.notices') }}" class="active">
+                                        Notice Settingss
+                                    </a>
+                                </li>
                             @endcan
+
                         </ul>
                     </li>
                 @endcanany

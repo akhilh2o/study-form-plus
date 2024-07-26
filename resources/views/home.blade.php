@@ -1,157 +1,179 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Optional: Add custom styles for Owl Carousel */
-        .banner-content {
-            position: relative;
-            z-index: 10;
-        }
-        .banner-thumb {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
-        .banner-section {
-    position: relative;
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    /* Optional: Add custom styles for Owl Carousel */
+    .banner-content {
+        position: relative;
+        z-index: 10;
+    }
 
-.owl-dots {
-    text-align: center; /* Center the dots */
-    position: absolute;
-    bottom: 20px; /* Adjust the distance from the bottom */
-    width: 100%;
-    z-index: 10; /* Ensure dots are above other elements */
-}
+    .banner-thumb {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
 
-.owl-dot {
-    background: rgba(0, 0, 0, 0.5); /* Background color for inactive dots */
-    border-radius: 50%;
-    width: 12px; /* Size of dots */
-    height: 12px; /* Size of dots */
-    margin: 0 5px; /* Spacing between dots */
-    display: inline-block;
-    position: relative;
-    top: 50px;
-}
+    .banner-section {
+        position: relative;
+    }
 
-.owl-dot.active {
-    background: #fff; /* Background color for the active dot */
-}
+    .owl-dots {
+        text-align: center;
+        /* Center the dots */
+        position: absolute;
+        bottom: 20px;
+        /* Adjust the distance from the bottom */
+        width: 100%;
+        z-index: 10;
+        /* Ensure dots are above other elements */
+    }
 
-.owl-carousel .owl-nav {
-    display: none; /* Hide default navigation arrows */
-}
+    .owl-dot {
+        background: rgba(0, 0, 0, 0.5);
+        /* Background color for inactive dots */
+        border-radius: 50%;
+        width: 12px;
+        /* Size of dots */
+        height: 12px;
+        /* Size of dots */
+        margin: 0 5px;
+        /* Spacing between dots */
+        display: inline-block;
+        position: relative;
+        top: 50px;
+    }
 
-#main-carousel{
-    z-index: 9999;
-}
-.notice-board{
-    z-index: 9;
-    border: 5px solid #F7941F;
-    border-radius: 10px;
-    padding: 20px 0;
-    background-color: #10147B;
-    height: max-content;
-}
+    .owl-dot.active {
+        background: #fff;
+        /* Background color for the active dot */
+    }
 
-.notice-board .box p{
-    color: #F7941F;
-}
-.notice-board .box ul li button{
-    background-color: #F7941F;
-    width: 100%;
-    color: white;
-    border: none;
-    border-radius: 10px;
-}
-    </style>
+    .owl-carousel .owl-nav {
+        display: none;
+        /* Hide default navigation arrows */
+    }
+
+    #main-carousel {
+        z-index: 9999;
+    }
+
+    .notice-board {
+        z-index: 9;
+        border: 5px solid #F7941F;
+        border-radius: 10px;
+        padding: 20px 0;
+        background-color: #10147B;
+        height: max-content;
+    }
+
+    .notice-board .box p {
+        color: #F7941F;
+    }
+
+    .notice-board .box ul li button {
+        background-color: #F7941F;
+        width: 100%;
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+</style>
 <x-app-layout>
     <!-- ~~~ Banner Section ~~~ -->
     <section class="banner-section banner-overlay bg_img"
-         data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
-    <div class="container-fluid" >
-        <div class="row mx-lg-3 mx-md-2  gap-lg-0 g-3 " >
-            <!-- Left Column -->
-            <div class="col-lg-3 col-md-6 notice-board" >
-                <div class="box text-center p-3">
-                 
-                   <span >
-                      <h6 class="bg-white py-2 w-100 rounded-3 fw-bold"> NOTICE BOARD</h6>
-                   </span>
-                   <p class="mt-4 fw-bold">IMPORTANT REMINDER</p>
-                   <hr>
-                   <ul class="text-white px-4" style="list-style: disc; text-align:left;">
-                    <li style="list-style: disc; ">
-                    Daily Live Classes are Taking Place On COC Commerce School
-                    </li>
-                    <li style="list-style: disc; ">
-                    Get Latest Studio Recorded Classes For CMA & CA June/Dec 24 Attempt
-                    </li>
-                    <li style="list-style: disc; ">
-                    Get Latest Studio Recorded Classes For CMA & CA June/Dec 24 Attempt
-                    </li>
-                   </ul>
+        data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
+        <div class="container-fluid">
+            <div class="row mx-lg-3 mx-md-2  gap-lg-0 g-3 ">
+                <!-- Left Column -->
+                <div class="col-lg-3 col-md-6 notice-board">
+                    <div class="box text-center p-3">
+
+                        <span>
+                            <h6 class="bg-white py-2 w-100 rounded-3 fw-bold"> NOTICE BOARD</h6>
+                        </span>
+                        <p class="mt-4 fw-bold">IMPORTANT REMINDER</p>
+                        <hr>
+                        @php $notice_value = !empty($notices->option_value) ? $notices->option_value : ''; @endphp
+                        <ul class="text-white px-4" style="list-style: disc; text-align:left;">
+                            @if ($notice_value['notice_1'] ?? false)
+                                <li style="list-style: disc; ">
+                                    {{ $notice_value['notice_1'] ?? '' }}
+                                </li>
+                            @endif
+                            @if ($notice_value['notice_2'] ?? false)
+                                <li style="list-style: disc; ">
+                                    {{ $notice_value['notice_2'] ?? '' }}
+                                </li>
+                            @endif
+                            @if ($notice_value['notice_3'] ?? false)
+                                <li style="list-style: disc; ">
+                                    {{ $notice_value['notice_3'] ?? '' }}
+                                </li>
+                            @endif
+                            @if ($notice_value['notice_4'] ?? false)
+                                <li style="list-style: disc; ">
+                                    {{ $notice_value['notice_4'] ?? '' }}
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Middle Column with .banner-thumb Carousel -->
-            <div class="col-lg-6 col-md-6 d-lg-block d-md-none d-none">
-           
-        <div id="bannerCarousel" class="owl-carousel owl-theme">
-            <!-- Slide 1 -->
-            <div class="item">
-          
-        <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-    
 
-            </div>
-            <div class="item">
-          
-        <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-  
+                <!-- Middle Column with .banner-thumb Carousel -->
+                <div class="col-lg-6 col-md-6 d-lg-block d-md-none d-none">
 
-            </div>
-            <div class="item">
-            
-        <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-    
+                    <div id="bannerCarousel" class="owl-carousel owl-theme">
+                        <!-- Slide 1 -->
+                        @foreach ($banners ?? [] as $banner)
+                        <div class="item">
+                            <img src="{{ $banner->imageUrl() }}" alt="{{ $banner->alt_text }}">
+                        </div>
+                        @endforeach
 
-            </div>
-            </div>
-            </div>
+                        {{-- <div class="item">
+                            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
+                        </div> --}}
+                    </div>
+                </div>
 
-            <!-- Right Column -->
-            <div class="col-lg-3 col-md-6  notice-board" >
-                <div class="box text-center p-3">
-                 
-                  <p>Click & Visit Our</p>
-                   <p class="mt-4 fw-bold">👇Different Courses👇</p>
-                   <hr>
-                   <ul class="text-white px-4" style="list-style: disc; text-align:left;">
-                    <li>
-                   <button>CA (Chartered Accountant)</button>
-                    </li>
-                    <li>
-                   <button>CMA (Cost and management accounting)</button>
-                    </li>
-                    <li>
-                   <button>11th</button>
-                    </li>
-                    <li>
-                   <button>12th</button>
-                    </li>
-                    <li>
-                   <button>B.COM</button>
-                    </li>
-                   
-                   </ul>
+                <!-- Right Column -->
+                <div class="col-lg-3 col-md-6  notice-board">
+                    <div class="box text-center p-3">
+
+                        <p>Click & Visit Our</p>
+                        <p class="mt-4 fw-bold">👇Different Courses👇</p>
+                        <hr>
+                        <ul class="text-white px-4" style="list-style: disc; text-align:left;">
+                            <li>
+                                <button>CA (Chartered Accountant)</button>
+                            </li>
+                            <li>
+                                <button>CMA (Cost and management accounting)</button>
+                            </li>
+                            <li>
+                                <button>11th</button>
+                            </li>
+                            <li>
+                                <button>12th</button>
+                            </li>
+                            <li>
+                                <button>B.COM</button>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
@@ -206,7 +228,8 @@
                         <div class="content">
                             <h6 class="title">Education Services</h6>
                             <span class="shape"></span>
-                            <p class="fs-sm"><p>
+                            <p class="fs-sm">
+                            <p>
                         </div>
                     </div>
                 </div>
@@ -412,25 +435,37 @@
     <!-- ~~~ Testimonial Section ~~~ -->
 
     @push('scripts')
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
+        <script>
+            if (localStorage.getItem("quick_contact") != '1') {
+                setTimeout(() => {
+                    new bootstrap.Modal('#quick_contact_popup').show(true);
+                }, 5000);
+            }
 
- <!-- jQuery -->
- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $("#bannerCarousel").owlCarousel({
-            loop: true,                // Infinite loop
-            margin: 10,                // Margin between slides
-            nav: false,                // Disable navigation arrows
-            dots: true,                // Enable dots
-            autoplay: true,           // Enable autoplay
-            autoplayTimeout: 3000,    // Autoplay timeout in milliseconds
-            items: 1,                  // Number of items to display
-            autoplayHoverPause: true  // Pause autoplay on hover
-        });
-    });
-</script>
+            $(document).ready(function() {
+                $("#quick_contact_form").submit(function() {
+                    localStorage.setItem("quick_contact", "1");
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $("#bannerCarousel").owlCarousel({
+                    loop: true, // Infinite loop
+                    margin: 10, // Margin between slides
+                    nav: false, // Disable navigation arrows
+                    dots: true, // Enable dots
+                    autoplay: true, // Enable autoplay
+                    autoplayTimeout: 3000, // Autoplay timeout in milliseconds
+                    items: 1, // Number of items to display
+                    autoplayHoverPause: true // Pause autoplay on hover
+                });
+            });
+        </script>
 
 
         <style>
@@ -442,28 +477,28 @@
         </style>
         <script type="text/javascript">
             /*$('.course_slider').owlCarousel({
-                loop: false,
-                margin: 10,
-                nav: true,
-                dots: false,
-                autoplay: true,
-                autoplayHoverPause: true,
-                navText: [
-                    '<span class="btn btn-sm btn-dark me-1"><i class="fas fa-arrow-left"></i></span>',
-                    '<span class="btn btn-sm btn-dark"><i class="fas fa-arrow-right"></i></span>'
-                ],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1200: {
-                        items: 3
-                    }
-                }
-            });*/
+                        loop: false,
+                        margin: 10,
+                        nav: true,
+                        dots: false,
+                        autoplay: true,
+                        autoplayHoverPause: true,
+                        navText: [
+                            '<span class="btn btn-sm btn-dark me-1"><i class="fas fa-arrow-left"></i></span>',
+                            '<span class="btn btn-sm btn-dark"><i class="fas fa-arrow-right"></i></span>'
+                        ],
+                        responsive: {
+                            0: {
+                                items: 1
+                            },
+                            600: {
+                                items: 2
+                            },
+                            1200: {
+                                items: 3
+                            }
+                        }
+                    });*/
 
             let items = document.querySelectorAll('.carousel .carousel-item')
             items.forEach((el) => {

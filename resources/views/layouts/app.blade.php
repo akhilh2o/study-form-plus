@@ -93,7 +93,7 @@
             <div class="d-flex justify-content-end align-items-center justify-content-between py-2">
                 <div class="text-end">
                     <p class="text-white m-0 small" style="line-height: 0px">
-                        Study Forum Plus
+                        {{ config('app.name', 'Study Forum Plus') }}
                     </p>
                 </div>
                 <div class="right ">
@@ -667,19 +667,7 @@
     <script src="{{ asset('assets/frontend/js/nice-select.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/owl.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
-    <script>
-        if (localStorage.getItem("quick_contact") != '1') {
-            setTimeout(() => {
-                new bootstrap.Modal('#quick_contact_popup').show(true);
-            }, 5000);
-        }
-
-        $(document).ready(function() {
-            $("#quick_contact_form").submit(function() {
-                localStorage.setItem("quick_contact", "1");
-            });
-        });
-    </script>
+    
     @stack('scripts')
 </body>
 

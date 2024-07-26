@@ -37,10 +37,9 @@
                 <div class="col-md-8 col-sm-12">
                     <h4 class="title mb-2">{{ $course?->title }}</h4>
                     <div class="rating mb-3 d-flex align-items-center gap-3 ">
-                        <a class="text-white  px-2" style="border-radius: 3.2rem; font-size: 14px; background-color : #2eca7f; ">5 <i class="fa fa-star" style="font-size: 12px;">
-
-                            </i></a>
-                        <a href="#rating&review">2,000 ratings </a>
+                        <a class="text-white  px-2" style="border-radius: 3.2rem; font-size: 14px; background-color : #2eca7f;"> 
+                            {{ $course->reviews?->avg('rating') ?? '0' }} <i class="fa fa-star" style="font-size: 12px;"></i></a>
+                        <a href="#rating&review">{{ $course?->reviews?->count() }} ratings </a>
                     </div>
                     <p class="mb-3">{{ $course?->category?->name }}</p>
                     <div class="row mb-3 gap-2">
@@ -239,9 +238,9 @@
             @if ($relatedCourses->count())
             <h3 class="mt-5 mb-4">Related Courses</h3>
             <div class="row">
-                @foreach ($relatedCourses as $course)
+                @foreach ($relatedCourses as $product)
                 <div class="col-lg-4 col-md-3 col-sm-6">
-                    <x-product-card :product="$course" />
+                    <x-product-card :product="$product" />
                 </div>
                 @endforeach
             </div>
@@ -249,63 +248,67 @@
             @endif
 
             <div class="container mt-5" id="rating&review">
-  <div class="row">
-    <!-- Left side: Form --> <h4>Leave a Review</h4>
-    <div class="col-md-5 mt-3">
-     
-      <form id="reviewForm">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <label for="rating">Rating</label>
-          <div class="star-rating">
-            <i class="fas fa-star" data-index="0"></i>
-            <i class="fas fa-star" data-index="1"></i>
-            <i class="fas fa-star" data-index="2"></i>
-            <i class="fas fa-star" data-index="3"></i>
-            <i class="fas fa-star" data-index="4"></i>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="review">Review</label>
-          <textarea class="form-control" id="review" rows="3" placeholder="Your review"></textarea>
-        </div>
-        <button type="submit" class="btn text-white" style="background-color:#1c1f23;">Submit</button>
-      </form>
-    </div>
-    <!-- Right side: Reviews -->
-    <div class="col-md-7 mt-3">
-      <div class="review-item">
-        <div class="review fw-bold">John Doe</div>
-        <div class="star-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-        <div class="review-text">
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget ligula et est hendrerit luctus."
-        </div>
-      </div>
-      <div class="review-item">
-        <div class="review fw-bold">Jane Smith</div>
-        <div class="star-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-        </div>
-        <div class="review-text">
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+               
+                <div class="row">
+                    <!-- Left side: Form --> 
+                    {{-- <h4>Leave a Review</h4> --}}
+                    <div class="col-md-5 mt-3">
+                     <x-areviews-areviews:review-form :model="$course" />
+                    {{-- <form id="reviewForm">
+                        <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <div class="star-rating">
+                            <i class="fas fa-star" data-index="0"></i>
+                            <i class="fas fa-star" data-index="1"></i>
+                            <i class="fas fa-star" data-index="2"></i>
+                            <i class="fas fa-star" data-index="3"></i>
+                            <i class="fas fa-star" data-index="4"></i>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label for="review">Review</label>
+                        <textarea class="form-control" id="review" rows="3" placeholder="Your review"></textarea>
+                        </div>
+                        <button type="submit" class="btn text-white" style="background-color:#1c1f23;">Submit</button>
+                    </form> --}}
+                    </div>
+                    <!-- Right side: Reviews -->
+                    
+                    <div class="col-md-7 mt-3">
+                        <x-areviews-areviews:reviews :model="$course" column="1" limit="20" :paginate="true" />
+                        {{-- <div class="review-item">
+                            <div class="review fw-bold">John Doe</div>
+                            <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-text">
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget ligula et est hendrerit luctus."
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review fw-bold">Jane Smith</div>
+                            <div class="star-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-text">
+                            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
 
         </div>
 

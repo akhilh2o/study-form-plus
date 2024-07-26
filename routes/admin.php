@@ -79,5 +79,8 @@ Route::middleware(['auth', GatesMiddleware::class, ReferrerMiddleware::class])->
         Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
         Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
         Route::resource('faculties', \App\Http\Controllers\Admin\FacultyController::class);
+        Route::resource('banners', \App\Http\Controllers\Admin\BannerController::class);
+        Route::get('settings/notices', [\App\Http\Controllers\Admin\SettingController::class, 'notices'])->name('settings.notices');
+        Route::post('settings/notices', [\App\Http\Controllers\Admin\SettingController::class, 'noticeStore'])->name('settings.notices.store');
         Route::resource('settings', \App\Http\Controllers\Admin\SettingController::class);
     });

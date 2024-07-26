@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Faculty;
@@ -42,10 +43,15 @@ class HomeController extends Controller
             ->withCount('courses')
             ->get();
 
+        $banners = Banner::latest()->get();
+        $notices = setting('notices') ?? NULL;
+
         return view('home')->with('courses', $courses)
             ->with('testimonials', $testimonials)
             ->with('categories', $categories)
-            ->with('faculties', $faculties);
+            ->with('faculties', $faculties)
+            ->with('banners', $banners)
+            ->with('notices', $notices);
     }
 
     public function contact()
