@@ -5,6 +5,12 @@
         </a>
     </div>
     <div class="content">
+       <div class="rating mb-2">
+        <a href="#" class="text-white  px-2" style="border-radius: 3.2rem; font-size: 14px; background-color : #2eca7f; ">
+            {{ $product?->reviews?->avg('rating') ?? '0' }} <i class="fa fa-star" style="font-size: 12px;"></i>
+        </a>
+       </div>
+
         <h6 class="title mb-3">
             <a href="{{ route('course', [$product]) }}" class="lc-2">
                 {{ $product?->title }}

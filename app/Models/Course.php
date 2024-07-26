@@ -6,11 +6,13 @@ use App\Traits\ColumnFilterTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Takshak\Areviews\Traits\Models\ReviewModelTrait;
 
 class Course extends Model
 {
     use HasFactory;
     use ColumnFilterTrait;
+    use ReviewModelTrait;
 
     protected $guarded = [];
 

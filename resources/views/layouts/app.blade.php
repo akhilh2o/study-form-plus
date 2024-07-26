@@ -32,6 +32,49 @@
     @stack('styles')
 </head>
 
+<style>
+ .mega-dropdown .dropdown-menu a {
+  text-decoration: none;
+  color: #000000;
+}
+.mega-dropdown .dropdown-menu a .d-flex {
+  transition: all 0.5s;
+}
+.mega-dropdown .dropdown-menu .col-sm-6:nth-child(1) a:hover .d-flex {
+  background-color: var(--bs-warning-bg-subtle);
+}
+.mega-dropdown .dropdown-menu .col-sm-6:nth-child(2) a:hover .d-flex {
+  background-color: var(--bs-danger-bg-subtle);
+}
+.mega-dropdown .dropdown-menu .col-sm-6:nth-child(3) a:hover .d-flex {
+  background-color: var(--bs-success-bg-subtle);
+}
+.mega-dropdown .dropdown-menu .col-sm-6:nth-child(4) a:hover .d-flex {
+  background-color: var(--bs-secondary-bg-subtle);
+}
+.mega-dropdown .dropdown-menu .col-sm-6:nth-child(5) a:hover .d-flex {
+  background-color: var(--bs-tertiary-bg);
+}
+.mega-dropdown .dropdown-menu .col-sm-6:nth-child(6) a:hover .d-flex {
+  background-color: var(--bs-info-bg-subtle);
+}
+@media only screen and (min-width: 992px) {
+ .mega-dropdown .dropdown-menu {
+    width: 55vw;
+  }
+  .mega-dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+  .mega-dropdown .dropdown-menu.show {
+    display: flex;
+  }
+}
+
+.social-icons  li a .fab{
+    position: relative;
+    top: 6px;
+}
+</style>
 <body>
     <x-alertt-alert />
     <div class="all-sections">
@@ -50,7 +93,7 @@
             <div class="d-flex justify-content-end align-items-center justify-content-between py-2">
                 <div class="text-end">
                     <p class="text-white m-0 small" style="line-height: 0px">
-                        Study Forum Plus
+                        {{ config('app.name', 'Study Forum Plus') }}
                     </p>
                 </div>
                 <div class="right ">
@@ -168,6 +211,93 @@
                                     @endforeach
                                 </ul>
                             </li>
+                            <li class="nav-item mega-dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            All Courses
+          </a>
+          <div class="dropdown-menu px-3 rounded-3 border-0 shadow">
+            <div class="row">
+              <div class="col-sm-4">
+                <a href="#">
+                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                    <div class="icon px-3 bg-warning-subtle rounded-3 fs-1">
+                      <i class="bi bi-tv"></i>
+                    </div>
+                    <div class="text ps-3">
+                      <h5>CMA</h5>
+                    
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a href="#">
+                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                    <div class="icon px-3 bg-danger-subtle rounded-3 fs-1">
+                      <i class="bi bi-headphones"></i>
+                    </div>
+                    <div class="text ps-3">
+                      <h5>CMA</h5>
+                    
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a href="#">
+                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                    <div class="icon px-3 bg-success-subtle rounded-3 fs-1">
+                      <i class="bi bi-phone"></i>
+                    </div>
+                    <div class="text ps-3">
+                      <h5>CMA</h5>
+                    
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a href="#">
+                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                    <div class="icon px-3 bg-secondary-subtle rounded-3 fs-1">
+                      <i class="bi bi-laptop"></i>
+                    </div>
+                    <div class="text ps-3">
+                      <h5>CMA</h5>
+                    
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a href="#">
+                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                    <div class="icon px-3 bg-body-tertiary rounded-3 fs-1">
+                      <i class="bi bi-smartwatch"></i>
+                    </div>
+                    <div class="text ps-3">
+                      <h5>CMA</h5>
+                    
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a href="#">
+                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                    <div class="icon px-3 bg-info-subtle rounded-3 fs-1">
+                      <i class="bi bi-earbuds"></i>
+                    </div>
+                    <div class="text ps-3">
+                      <h5>CMA</h5>
+                    
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown">
@@ -266,6 +396,13 @@
                                     @endguest
                                 </ul>
                             </li>
+         
+
+              
+                        
+
+
+
                         </ul>
                         <ul class="menu d-lg-flex flex-wrap ms-auto">
                             <li class="wishlist me-3">
@@ -530,19 +667,7 @@
     <script src="{{ asset('assets/frontend/js/nice-select.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/owl.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
-    <script>
-        if (localStorage.getItem("quick_contact") != '1') {
-            setTimeout(() => {
-                new bootstrap.Modal('#quick_contact_popup').show(true);
-            }, 5000);
-        }
-
-        $(document).ready(function() {
-            $("#quick_contact_form").submit(function() {
-                localStorage.setItem("quick_contact", "1");
-            });
-        });
-    </script>
+    
     @stack('scripts')
 </body>
 
