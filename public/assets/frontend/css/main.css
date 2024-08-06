@@ -1697,7 +1697,7 @@ footer .container {
     margin: 0 !important;
 }
 
-.copyright-area .left,
+/* .copyright-area .left,
 .copyright-area .right {
     padding: 0 15px 20px;
 }
@@ -1707,7 +1707,7 @@ footer .container {
     .copyright-area .right {
         max-width: 50%;
     }
-}
+} */
 
 .social-icons {
     margin: -10px;
@@ -2219,6 +2219,7 @@ header.active {
     color: #07294d;
     text-transform: capitalize;
     position: relative;
+  
 }
 
 .menu li a:hover,

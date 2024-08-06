@@ -23,58 +23,83 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
     @if (setting('general_settings')?->option_value['favicon'])
-        <link rel="shortcut icon"
-            href="{{ asset('storage/' . setting('general_settings')?->option_value['favicon']) }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('storage/' . setting('general_settings')?->option_value['favicon']) }}" type="image/x-icon">
     @else
-        <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpeg') }}" type="image/x-icon">
     @endif
 
     @stack('styles')
 </head>
 
 <style>
- .mega-dropdown .dropdown-menu a {
-  text-decoration: none;
-  color: #000000;
-}
-.mega-dropdown .dropdown-menu a .d-flex {
-  transition: all 0.5s;
-}
-.mega-dropdown .dropdown-menu .col-sm-6:nth-child(1) a:hover .d-flex {
-  background-color: var(--bs-warning-bg-subtle);
-}
-.mega-dropdown .dropdown-menu .col-sm-6:nth-child(2) a:hover .d-flex {
-  background-color: var(--bs-danger-bg-subtle);
-}
-.mega-dropdown .dropdown-menu .col-sm-6:nth-child(3) a:hover .d-flex {
-  background-color: var(--bs-success-bg-subtle);
-}
-.mega-dropdown .dropdown-menu .col-sm-6:nth-child(4) a:hover .d-flex {
-  background-color: var(--bs-secondary-bg-subtle);
-}
-.mega-dropdown .dropdown-menu .col-sm-6:nth-child(5) a:hover .d-flex {
-  background-color: var(--bs-tertiary-bg);
-}
-.mega-dropdown .dropdown-menu .col-sm-6:nth-child(6) a:hover .d-flex {
-  background-color: var(--bs-info-bg-subtle);
-}
-@media only screen and (min-width: 992px) {
- .mega-dropdown .dropdown-menu {
-    width: 55vw;
-  }
-  .mega-dropdown:hover .dropdown-menu {
-    display: flex;
-  }
-  .mega-dropdown .dropdown-menu.show {
-    display: flex;
-  }
-}
+    .menu li a {
+        width: auto;
+    }
 
-.social-icons  li a .fab{
-    position: relative;
-    top: 6px;
-}
+    .mega-dropdown .dropdown-menu a {
+        text-decoration: none;
+        color: #000000;
+    }
+
+    .mega-dropdown .dropdown-menu a .d-flex {
+        transition: all 0.5s;
+    }
+
+    .mega-dropdown .dropdown-menu .col-sm-6:nth-child(1) a:hover .d-flex {
+        background-color: var(--bs-warning-bg-subtle);
+    }
+
+    .mega-dropdown .dropdown-menu .col-sm-6:nth-child(2) a:hover .d-flex {
+        background-color: var(--bs-danger-bg-subtle);
+    }
+
+    .mega-dropdown .dropdown-menu .col-sm-6:nth-child(3) a:hover .d-flex {
+        background-color: var(--bs-success-bg-subtle);
+    }
+
+    .mega-dropdown .dropdown-menu .col-sm-6:nth-child(4) a:hover .d-flex {
+        background-color: var(--bs-secondary-bg-subtle);
+    }
+
+    .mega-dropdown .dropdown-menu .col-sm-6:nth-child(5) a:hover .d-flex {
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    .mega-dropdown .dropdown-menu .col-sm-6:nth-child(6) a:hover .d-flex {
+        background-color: var(--bs-info-bg-subtle);
+    }
+
+    @media only screen and (min-width: 992px) {
+        .mega-dropdown .dropdown-menu {
+            width: 55vw;
+        }
+
+        .mega-dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .mega-dropdown .dropdown-menu.show {
+            display: flex;
+        }
+    }
+
+    /* .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 1rem;
+} */
+
+
+
+   
 </style>
+
 <body>
     <x-alertt-alert />
     <div class="all-sections">
@@ -84,31 +109,31 @@
             <div class="inner"></div>
         </div> --}}
         <span class="go-top">
-            <i class="fas fa-angle-up"></i>
+            <i class="fas fa-angle-up mt-2"></i>
         </span>
         <!-- ~~~ Loader & Go-Top ~~~ -->
 
         <!-- ~~~ Header Section ~~~ -->
         <div class="custom-container top-header" style="background-color: #202c45!important;color: #aab1c6;">
-            <div class="d-flex justify-content-end align-items-center justify-content-between py-2">
+            <div class="d-flex justify-content-end align-items-center justify-content-between py-2 container">
                 <div class="text-end">
-                    <p class="text-white m-0 small" style="line-height: 0px">
+                    <p class="text-white m-0 fs-6 fw-bold" style="line-height: 0px">
                         {{ config('app.name', 'Study Forum Plus') }}
                     </p>
                 </div>
                 <div class="right ">
                     <ul class="social-icons">
                         <li>
-                            <a href="#0" class=""><i class="fab fa-facebook-f"></i></a>
+                            <a href="#0" class=""><i class="fab fa-facebook-f mt-1" ></i></a>
                         </li>
                         <li>
-                            <a href="#0" class=""><i class="fab fa-twitter"></i></a>
+                            <a href="#0" class=""><i class="fab fa-twitter mt-1"></i></a>
                         </li>
                         <li>
-                            <a href="#0"><i class="fab fa-instagram"></i></a>
+                            <a href="#0"><i class="fab fa-instagram mt-1"></i></a>
                         </li>
                         <li>
-                            <a href="#0"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#0"><i class="fab fa-linkedin-in mt-1"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -122,15 +147,13 @@
                     <div class="logo">
                         <a href="{{ route('home') }}">
                             @if (setting('general_settings')?->option_value['logo'])
-                                <img src="{{ asset('storage/' . setting('general_settings')?->option_value['logo']) }}"
-                                    alt="logo">
+                            <img src="{{ asset('storage/' . setting('general_settings')?->option_value['logo']) }}" alt="logo">
                             @else
-                                <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
+                            <img src="{{ asset('assets/images/logo.jpeg') }}" alt="logo">
                             @endif
                         </a>
                     </div>
-                    <button class="navbar-toggler navbar-togglerBtn" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapsibleNavbar">
+                    <button class="navbar-toggler navbar-togglerBtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                         <i class="fas fa-bars"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -139,8 +162,7 @@
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                     Courses
                                 </a>
                                 <ul class="dropdown-menu">
@@ -150,68 +172,61 @@
                                         </a>
                                     </li>
                                     @foreach ($categories as $category)
-                                        <li class="nav-item dropdown d-flex justify-content-between">
-                                            <a href="{{ route('courses', ['category' => $category->slug]) }}">
-                                                {{ $category->name }}
-                                            </a>
+                                    <li class="nav-item dropdown d-flex justify-content-between">
+                                        <a href="{{ route('courses', ['category' => $category->slug]) }}" class="w-100">
+                                            {{ $category->name }}
+                                        </a>
 
-                                            @if ($category->children->count())
-                                                <a class="dropdown-item nav-link dropdown-toggle text-end"
-                                                    role="button" data-bs-toggle="dropdown">
+                                        @if ($category->children->count())
+                                        <a class="dropdown-item nav-link dropdown-toggle text-end" role="button" data-bs-toggle="dropdown">
+                                        </a>
+
+                                        <ul class="dropdown-submenu">
+                                            @foreach ($category->children ?? [] as $childrens)
+                                            <li class="nav-item dropdown d-flex justify-content-between">
+                                                <a href="{{ route('courses', ['category' => $childrens->slug]) }}" class="text-nowrap">
+                                                    {{ $childrens->name }}
+                                                </a>
+                                                @if ($childrens->children->count())
+                                                <a class="dropdown-item nav-link dropdown-toggle text-end" role="button" data-bs-toggle="dropdown">
                                                 </a>
 
                                                 <ul class="dropdown-submenu">
-                                                    @foreach ($category->children ?? [] as $childrens)
-                                                        <li class="nav-item dropdown d-flex justify-content-between">
-                                                            <a href="{{ route('courses', ['category' => $childrens->slug]) }}"
-                                                                class="text-nowrap">
-                                                                {{ $childrens->name }}
-                                                            </a>
-                                                            @if ($childrens->children->count())
-                                                                <a class="dropdown-item nav-link dropdown-toggle text-end"
-                                                                    role="button" data-bs-toggle="dropdown">
-                                                                </a>
-
-                                                                <ul class="dropdown-submenu">
-                                                                    @foreach ($childrens->children ?? [] as $child)
-                                                                        <li class="nav-item">
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('courses', ['category' => $child->slug]) }}">
-                                                                                {{ $child->name }}
-                                                                            </a>
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            @endif
-                                                        </li>
+                                                    @foreach ($childrens->children ?? [] as $child)
+                                                    <li class="nav-item">
+                                                        <a class="dropdown-item" href="{{ route('courses', ['category' => $child->slug]) }}">
+                                                            {{ $child->name }}
+                                                        </a>
+                                                    </li>
                                                     @endforeach
                                                 </ul>
-                                            @endif
-                                        </li>
+                                                @endif
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                    </li>
 
-                                        {{-- <li class="{{ $category->children->count() ? 'dropdown' : '' }}">
-                                            <a class="dropdown-item "
-                                                href="{{ route('courses', ['category' => $category->slug]) }}">
+                                    {{-- <li class="{{ $category->children->count() ? 'dropdown' : '' }}">
+                                    <a class="dropdown-item " href="{{ route('courses', ['category' => $category->slug]) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                    @if ($category->children->count())
+                                    <ul class="dropdown-submenu">
+                                        @foreach ($category->children ?? [] as $child)
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item nav-link dropdown-toggle" href="{{ route('courses', ['category' => $child->slug]) }}" role="button" data-bs-toggle="dropdown">
                                                 {{ $category->name }}
                                             </a>
-                                            @if ($category->children->count())
-                                                <ul class="dropdown-submenu">
-                                                    @foreach ($category->children ?? [] as $child)
-                                                        <li class="nav-item dropdown">
-                                                            <a class="dropdown-item nav-link dropdown-toggle"
-                                                                href="{{ route('courses', ['category' => $child->slug]) }}"
-                                                                role="button" data-bs-toggle="dropdown">
-                                                                {{ $category->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li> --}}
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="nav-item mega-dropdown">
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                            </li> --}}
+                            @endforeach
+                        </ul>
+                        </li>
+                        <!-- <li class="nav-item mega-dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             All Courses
           </a>
@@ -297,109 +312,101 @@
               </div>
             </div>
           </div>
-        </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown">
-                                    E-Books
-                                </a>
-                                <ul class="dropdown-menu">
-                                    @foreach ($ebookCategories ?? [] as $category)
+        </li> -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                E-Books
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($ebookCategories ?? [] as $category)
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        {{ $category->name }}
+                                    </a>
+                                    @if ($category->children)
+                                    <ul class="dropdown-submenu">
+                                        @foreach ($category->children ?? [] as $childrens)
                                         <li class="nav-item dropdown">
-                                            <a class="dropdown-item nav-link dropdown-toggle" href="#"
-                                                role="button" data-bs-toggle="dropdown">
-                                                {{ $category->name }}
+                                            <a class="dropdown-item nav-link dropdown-toggle" href="{{ route('ebooks.category', ['parent' => $category, 'child' => $childrens]) }}" role="button" data-bs-toggle="dropdown">
+                                                {{ $childrens->name }}
                                             </a>
-                                            @if ($category->children)
-                                                <ul class="dropdown-submenu">
-                                                    @foreach ($category->children ?? [] as $childrens)
-                                                        <li class="nav-item dropdown">
-                                                            <a class="dropdown-item nav-link dropdown-toggle"
-                                                                href="{{ route('ebooks.category', ['parent' => $category, 'child' => $childrens]) }}"
-                                                                role="button" data-bs-toggle="dropdown">
-                                                                {{ $childrens->name }}
-                                                            </a>
-                                                            @if ($childrens->children)
-                                                                <ul class="dropdown-submenu">
-                                                                    @foreach ($childrens->children ?? [] as $child)
-                                                                        <li class="nav-item">
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('ebooks.detail', [$child->slug]) }}">
-                                                                                {{ $child->name }}
-                                                                            </a>
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            @endif
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
+                                            @if ($childrens->children)
+                                            <ul class="dropdown-submenu">
+                                                @foreach ($childrens->children ?? [] as $child)
+                                                <li class="nav-item">
+                                                    <a class="dropdown-item" href="{{ route('ebooks.detail', [$child->slug]) }}">
+                                                        {{ $child->name }}
+                                                    </a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
                                             @endif
                                         </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="{{ route('faculties') }}">Faculties</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('about') }}">About Us</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('contact') }}">Contact</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown">
-                                    {{ auth()->check() ? auth()->user()->name : 'My Account' }}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    @guest
-                                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                                    @else
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('user.dashboard') }}">
-                                                Dashboard
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('user.profile') }}">
-                                                Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('wishlists.index') }}">
-                                                Wishlist
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('user.orders') }}">
-                                                Orders
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('user.password') }}">
-                                                Change Password
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('login') }}"
-                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
-                                        </li>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                        </form>
-                                    @endguest
-                                </ul>
-                            </li>
-         
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('faculties') }}">Faculties</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('about') }}">About Us</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('contact') }}">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                {{ auth()->check() ? auth()->user()->name : 'My Account' }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @guest
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                @else
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('user.dashboard') }}">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('user.profile') }}">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('wishlists.index') }}">
+                                        Wishlist
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('user.orders') }}">
+                                        Orders
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('user.password') }}">
+                                        Change Password
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('login') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                @endguest
+                            </ul>
+                        </li>
 
-              
-                        
+
+
+
 
 
 
@@ -410,9 +417,9 @@
                                     <i class="fas fa-heart"></i> Wishlist
                                     <span class="badge bg-dark rounded-pill">
                                         @if (auth()->check())
-                                            {{ auth()->user()?->wishlists->count() }}
+                                        {{ auth()->user()?->wishlists->count() }}
                                         @else
-                                            0
+                                        0
                                         @endif
                                     </span>
                                 </a>
@@ -460,19 +467,18 @@
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
                         @auth
-                            <li>
-                                <a href="{{ route('dashboard') }}">My Account</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('dashboard') }}">My Account</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                        </li>
                         @else
-                            <li>
-                                <a href="{{ route('login') }}">Login</a>
-                            </li>
+                        <li>
+                            <a href="{{ route('login') }}">Login</a>
+                        </li>
                         @endauth
                         </li>
                     </ul>
@@ -541,9 +547,9 @@
                                 <h5 class="title">Information</h5>
                                 <ul>
                                     @foreach ($pages as $page)
-                                        <li>
-                                            <a href="{{ route('page', [$page]) }}">{{ $page?->title }}</a>
-                                        </li>
+                                    <li>
+                                        <a href="{{ route('page', [$page]) }}">{{ $page?->title }}</a>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -566,8 +572,7 @@
                                             <i class="fas fa-phone-alt"></i>
                                         </div>
                                         <div class="content">
-                                            <a
-                                                href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
+                                            <a href="Tel:+{{ setting('general_settings')?->option_value['support_phone'] }}">
                                                 {{ setting('general_settings')?->option_value['support_phone'] ?? '+91 9638-9638-9638' }}
                                             </a>
                                         </div>
@@ -577,8 +582,7 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="content">
-                                            <a
-                                                href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
+                                            <a href="Mailto:{{ setting('general_settings')?->option_value['support_email'] }}">
                                                 {{ setting('general_settings')?->option_value['support_email'] ?? 'info@example.com' }}
                                             </a>
                                         </div>
@@ -587,24 +591,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="copyright-area">
+                    <div class="copyright-area d-flex justify-content-between ">
                         <div class="left">
                             <p>&copy; Copyright 2023. All Rights Reserved.</p>
+                        </div>
+                        <div class="center ms-lg-0 ms-md-0 ms-3 text-center">
+                            <p>Developed by: <a href="https://texmith.com/" target="_blank" class="text-white">Texmith infotech</a></p>
                         </div>
                         <div class="right">
                             <ul class="social-icons">
                                 <li>
-                                    <a href="#0"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#0"><i class="fab fa-facebook-f  mt-2"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#0" class="active"><i class="fab fa-twitter"></i></a>
+                                    <a href="#0" class="active"><i class="fab fa-twitter  mt-2"> </i></a>
                                 </li>
                                 <li>
-                                    <a href="#0"><i class="fab fa-instagram"></i></a>
+                                    <a href="#0"><i class="fab fa-instagram  mt-2" ></i></a>
                                 </li>
                                 <li>
-                                    <a href="#0"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#0"><i class="fab fa-linkedin-in  mt-2"></i></a>
                                 </li>
+                                <!-- style="top: 10px;" -->
                             </ul>
                         </div>
                     </div>
@@ -615,8 +623,7 @@
 
         <div class="modal" id="quick_contact_popup">
             <div class="modal-dialog">
-                <form method="POST" action="{{ route('queries.store') }}" class="modal-content"
-                    id="quick_contact_form">
+                <form method="POST" action="{{ route('queries.store') }}" class="modal-content" id="quick_contact_form">
                     @csrf
                     <!-- Modal Header -->
                     <div class="modal-header d-block" style="background-color: #202c45">
@@ -630,16 +637,13 @@
                             <br />
                             <span class="text-success">Or Register below</span> <span>We will contact you</span>
                         </h6>
-                        <button type="button" class="btn-close " data-bs-dismiss="modal"
-                            style="position: absolute; right: 1rem; top: 1rem;"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" style="position: absolute; right: 1rem; top: 1rem;"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <input type="text" name="name" class="form-control mb-3" placeholder="Enter your name"
-                            required>
-                        <input type="tel" name="mobile" class="form-control" placeholder="Enter mobile no."
-                            required>
+                        <input type="text" name="name" class="form-control mb-3" placeholder="Enter your name" required>
+                        <input type="tel" name="mobile" class="form-control" placeholder="Enter mobile no." required>
                         <input type="hidden" name="subject" value="Quick contact">
                         <input type="hidden" name="title" value="Quick contact">
                     </div>
@@ -667,7 +671,41 @@
     <script src="{{ asset('assets/frontend/js/nice-select.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/owl.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Function to close all open dropdowns
+        function closeAllDropdowns() {
+            $('.dropdown-menu.show').each(function () {
+                var $dropdownToggle = $(this).prev('.dropdown-toggle');
+                if ($dropdownToggle.length) {
+                    var bsDropdown = bootstrap.Dropdown.getInstance($dropdownToggle[0]);
+                    if (bsDropdown) bsDropdown.hide();
+                }
+            });
+        }
+
+        // Close dropdowns when scrolling
+        $(window).on('scroll', function () {
+            closeAllDropdowns();
+        });
+
+        // Close dropdowns when clicking outside
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest('.dropdown-toggle, .dropdown-menu').length) {
+                closeAllDropdowns();
+            }
+        });
+    });
+</script>
+
+<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<div class="elfsight-app-40d72caa-d4ac-4490-9b93-57a739145eaa" data-elfsight-app-lazy></div>
+
+
     @stack('scripts')
 </body>
 
