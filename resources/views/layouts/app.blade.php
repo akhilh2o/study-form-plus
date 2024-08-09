@@ -11,6 +11,15 @@
     </title>
     <meta name="description" content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
     <meta name="keywords" content="@yield('meta_keyword', setting('general_settings')?->option_value['meta_keyword'])">
+
+    <meta property="og:url"           content="{{ url()->current() }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="@yield('meta_title', setting('general_settings')?->option_value['meta_title'])" />
+    <meta property="og:description"   content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])" />
+    <meta property="og:image"         content="@yield('image',asset('assets/images/logo.jpeg'))" />
+
+
+
     <meta name="author" content="{{ config('app.name') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
@@ -22,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
+
     @if (setting('general_settings')?->option_value['favicon'])
     <link rel="shortcut icon" href="{{ asset('storage/' . setting('general_settings')?->option_value['favicon']) }}" type="image/x-icon">
     @else
@@ -227,92 +237,92 @@
                         </ul>
                         </li>
                         <!-- <li class="nav-item mega-dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            All Courses
-          </a>
-          <div class="dropdown-menu px-3 rounded-3 border-0 shadow">
-            <div class="row">
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
-                    <div class="icon px-3 bg-warning-subtle rounded-3 fs-1">
-                      <i class="bi bi-tv"></i>
-                    </div>
-                    <div class="text ps-3">
-                      <h5>CMA</h5>
-                    
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
-                    <div class="icon px-3 bg-danger-subtle rounded-3 fs-1">
-                      <i class="bi bi-headphones"></i>
-                    </div>
-                    <div class="text ps-3">
-                      <h5>CMA</h5>
-                    
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
-                    <div class="icon px-3 bg-success-subtle rounded-3 fs-1">
-                      <i class="bi bi-phone"></i>
-                    </div>
-                    <div class="text ps-3">
-                      <h5>CMA</h5>
-                    
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
-                    <div class="icon px-3 bg-secondary-subtle rounded-3 fs-1">
-                      <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="text ps-3">
-                      <h5>CMA</h5>
-                    
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
-                    <div class="icon px-3 bg-body-tertiary rounded-3 fs-1">
-                      <i class="bi bi-smartwatch"></i>
-                    </div>
-                    <div class="text ps-3">
-                      <h5>CMA</h5>
-                    
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="d-flex align-items-center py-3 px-1 rounded-3">
-                    <div class="icon px-3 bg-info-subtle rounded-3 fs-1">
-                      <i class="bi bi-earbuds"></i>
-                    </div>
-                    <div class="text ps-3">
-                      <h5>CMA</h5>
-                    
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </li> -->
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            All Courses
+                        </a>
+                        <div class="dropdown-menu px-3 rounded-3 border-0 shadow">
+                            <div class="row">
+                            <div class="col-sm-4">
+                                <a href="#">
+                                <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                                    <div class="icon px-3 bg-warning-subtle rounded-3 fs-1">
+                                    <i class="bi bi-tv"></i>
+                                    </div>
+                                    <div class="text ps-3">
+                                    <h5>CMA</h5>
+                                    
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#">
+                                <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                                    <div class="icon px-3 bg-danger-subtle rounded-3 fs-1">
+                                    <i class="bi bi-headphones"></i>
+                                    </div>
+                                    <div class="text ps-3">
+                                    <h5>CMA</h5>
+                                    
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#">
+                                <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                                    <div class="icon px-3 bg-success-subtle rounded-3 fs-1">
+                                    <i class="bi bi-phone"></i>
+                                    </div>
+                                    <div class="text ps-3">
+                                    <h5>CMA</h5>
+                                    
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#">
+                                <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                                    <div class="icon px-3 bg-secondary-subtle rounded-3 fs-1">
+                                    <i class="bi bi-laptop"></i>
+                                    </div>
+                                    <div class="text ps-3">
+                                    <h5>CMA</h5>
+                                    
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#">
+                                <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                                    <div class="icon px-3 bg-body-tertiary rounded-3 fs-1">
+                                    <i class="bi bi-smartwatch"></i>
+                                    </div>
+                                    <div class="text ps-3">
+                                    <h5>CMA</h5>
+                                    
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#">
+                                <div class="d-flex align-items-center py-3 px-1 rounded-3">
+                                    <div class="icon px-3 bg-info-subtle rounded-3 fs-1">
+                                    <i class="bi bi-earbuds"></i>
+                                    </div>
+                                    <div class="text ps-3">
+                                    <h5>CMA</h5>
+                                    
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                        </li> -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 E-Books
@@ -357,6 +367,9 @@
                         </li>
                         <li>
                             <a href="{{ route('contact') }}">Contact</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('blog.posts.index') }}">Blog</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -403,12 +416,6 @@
                                 @endguest
                             </ul>
                         </li>
-
-
-
-
-
-
 
                         </ul>
                         <ul class="menu d-lg-flex flex-wrap ms-auto">
@@ -524,22 +531,19 @@
                                 <h5 class="title">Important Links</h5>
                                 <ul>
                                     <li>
-                                        <a href="{{ route('home') }}">Home</a>
-                                    </li>
-                                    <li>
                                         <a href="{{ route('courses') }}">All Courses</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('faculties') }}">Faculties</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('login') }}">My Account</a>
-                                    </li>
-                                    <li>
                                         <a href="{{ route('about') }}">About Us</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('contact') }}">Contact Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('blog.posts.index') }}">Blog</a>
                                     </li>
                                 </ul>
                             </div>

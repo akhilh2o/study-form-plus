@@ -64,18 +64,35 @@
                         <textarea name="content" class="form-control " id="content" cols="30"
                             rows="3" required>{{ $category?->content }}</textarea>
                     </div>
-                    <div class="d-flex">
-                        <div class="mr-2">
-                            <div id="main-image-preview">
-                                <img src="{{ $category->image() }}" alt="image" width="75"
-                                    class="rounded">
+                    <div class="row">
+                        <div class="col-sm-8 col-12">
+                            <div class="d-flex">
+                                <div class="mr-2">
+                                    <div id="main-image-preview">
+                                        <img src="{{ $category->image() }}" alt="image" width="75"
+                                            class="rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group flex-fill">
+                                    <label for="">Image</label>
+                                    <input type="file" name="image" class="form-control" id="crop-main-image">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group flex-fill">
-                            <label for="">Image</label>
-                            <input type="file" name="image" class="form-control" id="crop-main-image">
+                        <div class="col-sm-4 col-12">
+                            <div class="form-group">
+                                <label for="">Popular</label>
+                                <select name="is_popular" class="form-control">
+                                    <option value="">-- Select --</option>
+                                    <option value="1" {{ ($category->is_popular=='1' ) ? 'selected' : '' }}>Yes
+                                    </option>
+                                    <option value="0" {{ ($category->is_popular=='0' ) ? 'selected' : '' }}>No
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+                   
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
                         <textarea name="meta_title" class="form-control" id="meta_title" cols="30"

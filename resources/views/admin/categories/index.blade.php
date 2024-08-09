@@ -55,6 +55,7 @@
                         <th>Thumbnail</th>
                         <th>Name</th>
                         <th>Status</th>
+                        <th>Popular</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -92,6 +93,9 @@
                                     </a>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            {{ $category?->is_popular ? 'Yes' : 'No' }}
                         </td>
                         <td width="25%">
                             <form action="{{ route('admin.categories.create') }}" class="d-inline-block">

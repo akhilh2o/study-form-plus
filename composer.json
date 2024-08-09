@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "razorpay/razorpay": "2.*",
         "takshak/adash": "^4.2",
+        "takshak/adash-blog": "^4.0",
         "takshak/adash-reviews": "^1.0"
     },
     "require-dev": {

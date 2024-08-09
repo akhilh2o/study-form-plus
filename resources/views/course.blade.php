@@ -1,41 +1,47 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-<style>
-    .star-rating {
-      font-size: 16px;
-      color: #FFD700; 
-    }
-    .review-item {
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-    }
-    .review-item .review-user {
-      font-weight: bold;
-    }
-    .review-item .review-rating {
-      color: #FFD700; /* Star color */
-    }
-    .fa-brands{
-        transition: transform 0.2s ease-in-out;
-    }
-    .fa-brands:hover{
-        -webkit-transform: scale(1.1); /* Safari */
-    -ms-transform: scale(1.1); /* IE 9 */
-    transform: scale(1.1);
-    }
-  </style>
 <x-app-layout>
+    @push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    
+    <style>
+        .star-rating {
+          font-size: 16px;
+          color: #FFD700; 
+        }
+        .review-item {
+          border-bottom: 1px solid #ccc;
+          padding: 10px 0;
+        }
+        .review-item .review-user {
+          font-weight: bold;
+        }
+        .review-item .review-rating {
+          color: #FFD700; /* Star color */
+        }
+        .fa-brands{
+            transition: transform 0.2s ease-in-out;
+        }
+        .fa-brands:hover{
+            -webkit-transform: scale(1.1); /* Safari */
+        -ms-transform: scale(1.1); /* IE 9 */
+        transform: scale(1.1);
+        }
+      </style>
+    @endpush
+
     <!-- ~~~ Header Section ~~~ -->
     @section('meta_title', $course?->meta_title)
     @section('meta_description', $course?->meta_description)
     @section('meta_keyword', $course?->meta_keyword)
+    @section('image', $course->thumb())
     <!-- ~~~ Breadcrumb Section ~~~ -->
     <x-breadcrumb :title="$course?->title" :links="[
         ['text' => 'Home', 'url' => route('home')],
         ['text' => 'Courses', 'url' => route('courses')],
         // ['text' => $course?->title],
     ]" />
+
 
     <!-- ~~~ Course Section ~~~ -->
     <section class="course-details-section pt-50 pb-120">
@@ -45,25 +51,29 @@
                 <div class="col-md-4 col-sm-12 mb-4">
                     <img src="{{ $course->thumb() }}" alt="thumbnail" class="rounded w-100">
                     <div class="d-flex justify-content-center gap-4 fs-4 my-3">
-        <a href="#" id="whatsapp-link" class="text-success" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a href="#" id="facebook-link" class="text-primary" target="_blank">
-            <i class="fa-brands fa-facebook"></i>
-        </a>
-        <a href="#" id="instagram-link" class="text-danger" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-    </div>
+                       
+                    <a href="https://wa.me/?text={{ url()->current() }}" id="whatsapp-link" class="text-success" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    <a href="https://www.facebook.com/share.php?u={{ url()->current() }}" id="facebook-link" class="text-primary" target="_blank" rel="noopener"> 
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+        
+                    <a href="https://www.instagram.com/?url={{ url()->current() }}" id="instagram-link" class="text-danger" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                </div>
 
                 </div>
                 <div class="col-md-8 col-sm-12">
                     <h4 class="title mb-2">{{ $course?->title }}</h4>
-                    <!-- <div class="rating mb-3 d-flex align-items-center gap-3 ">
+                     {{-- <div class="rating mb-3 d-flex align-items-center gap-3 ">
                         <a class="text-white  px-2" style="border-radius: 3.2rem; font-size: 14px; background-color : #2eca7f;"> 
                             {{ $course->reviews?->avg('rating') ?? '0' }} <i class="fa fa-star" style="font-size: 12px;"></i></a>
                         <a href="#rating&review">{{ $course?->reviews?->count() }} ratings </a>
-                    </div> -->
+                    </div>  --}}
                     <p class="mb-3 mt-1">{{ $course?->category?->name }}</p>
                     <div class="row mb-3 gap-2">
                         <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 col-xxl-9">
@@ -240,7 +250,7 @@
                 <div class="col-12 mt-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="py-2">Demo Videos</h5>
+                            <h5 class="py-2">Demo Video 1</h5>
                         </div>
                         <div class="card-body">
                             <div class="description">
@@ -257,6 +267,30 @@
                     </div>
                 </div>
             </div>
+
+            @if($course?->demo_link2)
+            <div class="form-group row" id="demovideo">
+                <div class="col-12 mt-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="py-2">Demo Video 2</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="description">
+                                <div class="row my-4">
+                                    <div class="col-12 d-block d-md-none">
+                                        <iframe id="ytplayer" type="text/html" width="100%" height="300" src="{{ $course?->demo_link2 }}" frameborder="0"></iframe>
+                                    </div>
+                                    <div class="col-12 d-none d-md-block">
+                                        <iframe id="ytplayer" type="text/html" width="100%" height="650" src="{{ $course?->demo_link2 }}" frameborder="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
 
             @if ($relatedCourses->count())
             <h3 class="mt-5 mb-4">Related Courses</h3>

@@ -21,7 +21,7 @@ return new class () extends Migration {
             $table->string('thumbnail')->nullable()->default(null);
             $table->string('demo_link')->nullable()->default(null);
             $table->longText('description')->nullable()->default(null);
-            $table->boolean('popular')->default(true);
+            $table->boolean('popular')->default(true)->comment('1 = popular, 0 = not popular working as trending course on homepage');
             $table->boolean('with_handbook')->nullable()->default(false);
             $table->boolean('status')->default(true);
             $table->integer('priority')->nullable()->default(null);

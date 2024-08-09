@@ -56,12 +56,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="demo_link">Demo URL (Youtube link) <span
                                         class="text-danger">*</span></label>
                                 <input type="url" name="demo_link" class="form-control"
                                     value="{{ $course->demo_link }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="demo_link2">Demo URL 2 (Youtube link)</label>
+                                <input type="url" name="demo_link2" class="form-control" value="{{ $course->demo_link2 }}">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -124,7 +130,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Popular <span class="text-danger">*</span></label>
+                            <label for="">Trending <span class="text-danger">*</span></label>
                             <select name="popular" class="form-control select2" required>
                                 <option value="">-- Select --</option>
                                 <option value="1" {{ $course->popular == '1' ? 'selected' : '' }}>Yes</option>
