@@ -1,3 +1,10 @@
+<style>
+    .course-item:hover .thumb img {
+    -webkit-transform: scale(1.1) !important;
+    -ms-transform: scale(1.1) !important ;
+    transform: scale(1.1) !important ;
+}
+</style>
 <div {{ $attributes->merge(['class' => 'course-item']) }}>
     <div class="thumb">
         <a href="{{ route('course', [$product]) }}">

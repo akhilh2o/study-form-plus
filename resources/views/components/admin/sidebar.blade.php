@@ -279,7 +279,57 @@
                     </a>
                 </li>
 
-            </ul>
+                @if(config('site.blog.routes.default', true) && config('site.blog.routes.sections.admin', true))
+                    <li class="menu-title">Manage Blog Posts</li>
+                    @canany(['blog_categories_access', 'blog_categories_create'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-tags"></i>
+                            <span>Blog Categories</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('blog_categories_create')
+                            <li><a href="{{ route('admin.blog.categories.create') }}">New Category</a></li>
+                            @endcan
+
+                            @can('blog_categories_access')
+                            <li><a href="{{ route('admin.blog.categories.index') }}">All Categories</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                    @endcanany
+
+                    @canany(['blog_posts_access', 'blog_posts_create'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-blog"></i>
+                            <span>Blog Posts</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('blog_posts_access')
+                            <li><a href="{{ route('admin.blog.posts.create') }}">Create Post</a></li>
+                            @endcan
+
+                            @can('blog_posts_create')
+                            <li><a href="{{ route('admin.blog.posts.index') }}">All Posts</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                    @endcanany
+
+                    @if (config('site.blog.comments'))
+                        @can('blog_comments_access')
+                        <li>
+                            <a href="{{ route('admin.blog.comments.index') }}" class="waves-effect">
+                                <i class="fas fa-comments"></i>
+                                <span>Blog Comments</span>
+                            </a>
+                        </li>
+                        @endcan
+                    @endif
+                @endif
+
+			</ul>
         </div>
     </div>
 </div>

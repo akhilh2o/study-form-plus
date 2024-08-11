@@ -14,24 +14,32 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $category = null;
+        $categories = null;
         $categoryIds = collect([]);
+
         if ($request->get('category')) {
             $category = Category::query()
                 ->with('children')
+                ->withCount('children')
                 ->where('id', $request->category)
                 ->orWhere('slug', $request->category)
                 ->first();
 
-            $categoryIds = collect([$category->id])->merge($category->children->pluck('id'));
+
+            if ($category?->children_count) {
+                $categories = $category?->children;
+            }
+
+            $categoryIds = collect([$category->id]);
+        } else {
+            $categories = Category::select('id', 'name', 'slug')
+                ->where('parent_id', 0)
+                ->get();
         }
 
-        $categories = Category::select('id', 'name', 'slug')->get();
-
         $courses = Course::query()
-            ->when($categoryIds->count(), function ($query) use ($categoryIds) {
-                $query->whereHas('category', function ($query) use ($categoryIds) {
-                    $query->whereIn('id', $categoryIds);
-                });
+            ->whereHas('category', function ($query) use ($categoryIds) {
+                $query->whereIn('id', $categoryIds);
             })
             ->with('variations')
             ->withMax('variations', 'sale_price_download')
@@ -41,6 +49,8 @@ class CourseController extends Controller
             ->where('status', true)
             ->paginate(24)
             ->withQueryString();
+
+        
 
         return view('courses')->with([
             'courses'       => $courses,

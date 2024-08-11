@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c664520726064992212e8a3cc923aab0",
+    "content-hash": "e5d579b5490db1417f797c6d401b15cc",
     "packages": [
         {
             "name": "brick/math",
@@ -6157,6 +6157,59 @@
                 "source": "https://github.com/takshaktiwari/adash/tree/4.2.3"
             },
             "time": "2023-10-12T14:00:53+00:00"
+        },
+        {
+            "name": "takshak/adash-blog",
+            "version": "4.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/takshaktiwari/adash-blog.git",
+                "reference": "8edf69b6c3ffb9209e04c06c288e30690f835995"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/takshaktiwari/adash-blog/zipball/8edf69b6c3ffb9209e04c06c288e30690f835995",
+                "reference": "8edf69b6c3ffb9209e04c06c288e30690f835995",
+                "shasum": ""
+            },
+            "require": {
+                "takshak/adash": "*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Takshak\\Ablog\\AblogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Takshak\\Ablog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Takshak Tiwari",
+                    "email": "takshaktiwari@gmail.com"
+                }
+            ],
+            "description": "Blog for laravel",
+            "keywords": [
+                "adash",
+                "admin",
+                "blog",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/takshaktiwari/adash-blog/issues",
+                "source": "https://github.com/takshaktiwari/adash-blog/tree/4.0.9"
+            },
+            "time": "2024-03-15T02:54:46+00:00"
         },
         {
             "name": "takshak/adash-reviews",

@@ -1,86 +1,207 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-<!-- Font Awesome for Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<style>
-    /* Optional: Add custom styles for Owl Carousel */
-    .banner-content {
-        position: relative;
-        z-index: 10;
-    }
-
-    .banner-thumb {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-    }
-
-    .banner-section {
-        position: relative;
-    }
-
-    .owl-dots {
-        text-align: center;
-        /* Center the dots */
-        position: absolute;
-        bottom: 20px;
-        /* Adjust the distance from the bottom */
-        width: 100%;
-        z-index: 10;
-        /* Ensure dots are above other elements */
-    }
-
-    .owl-dot {
-        background: rgba(0, 0, 0, 0.5);
-        /* Background color for inactive dots */
-        border-radius: 50%;
-        width: 12px;
-        /* Size of dots */
-        height: 12px;
-        /* Size of dots */
-        margin: 0 5px;
-        /* Spacing between dots */
-        display: inline-block;
-        position: relative;
-        top: 50px;
-    }
-
-    .owl-dot.active {
-        background: #fff;
-        /* Background color for the active dot */
-    }
-
-    .owl-carousel .owl-nav {
-        display: none;
-        /* Hide default navigation arrows */
-    }
-
-    #main-carousel {
-        z-index: 9999;
-    }
-
-    .notice-board {
-        z-index: 9;
-        border: 5px solid #F7941F;
-        border-radius: 10px;
-        padding: 20px 0;
-        background-color: #10147B;
-        height: max-content;
-    }
-
-    .notice-board .box p {
-        color: #F7941F;
-    }
-
-    .notice-board .box ul li button {
-        background-color: #F7941F;
-        width: 100%;
-        color: white;
-        border: none;
-        border-radius: 10px;
-    }
-</style>
 <x-app-layout>
+    @push('styles')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+        <!-- Font Awesome for Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <style>
+            /* Optional: Add custom styles for Owl Carousel */
+            .banner-content {
+                position: relative;
+                z-index: 10;
+            }
+
+            .banner-thumb {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+
+            .banner-section {
+                position: relative;
+            }
+
+            .owl-dots {
+                text-align: center;
+                /* Center the dots */
+                position: absolute;
+                bottom: 20px;
+                /* Adjust the distance from the bottom */
+                width: 100%;
+                z-index: 10;
+                /* Ensure dots are above other elements */
+            }
+
+            .owl-dot {
+                background: rgba(0, 0, 0, 0.5);
+                /* Background color for inactive dots */
+                border-radius: 50%;
+                width: 12px;
+                /* Size of dots */
+                height: 12px;
+                /* Size of dots */
+                margin: 0 5px;
+                /* Spacing between dots */
+                display: inline-block;
+                position: relative;
+                top: 50px;
+            }
+
+            .owl-dot.active {
+                background: #fff;
+                /* Background color for the active dot */
+            }
+
+            .owl-carousel .owl-nav {
+                display: none;
+                /* Hide default navigation arrows */
+            }
+
+            #main-carousel {
+                z-index: 9999;
+            }
+
+            .notice-board {
+                z-index: 9;
+                border: 5px solid #F7941F;
+                border-radius: 10px;
+                padding: 20px 0;
+                background-color: #10147B;
+                height: 480px;
+            }
+
+            .notice-board .box p {
+                color: #F7941F;
+            }
+
+            .notice-board .box ul li button {
+                background-color: #F7941F;
+                width: 100%;
+                color: white;
+                border: none;
+                border-radius: 10px;
+            }
+
+            #bannerCarousel .item img {
+                height: 480px;
+                object-fit: cover;
+            }
+
+            .testimonial-item p {
+                height: 160px;
+            }
+
+            @media (max-width:768px) {
+                .testimonial-item p {
+                    height: 220px;
+                }
+            }
+
+            .notice-board-buttons li button,
+            button-hover {
+                transition: transform 0.3s ease-in-out;
+                /* Smooth scaling transition */
+            }
+
+            .notice-board-buttons li button:hover,
+            .button-hover:hover {
+                -webkit-transform: scale(1.1);
+                /* Safari */
+                -ms-transform: scale(1.1);
+                /* IE 9 */
+                transform: scale(1.1);
+                /* Standard */
+            }
+
+            .button-hover:hover {
+                -webkit-transform: scale(1.03);
+                /* Safari */
+                -ms-transform: scale(1.03);
+                /* IE 9 */
+                transform: scale(1.03);
+                /* Standard */
+            }
+
+            .card1 h3 {
+                color: #262626;
+                font-size: 17px;
+                line-height: 24px;
+                font-weight: 700;
+                margin-bottom: 4px;
+            }
+
+
+
+            .go-corner {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                width: 32px;
+                height: 32px;
+                overflow: hidden;
+                top: 0;
+                right: 0;
+                background-color: #F7941F;
+                border-radius: 0 4px 0 32px;
+            }
+
+            .go-arrow {
+                margin-top: -4px;
+                margin-right: -4px;
+                color: white;
+                font-family: courier, sans;
+            }
+
+            .card1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 120px;
+                position: relative;
+                max-width: 262px;
+                background-color: #f2f8f9;
+                border-radius: 4px;
+                padding: 32px 24px;
+                margin: 12px;
+                text-decoration: none;
+                z-index: 0;
+                overflow: hidden;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    z-index: -1;
+                    top: -16px;
+                    right: -16px;
+                    background: #F7941F;
+                    height: 32px;
+                    width: 32px;
+                    border-radius: 32px;
+                    transform: scale(1);
+                    transform-origin: 50% 50%;
+                    transition: transform 0.25s ease-out;
+                }
+
+                &:hover:before {
+                    transform: scale(21);
+                }
+            }
+
+            .card1:hover {
+                p {
+                    transition: all 0.3s ease-out;
+                    color: rgba(255, 255, 255, 0.8);
+                }
+
+                h3 {
+                    transition: all 0.3s ease-out;
+                    color: #ffffff;
+                }
+            }
+        </style>
+    @endpush
     <!-- ~~~ Banner Section ~~~ -->
     <section class="banner-section banner-overlay bg_img"
         data-img="{{ asset('assets/frontend/images/banner/banner-bg.jpg') }}">
@@ -127,20 +248,10 @@
                     <div id="bannerCarousel" class="owl-carousel owl-theme">
                         <!-- Slide 1 -->
                         @foreach ($banners ?? [] as $banner)
-                        <div class="item">
-                            <img src="{{ $banner->imageUrl() }}" alt="{{ $banner->alt_text }}">
-                        </div>
+                            <div class="item">
+                                <img src="{{ $banner?->imageUrl() }}" alt="{{ $banner?->alt_text }}">
+                            </div>
                         @endforeach
-
-                        {{-- <div class="item">
-                            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-                        </div>
-                        <div class="item">
-                            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-                        </div>
-                        <div class="item">
-                            <img src="{{ asset('assets/frontend/images/banner/banner.png') }}" alt="banner">
-                        </div> --}}
                     </div>
                 </div>
 
@@ -151,33 +262,18 @@
                         <p>Click & Visit Our</p>
                         <p class="mt-4 fw-bold">👇Different Courses👇</p>
                         <hr>
-                        <ul class="text-white px-4" style="list-style: disc; text-align:left;">
-                            <li>
-                                <button>CA (Chartered Accountant)</button>
-                            </li>
-                            <li>
-                                <button>CMA (Cost and management accounting)</button>
-                            </li>
-                            <li>
-                                <button>11th</button>
-                            </li>
-                            <li>
-                                <button>12th</button>
-                            </li>
-                            <li>
-                                <button>B.COM</button>
-                            </li>
-
+                        <ul class="text-white px-4 notice-board-buttons" style="list-style: disc; text-align:left;">
+                            @foreach ($categories ?? [] as $categ)
+                                <li>
+                                    <button onclick="window.location.href='{{ route('courses', ['category' => $categ->slug]) }}'">{{ $categ?->name }}</button>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-
-
-
 
 
     <!-- ~~~ Banner Section ~~~ -->
@@ -193,6 +289,28 @@
         </section>
     @endif
 
+    <div class="container my-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="section-header">
+                <h2 class="title"><span>Browse </span>Courses</h2>
+            </div>
+            @foreach ($categories ?? [] as $categ)
+                <div class="col-xl-2 col-sm-6 col-12">
+                    <a class="card1" href="{{ route('courses', ['category' => $categ?->slug]) }}">
+                        <h3>{{ $categ?->name }}</h3>
+
+                        <div class="go-corner">
+                            <div class="go-arrow">
+                                →
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+
     <!-- ~~~ Course Section ~~~ -->
     <section class="course-section pt-40 pb-40 section-bg oh pos-rel">
         <div class="course-top-shape">
@@ -201,78 +319,60 @@
         <div class="course-bottom-shape">
             <img src="{{ asset('assets/frontend/images/course/course-bottom-shape.png') }}" alt="course">
         </div>
+        {{-- trending courses --}}
         <div class="container">
+            <x-trending-course-section :courses="$courses" />
+        </div>
+
+        {{-- category  wise course --}}
+        {{-- <div class="container">
             @foreach ($categories ?? [] as $category)
                 <x-category-course-section :category="$category" style="margin-bottom: 5rem;" />
                 @foreach ($category->children as $child)
                     <x-category-course-section :category="$child" style="margin-bottom: 5rem;" />
                 @endforeach
             @endforeach
-        </div>
+        </div> --}}
     </section>
     <!-- ~~~ Course Section ~~~ -->
 
-    <!-- ~~~ Feature Section ~~~ -->
-    <section class="feature-section pt-100 pb-100">
+    <section class="instructor-section pt-40 pb-40 gradient-bg">
         <div class="container">
             <div class="section-header">
-                {{-- <span class="category">Features</span> --}}
-                <h2 class="title"><span>Why</span> Study Form Plus</h2>
+                <h2 class="title"><span>Our </span>faculties</h2>
             </div>
-            <div class="row justify-content-center mb-30-none">
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Education Services</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm">
-                            <p>
-                        </div>
+            <div class="row mx-auto my-auto justify-content-center">
+                <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        @foreach ($faculties ?? [] as $key => $faculty)
+                            <div class="carousel-item @if ($key == 0) active @endif">
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <a href="{{ route('faculty', [$faculty]) }}" class="d-block fw-bold fs-5 mb-1">
+                                            <img class="card-img-top" src="{{ $faculty->avatarUrl() }}"
+                                                alt="Card image">
+                                            <div class="card-body lh-1">
+                                                {{ $faculty?->title }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-laptop-house"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Online/Offline Class</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Expert Mentor</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-10">
-                    <div class="feature-item">
-                        <div class="icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="content">
-                            <h6 class="title">Lifetime Support</h6>
-                            <span class="shape"></span>
-                            <p class="fs-sm"></p>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ~~~ Feature Section ~~~ -->
+    <!-- ~~~ Instructor Section ~~~ -->
 
     <!-- ~~~ Counter Section ~~~ -->
     <section class="counter-section pt-120 pb-120 title-lay bg_img"
@@ -320,7 +420,7 @@
                     </div>
                 </div>
                 <div class="apply-form-wrapper">
-                    <h5 class="title">Apply Now</h5>
+                    <!-- <h5 class="title">Apply Now</h5> -->
                     <form class="apply-form">
                         <div class="apply-group">
                             <label for="name" class="label-name">Full Name</label>
@@ -338,7 +438,8 @@
                             <input type="text" id="phone" name="phone">
                         </div>
                         <div class="apply-group mb-0">
-                            <button type="submit">submit now <i class="fas fa-angle-right"></i></button>
+                            <button type="submit" class="button-hover">Subscribe now <i
+                                    class="fas fa-angle-right"></i></button>
                         </div>
                     </form>
                 </div>
@@ -347,44 +448,67 @@
     </section>
     <!-- ~~~ Counter Section ~~~ -->
 
-    <section class="instructor-section pt-40 pb-40 gradient-bg">
+    <!-- ~~~ Feature Section ~~~ -->
+    <section class="feature-section pt-100 pb-100">
         <div class="container">
             <div class="section-header">
-                <h2 class="title"><span>Awesome </span>faculties</h2>
+                {{-- <span class="category">Features</span> --}}
+                <h2 class="title"><span>Why</span> Study Form Plus</h2>
             </div>
-            <div class="row mx-auto my-auto justify-content-center">
-                <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        @foreach ($faculties ?? [] as $key => $faculty)
-                            <div class="carousel-item @if ($key == 0) active @endif">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <a href="{{ route('faculty', [$faculty]) }}"
-                                            class="d-block fw-bold fs-5 mb-1">
-                                            <img class="card-img-top" src="{{ $faculty->avatarUrl() }}"
-                                                alt="Card image">
-                                            <div class="card-body lh-1">
-                                                {{ $faculty?->title }}
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+            <div class="row justify-content-center mb-30-none">
+                <div class="col-xl-3 col-md-6 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon ">
+                            <i class="fas fa-book-reader mt-3"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Education Services</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm">
+                            <p>
+                        </div>
                     </div>
-                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
+                </div>
+                <div class="col-xl-3 col-md-6 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <i class="fas fa-laptop-house mt-3"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Online/Offline Class</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <i class="fas fa-chalkboard-teacher mt-3"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Expert Mentor</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-sm-10">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <i class="fas fa-headset mt-3"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Lifetime Support</h6>
+                            <span class="shape"></span>
+                            <p class="fs-sm"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ~~~ Instructor Section ~~~ -->
+    <!-- ~~~ Feature Section ~~~ -->
 
     <!-- ~~~ Testimonial Section ~~~ -->
     <section class="testimonial-section pt-100 pb-100">
@@ -395,10 +519,10 @@
                 </div>
                 <div class="slider-nav">
                     <div class="testimoni-prev">
-                        <i class="fas fa-angle-left"></i>
+                        <i class="fas fa-angle-left " style="margin-top: 10px;"></i>
                     </div>
                     <div class="testimoni-next active">
-                        <i class="fas fa-angle-right"></i>
+                        <i class="fas fa-angle-right " style="margin-top: 10px;"></i>
                     </div>
                 </div>
             </div>
@@ -477,28 +601,28 @@
         </style>
         <script type="text/javascript">
             /*$('.course_slider').owlCarousel({
-                        loop: false,
-                        margin: 10,
-                        nav: true,
-                        dots: false,
-                        autoplay: true,
-                        autoplayHoverPause: true,
-                        navText: [
-                            '<span class="btn btn-sm btn-dark me-1"><i class="fas fa-arrow-left"></i></span>',
-                            '<span class="btn btn-sm btn-dark"><i class="fas fa-arrow-right"></i></span>'
-                        ],
-                        responsive: {
-                            0: {
-                                items: 1
-                            },
-                            600: {
-                                items: 2
-                            },
-                            1200: {
-                                items: 3
-                            }
-                        }
-                    });*/
+                                loop: false,
+                                margin: 10,
+                                nav: true,
+                                dots: false,
+                                autoplay: true,
+                                autoplayHoverPause: true,
+                                navText: [
+                                    '<span class="btn btn-sm btn-dark me-1"><i class="fas fa-arrow-left"></i></span>',
+                                    '<span class="btn btn-sm btn-dark"><i class="fas fa-arrow-right"></i></span>'
+                                ],
+                                responsive: {
+                                    0: {
+                                        items: 1
+                                    },
+                                    600: {
+                                        items: 2
+                                    },
+                                    1200: {
+                                        items: 3
+                                    }
+                                }
+                            });*/
 
             let items = document.querySelectorAll('.carousel .carousel-item')
             items.forEach((el) => {

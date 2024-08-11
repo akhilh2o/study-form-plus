@@ -18,6 +18,7 @@ class CourseAction
         $course->slug                      =  Str::slug($request->post('title'));
         $course->description               =  $request->post('description');
         $course->demo_link                 =  $this->getYoutubeEmbedUrl($request->post('demo_link'));
+        $course->demo_link2                =  $this->getYoutubeEmbedUrl($request->post('demo_link2'));
         $course->faculties                 =  implode(', ', $request->post('faculties'));
         $course->doubt_solving_faculties   =  $request->post('doubt_solving_faculties');
         $course->language                  =  $request->post('language');

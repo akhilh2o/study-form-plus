@@ -30,7 +30,7 @@ class CategoryController extends Controller
 
     public function create(Request $request)
     {
-         $categories = Category::query()
+        $categories = Category::query()
             ->when($request->get('parent_id'), function ($query) {
                 $query->where('id', request('parent_id'));
             })
@@ -49,6 +49,7 @@ class CategoryController extends Controller
             'parent_id'           =>  'nullable',
             'content'             =>  'nullable',
             'status'              =>  'required',
+            'is_popular'          =>  'nullable',
             'image'               =>  'nullable|image',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
@@ -59,7 +60,9 @@ class CategoryController extends Controller
         $category->name                      =  $request->post('name');
         $category->parent_id                 =  $request->post('parent_id') ?? 0;
         $category->status                    =  $request->post('status');
-        $category->slug                      =  str()->of($request->post('name'))->append(time());
+        $category->is_popular                =  $request->post('is_popular');
+        $category->slug                      =  str()->slug($request->post('name'));
+        // $category->slug                      =  str()->of($request->post('name'))->append(time());
         $category->content                   =  $request->post('content');
         $category->meta_title                =  $request->post('meta_title');
         $category->meta_keyword              =  $request->post('meta_keyword');
@@ -102,6 +105,7 @@ class CategoryController extends Controller
             'parent_id'           =>  'nullable',
             'content'             =>  'nullable',
             'status'              =>  'required',
+            'is_popular'          =>  'nullable',
             'image'               =>  'nullable|image',
             'meta_title'          =>  'nullable',
             'meta_keyword'        =>  'nullable',
@@ -109,8 +113,10 @@ class CategoryController extends Controller
         ]);
 
         $category->name                      =  $request->post('name');
+        $category->slug                      =  str()->slug($request->post('name'));
         $category->parent_id                 =  $request->post('parent_id') ?? 0;
         $category->status                    =  $request->post('status');
+        $category->is_popular                =  $request->post('is_popular');
         $category->content                   =  $request->post('content');
         $category->meta_title                =  $request->post('meta_title');
         $category->meta_keyword              =  $request->post('meta_keyword');
@@ -118,8 +124,12 @@ class CategoryController extends Controller
 
 
         if ($request->file('image')) {
-            Storage::disk('public')->delete($category->image);
-            Storage::disk('public')->delete($category->image_thumb);
+            if ($category?->image) {
+                Storage::disk('public')->delete($category?->image);
+            }
+            if ($category?->image_thumb) {
+                Storage::disk('public')->delete($category?->image_thumb);
+            }
 
             $category->image = 'categories/' . time() . '.' . $request->file('image')->extension();
             $category->image_thumb = 'categories/thumb-' . time() . '.' . $request->file('image')->extension();
@@ -143,10 +153,10 @@ class CategoryController extends Controller
         if ($category->children->count()) {
             return back()->withErrors('SORRY !! Cannot delete parent category, please delete the subcategories first.');
         }
-        if ($category->image) {
+        if ($category?->image) {
             Storage::disk('public')->delete([$category->image]);
         }
-        if ($category->image_thumb) {
+        if ($category?->image_thumb) {
             Storage::disk('public')->delete($category->image_thumb);
         }
         $category->courses()->delete();
