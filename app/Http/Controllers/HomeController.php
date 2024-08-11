@@ -37,7 +37,6 @@ class HomeController extends Controller
         $faculties = Faculty::select(['id', 'avatar', 'title', 'subtitle',])->limit(8)->get();
 
         $categories = Category::query()
-            ->has('courses')
             ->where('is_popular', 1)
             ->orderBy('name', 'ASC')
             ->limit(5)
