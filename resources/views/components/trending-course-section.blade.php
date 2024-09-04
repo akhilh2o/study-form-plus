@@ -6,7 +6,7 @@
 <div {{ $attributes }}>
     <div class="section-header mt-3 mb-3">
         <h2 class="title mb-0 pb-0">
-            <h2 class="title"><span>Trending </span>Courses</h2>
+            <h2 class="title text-center"><span>Trending </span>Courses</h2>
             {{-- <span>Trending Courses</span> --}}
         </h2>
     </div>

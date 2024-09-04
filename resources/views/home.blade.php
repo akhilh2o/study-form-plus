@@ -21,7 +21,11 @@
             .banner-section {
                 position: relative;
             }
-
+@media (max-width:430px){
+    .banner-section {
+        padding: 30px 0;
+            }
+}
             .owl-dots {
                 text-align: center;
                 /* Center the dots */
@@ -87,7 +91,12 @@
                 height: 480px;
                 object-fit: cover;
             }
-
+@media (max-width:430px){
+    #bannerCarousel .item img {
+                height: 150px;
+               
+            }
+}
             .testimonial-item p {
                 height: 160px;
             }
@@ -163,7 +172,7 @@
                 max-width: 262px;
                 background-color: #f2f8f9;
                 border-radius: 4px;
-                padding: 32px 24px;
+                /* padding: 32px 24px; */
                 margin: 12px;
                 text-decoration: none;
                 z-index: 0;
@@ -200,6 +209,44 @@
                     color: #ffffff;
                 }
             }
+
+            .testimonial-section{
+                position: relative
+            }
+           @media (max-width : 768px){
+            .testimonial-section{
+              margin-bottom:90px; 
+            }
+            .testimonial-section .slider-nav{
+                position: absolute;
+                bottom: -20px;
+                left: 50%;
+                transform: translate(-50% , -50%);
+            }
+           }
+           @media (max-width : 330px){
+            .testimonial-section{
+              margin-bottom:0px; 
+            }
+            .testimonial-section .slider-nav{
+             
+                bottom:0;
+            
+            }
+           }
+           @media (max-width : 430px){
+       
+            #recipeCarousel .slider-nav{
+                position: absolute;
+                bottom: -80px;
+                left: 50%;
+                transform: translate(-50% , -50%);
+            
+            }
+            .instructor-section{
+                padding-bottom:90px; 
+            }
+           }
         </style>
     @endpush
     <!-- ~~~ Banner Section ~~~ -->
@@ -208,7 +255,7 @@
         <div class="container-fluid">
             <div class="row mx-lg-3 mx-md-2  gap-lg-0 g-3 ">
                 <!-- Left Column -->
-                <div class="col-lg-3 col-md-6 notice-board">
+                <div class="col-lg-3 col-md-6 notice-board order-lg-1 order-md-1 order-3">
                     <div class="box text-center p-3">
 
                         <span>
@@ -243,7 +290,7 @@
                 </div>
 
                 <!-- Middle Column with .banner-thumb Carousel -->
-                <div class="col-lg-6 col-md-6 d-lg-block d-md-none d-none">
+                <div class="col-lg-6 col-md-12 order-lg-2 order-md-3 order-1">
 
                     <div id="bannerCarousel" class="owl-carousel owl-theme">
                         <!-- Slide 1 -->
@@ -256,7 +303,7 @@
                 </div>
 
                 <!-- Right Column -->
-                <div class="col-lg-3 col-md-6  notice-board">
+                <div class="col-lg-3 col-md-6  notice-board order-lg-3 order-md-2 order-2">
                     <div class="box text-center p-3">
 
                         <p>Click & Visit Our</p>
@@ -290,12 +337,12 @@
     @endif
 
     <div class="container my-5">
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center px-sm-0">
             <div class="section-header">
-                <h2 class="title"><span>Browse </span>Courses</h2>
+                <h2 class="title text-center"><span>Browse </span>Courses</h2>
             </div>
             @foreach ($categories ?? [] as $categ)
-                <div class="col-xl-2 col-sm-6 col-12">
+                <div class="col-xl-2 col-6 col-md-4 text-center">
                     <a class="card1" href="{{ route('courses', ['category' => $categ?->slug]) }}">
                         <h3>{{ $categ?->name }}</h3>
 
@@ -338,8 +385,8 @@
 
     <section class="instructor-section pt-40 pb-40 gradient-bg">
         <div class="container">
-            <div class="section-header">
-                <h2 class="title"><span>Our </span>faculties</h2>
+            <div class="section-header pe-0 ">
+                <h2 class="title text-center text-md-start"><span>Our </span>faculties</h2>
             </div>
             <div class="row mx-auto my-auto justify-content-center">
                 <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -351,7 +398,7 @@
                                         <a href="{{ route('faculty', [$faculty]) }}" class="d-block fw-bold fs-5 mb-1">
                                             <img class="card-img-top" src="{{ $faculty->avatarUrl() }}"
                                                 alt="Card image">
-                                            <div class="card-body lh-1">
+                                            <div class="card-body lh-1 text-center">
                                                 {{ $faculty?->title }}
                                             </div>
                                         </a>
@@ -360,7 +407,8 @@
                             </div>
                         @endforeach
                     </div>
-                    <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+                    <div class="slider-nav">
+                        <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     </a>
@@ -368,9 +416,11 @@
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     </a>
+                     </div>
                 </div>
             </div>
         </div>
+        
     </section>
     <!-- ~~~ Instructor Section ~~~ -->
 
@@ -453,7 +503,7 @@
         <div class="container">
             <div class="section-header">
                 {{-- <span class="category">Features</span> --}}
-                <h2 class="title"><span>Why</span> Study Form Plus</h2>
+                <h2 class="title text-center"><span>Why</span> Study Form Plus</h2>
             </div>
             <div class="row justify-content-center mb-30-none">
                 <div class="col-xl-3 col-md-6 col-sm-10">
@@ -511,11 +561,11 @@
     <!-- ~~~ Feature Section ~~~ -->
 
     <!-- ~~~ Testimonial Section ~~~ -->
-    <section class="testimonial-section pt-100 pb-100">
+    <section class="testimonial-section pb-100">
         <div class="container">
-            <div class="slider-header">
+            <div class="slider-header align-items-center">
                 <div class="section-header left-style">
-                    <h2 class="title"><span>Our </span>Success Stories</h2>
+                    <h2 class="title text-center text-md-start  "><span>Our </span>Success Stories</h2>
                 </div>
                 <div class="slider-nav">
                     <div class="testimoni-prev">

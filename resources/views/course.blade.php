@@ -247,7 +247,7 @@
                 </div>
             </div>
             <div class="form-group row" id="demovideo">
-                <div class="col-6">
+                <div class="col-md-6 col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="py-2">Demo Video 1</h5>
@@ -259,7 +259,7 @@
                                         <iframe id="ytplayer" type="text/html" width="100%" height="300" src="{{ $course?->demo_link }}" frameborder="0"></iframe>
                                     </div>
                                     <div class="col-12 d-none d-md-block">
-                                        <iframe id="ytplayer" type="text/html" width="100%" height="650" src="{{ $course?->demo_link }}" frameborder="0"></iframe>
+                                        <iframe id="ytplayer" type="text/html" width="100%" height="300" src="{{ $course?->demo_link }}" frameborder="0"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +267,7 @@
                     </div>
                 </div>
                 @if($course?->demo_link2)
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="py-2">Demo Video 2</h5>
@@ -279,7 +279,7 @@
                                             <iframe id="ytplayer" type="text/html" width="100%" height="300" src="{{ $course?->demo_link2 }}" frameborder="0"></iframe>
                                         </div>
                                         <div class="col-12 d-none d-md-block">
-                                            <iframe id="ytplayer" type="text/html" width="100%" height="650" src="{{ $course?->demo_link2 }}" frameborder="0"></iframe>
+                                            <iframe id="ytplayer" type="text/html" width="100%" height="300" src="{{ $course?->demo_link2 }}" frameborder="0"></iframe>
                                         </div>
                                     </div>
                                 </div>

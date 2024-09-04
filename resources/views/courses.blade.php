@@ -33,7 +33,7 @@
                                 <div class="course-item">
                                     <div class="thumb">
                                         <a href="{{ route('courses', ['category' => $categ->slug]) }}">
-                                            <img src="{{ $categ?->imageThumb() }}" alt="{{ $categ?->name }}">
+                                            <img src="{{ $categ?->image() }}" alt="{{ $categ?->name }}">
                                         </a>
                                     </div>
                                     <div class="content">

@@ -12,11 +12,11 @@
     <meta name="description" content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])">
     <meta name="keywords" content="@yield('meta_keyword', setting('general_settings')?->option_value['meta_keyword'])">
 
-    <meta property="og:url"           content="{{ url()->current() }}" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="@yield('meta_title', setting('general_settings')?->option_value['meta_title'])" />
-    <meta property="og:description"   content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])" />
-    <meta property="og:image"         content="@yield('image',asset('assets/images/logo.jpeg'))" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@yield('meta_title', setting('general_settings')?->option_value['meta_title'])" />
+    <meta property="og:description" content="@yield('meta_description', setting('general_settings')?->option_value['meta_description'])" />
+    <meta property="og:image" content="@yield('image',asset('assets/images/logo.jpeg'))" />
 
 
 
@@ -105,9 +105,153 @@
     padding: 1rem;
 } */
 
+    .form-model {
+        position: fixed;
+        display: none;
+        bottom: 10px;
+        left: 10px;
+        width: 50px;
+        height: 50px;
+        background-color: black;
+        font-size: 25px;
+        color: #ffffff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        overflow: hidden;
+        z-index: 50;
+        border: 0;
+    }
+
+    .modal-header {
+        display: inline-grid !important;
+        justify-content: center !important;
+    }
+
+    .modal-header .btn-close {
+        position: absolute !important;
+        right: 15px !important;
+    }
+
+    #vdz_cb_widget {
+        position: fixed;
+        left: 40px;
+        bottom: 40px;
+        width: 80px;
+        height: 80px;
+        line-height: 78px;
+        border-radius: 50%;
+        background-color: rgba(32, 152, 209, .5);
+        text-align: center;
+        z-index: 9999;
+        overflow: visible;
+        /* Ensure overflow is visible to allow animations to extend outside */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Hide any part of the animation that goes outside of the button */
+    }
+
+    #vdz_cb_widget:before,
+    #vdz_cb_widget:after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #vdz_cb_widget:before {
+        width: 150px;
+        /* Larger size for the outer wave effect */
+        height: 150px;
+        border: 2px solid red;
+        opacity: 0;
+        animation: waveBefore 2s infinite;
+    }
+
+    #vdz_cb_widget:after {
+        width: 250px;
+        /* Larger size for the outer wave effect */
+        height: 250px;
+        background-color: rgba(32, 152, 209, .3);
+        opacity: 0;
+        animation: waveAfter 4s infinite;
+    }
+
+    @keyframes waveBefore {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0.6;
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1.5);
+            /* Extend beyond the button */
+            opacity: 0;
+        }
+    }
+
+    @keyframes waveAfter {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0.4;
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(2);
+            /* Extend further beyond the button */
+            opacity: 0;
+        }
+    }
+
+    .vdz_cb_widget {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        box-sizing: content-box !important;
+    }
+
+    .vdz_cb_widget span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        color: #fff;
+        z-index: 1;
+    }
 
 
-   
+    i.fa.fa-phone {
+        font-size: 35px;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+    }
+
+    button.ButtonBase__ButtonContainer-sc-p43e7i-3.euBiGU.Bubble__BubbleComponent-sc-1hq47r8-0.kTfTfE {
+        width: 80px !important;
+        height: 75px !important;
+    }
+
+    .dHxKzM,
+    .iCNyoS {
+        height: 0 !important;
+    }
 </style>
 
 <body>
@@ -134,7 +278,7 @@
                 <div class="right ">
                     <ul class="social-icons">
                         <li>
-                            <a href="#0" class=""><i class="fab fa-facebook-f mt-1" ></i></a>
+                            <a href="#0" class=""><i class="fab fa-facebook-f mt-1"></i></a>
                         </li>
                         <li>
                             <a href="#0" class=""><i class="fab fa-twitter mt-1"></i></a>
@@ -503,8 +647,8 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-12 col-sm-10">
-                            <div class="footer-support-item">
-                                <div class="content title">
+                            <div class="footer-support-item justify-content-center">
+                                <div class="content title ps-0">
                                     <h5 class="title">
                                         <center>Experienced Faculties, Daily Doubt sessions, Ready to counsel any
                                             enquiry, supportive technical team and empowering staff is which
@@ -611,7 +755,7 @@
                                     <a href="#0" class="active"><i class="fab fa-twitter  mt-2"> </i></a>
                                 </li>
                                 <li>
-                                    <a href="#0"><i class="fab fa-instagram  mt-2" ></i></a>
+                                    <a href="#0"><i class="fab fa-instagram  mt-2"></i></a>
                                 </li>
                                 <li>
                                     <a href="#0"><i class="fab fa-linkedin-in  mt-2"></i></a>
@@ -661,7 +805,72 @@
                 </form>
             </div>
         </div>
+
+
+        <!-- course modal -->
+
+        <div id="vdz_cb_widget">
+            <a class="vdz_cb_widget vdz_cb_widget_btn" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">
+                <span class="vdz_cb_widget_icon" aria-hidden="true">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                </span>
+            </a>
+        </div>
+        <!-- form -->
+        <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" method="POST" action="{{ route('queries.store') }}">
+                    @csrf
+                    <div class="modal-header " style="background-color:#202c45;">
+                        <h5 class="modal-title text-white text-center" id="contactModalLabel">Request A Call Back</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border: 0; font-size: 1.5rem; color:white;"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="subject" value="Request a Call Back">
+                        <input type="hidden" name="title" value="Request a Call Back">
+                        <!-- Form fields here -->
+                        <div class="form-row my-3">
+                            <div class="form-group col-md-12">
+                                <label for="fullName" style="font-weight: bold; font-size: 1.2rem;">Full Name</label>
+                                <input type="text" class="form-control my-1" id="fullName" name="name" placeholder="Full Name" required style="padding: 10px; font-size: 1.2rem; background-color: whitesmoke;">
+                            </div>
+                        </div>
+                        <div class="form-row my-3">
+                            <div class="form-group col-md-12 my-3">
+                                <label for="phone" style="font-weight: bold; font-size: 1.2rem;">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="mobile" placeholder="Phone Number" required maxlength="10" pattern="\d{10}" title="Please enter a 10-digit phone number" style="padding: 10px; font-size: 1.2rem; background-color: whitesmoke;">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="email" style="font-weight: bold; font-size: 1.2rem;">Email</label>
+                                <input type="email" class="form-control my-1" id="email" name="email" placeholder="Email" required style="padding: 10px; font-size: 1.2rem; background-color: whitesmoke;">
+                            </div>
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="assistance" style="font-weight: bold; font-size: 1.2rem;">Select Course</label>
+                            <select id="assistance" class="form-control my-1" name="others[assistance]" required style="padding: 10px; font-size: 1.2rem; background-color: whitesmoke;">
+                                <option value="">-- Please choose an option --</option>
+                                <option>CA (Chartered Accountant)</option>
+                                <option>CMA (Cost and management accounting)</option>
+                                <option>11th</option>
+                                <option>12th</option>
+                                <option>B.COM</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="justify-content: center;">
+                        <button type="submit" class="btn btn-primary" style="margin: 0 auto; background: black; border:0;">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- End course modal -->
+
+
     </div>
+    <div class="elfsight-app-40d72caa-d4ac-4490-9b93-57a739145eaa" data-elfsight-app-lazy></div>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
 
 
 
@@ -676,39 +885,85 @@
     <script src="{{ asset('assets/frontend/js/owl.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        // Function to close all open dropdowns
-        function closeAllDropdowns() {
-            $('.dropdown-menu.show').each(function () {
-                var $dropdownToggle = $(this).prev('.dropdown-toggle');
-                if ($dropdownToggle.length) {
-                    var bsDropdown = bootstrap.Dropdown.getInstance($dropdownToggle[0]);
-                    if (bsDropdown) bsDropdown.hide();
+    <script>
+        $(document).ready(function() {
+            // Function to close all open dropdowns
+            function closeAllDropdowns() {
+                $('.nav-item.dropdown.open').each(function() {
+                    $(this).removeClass('open'); // Remove 'open' class from the li
+                    $(this).find('.dropdown-menu').css('display', 'none'); // Hide the dropdown menu
+                });
+            }
+
+            // Close dropdowns when scrolling
+            $(window).on('scroll', function() {
+                closeAllDropdowns();
+            });
+
+            // Optionally, handle click events to toggle dropdown
+            $('.dropdown-toggle').on('click', function(e) {
+                e.stopPropagation(); // Prevent click event from closing the dropdown immediately
+                var $parent = $(this).parent('.nav-item.dropdown');
+
+                // Close all other dropdowns
+                closeAllDropdowns();
+
+                // Toggle the current dropdown
+                if ($parent.hasClass('open')) {
+                    $parent.removeClass('open');
+                    $(this).next('.dropdown-menu').css('display', 'none');
+                } else {
+                    $parent.addClass('open');
+                    $(this).next('.dropdown-menu').css('display', 'block');
                 }
             });
-        }
 
-        // Close dropdowns when scrolling
-        $(window).on('scroll', function () {
-            closeAllDropdowns();
+            // Close dropdowns when clicking outside
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('.dropdown-toggle, .dropdown-menu').length) {
+                    closeAllDropdowns();
+                }
+            });
         });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to show the modal
+            function showModal() {
+                var modalElement = document.getElementById('contactModal');
+                if (modalElement) {
+                    var bootstrapModal = new bootstrap.Modal(modalElement);
+                    bootstrapModal.show();
+                }
+            }
 
-        // Close dropdowns when clicking outside
-        $(document).on('click', function (event) {
-            if (!$(event.target).closest('.dropdown-toggle, .dropdown-menu').length) {
-                closeAllDropdowns();
+            // Check if the URL contains #contactModal
+            if (window.location.hash === '#contactModal') {
+                showModal();
+            }
+
+            // Function to hide the modal
+            function hideModal() {
+                var modalElement = document.getElementById('contactModal');
+                if (modalElement) {
+                    var bootstrapModal = bootstrap.Modal.getInstance(modalElement);
+                    if (bootstrapModal) {
+                        bootstrapModal.hide();
+                    }
+                }
+            }
+            var modalElement = document.getElementById('contactModal');
+            if (modalElement) {
+                modalElement.addEventListener('hidden.bs.modal', function() {
+                    history.pushState('', document.title, window.location.pathname + window.location.search);
+                });
+                z
             }
         });
-    });
-</script>
-
-<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-<div class="elfsight-app-40d72caa-d4ac-4490-9b93-57a739145eaa" data-elfsight-app-lazy></div>
-
+    </script>
 
     @stack('scripts')
 </body>

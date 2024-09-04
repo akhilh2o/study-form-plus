@@ -32,8 +32,7 @@ class CourseController extends Controller
 
             $categoryIds = collect([$category->id]);
         } else {
-            $categories = Category::select('id', 'name', 'slug')
-                ->where('parent_id', 0)
+            $categories = Category::where('parent_id', 0)
                 ->get();
         }
 
