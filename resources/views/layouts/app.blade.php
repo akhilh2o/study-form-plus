@@ -394,7 +394,7 @@
                                     </div>
                                     <div class="text ps-3">
                                     <h5>CMA</h5>
-                                    
+
                                     </div>
                                 </div>
                                 </a>
@@ -407,7 +407,7 @@
                                     </div>
                                     <div class="text ps-3">
                                     <h5>CMA</h5>
-                                    
+
                                     </div>
                                 </div>
                                 </a>
@@ -420,7 +420,7 @@
                                     </div>
                                     <div class="text ps-3">
                                     <h5>CMA</h5>
-                                    
+
                                     </div>
                                 </div>
                                 </a>
@@ -433,7 +433,7 @@
                                     </div>
                                     <div class="text ps-3">
                                     <h5>CMA</h5>
-                                    
+
                                     </div>
                                 </div>
                                 </a>
@@ -446,7 +446,7 @@
                                     </div>
                                     <div class="text ps-3">
                                     <h5>CMA</h5>
-                                    
+
                                     </div>
                                 </div>
                                 </a>
@@ -459,7 +459,7 @@
                                     </div>
                                     <div class="text ps-3">
                                     <h5>CMA</h5>
-                                    
+
                                     </div>
                                 </div>
                                 </a>
@@ -736,6 +736,11 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <br />
+                                <br />
+                                <h5 class="title">
+                                    Total Visits: <span>{{ (new \App\Services\Visits)->count() }}</span>
+                                </h5>
                             </div>
                         </div>
                     </div>
